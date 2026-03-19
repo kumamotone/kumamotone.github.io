@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Focus Launcher — 自分の注意力を、取り戻す。</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:      #0c0b0a;
+    --surface: #141312;
+    --white:   #eeece8;
+    --mid:     #666460;
+    --faint:   #2e2c2a;
+    --rule:    rgba(255,255,255,0.06);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--white);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300; overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px 48px;
+  }
+  .nav-logo { display: flex; align-items: center; gap: 11px; }
+  .nav-icon {
+    width: 26px; height: 26px; border-radius: 6px;
+    background: linear-gradient(150deg, #1a2e4a 0%, #0d1f35 100%);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 16px rgba(255,255,255,0.06);
+  }
+  .nav-icon svg { width: 13px; height: 13px; }
+  .nav-wordmark {
+    font-family: 'DM Mono', monospace; font-size: 12px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--mid);
+  }
+  .nav-cta {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--white); background: none;
+    border: 1px solid var(--faint); padding: 9px 18px;
+    text-decoration: none; transition: border-color 0.2s;
+    border-radius: 2px;
+  }
+  .nav-cta:hover { border-color: rgba(255,255,255,0.3); }
+
+  /* ── HERO ─────────────────────────────── */
+  .hero {
+    min-height: 100vh; padding: 140px 48px 100px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0; align-items: center;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-left { padding-right: 80px; border-right: 1px solid var(--rule); }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--mid); margin-bottom: 44px;
+  }
+  .hero-question {
+    font-size: clamp(28px, 3.2vw, 44px); font-weight: 300;
+    line-height: 1.65; margin-bottom: 48px; color: var(--white);
+  }
+  .hero-question em { font-style: normal; color: var(--mid); }
+  .hero-sub {
+    font-size: 14px; line-height: 1.9; color: var(--mid);
+    margin-bottom: 52px; max-width: 380px;
+  }
+  .hero-cta-row { display: flex; align-items: center; gap: 28px; }
+  .btn-fill {
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--bg); background: var(--white);
+    padding: 14px 28px; text-decoration: none;
+    transition: opacity 0.2s; border-radius: 2px; display: inline-block;
+  }
+  .btn-fill:hover { opacity: 0.8; }
+  .btn-text {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--mid); text-decoration: none;
+    border-bottom: 1px solid transparent; transition: border-color 0.2s; padding-bottom: 1px;
+  }
+  .btn-text:hover { border-color: var(--mid); }
+
+  /* ── LAUNCHER PREVIEW (right side of hero) ── */
+  .hero-right { padding-left: 80px; }
+  .launcher-preview { display: flex; flex-direction: column; }
+  .lp-time {
+    font-family: 'DM Serif Display', serif; font-size: 64px;
+    line-height: 1; color: var(--white); margin-bottom: 6px;
+  }
+  .lp-date {
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    letter-spacing: 0.16em; color: var(--mid); text-transform: uppercase;
+    margin-bottom: 36px;
+  }
+  .lp-rule { height: 1px; background: var(--rule); margin-bottom: 28px; }
+  .lp-app {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.03);
+    font-family: 'DM Mono', monospace; font-size: 14px; letter-spacing: 0.03em;
+    color: rgba(238,236,232,0.85);
+    transition: color 0.2s;
+  }
+  .lp-app.blocked {
+    color: var(--faint);
+  }
+  .lp-app .lp-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+  .lp-app.blocked .lp-dot { background: var(--faint); }
+  .lp-app .lp-block { font-size: 10px; color: var(--faint); }
+  .lp-label {
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint);
+    margin-top: 24px;
+  }
+
+  /* ── STATEMENT ────────────────────────── */
+  .statement {
+    padding: 120px 48px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--surface);
+  }
+  .statement-inner {
+    max-width: 800px; margin: 0 auto; text-align: center;
+  }
+  .statement-label {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--mid); margin-bottom: 48px;
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+  }
+  .statement-label::before, .statement-label::after {
+    content: ''; display: block; width: 32px; height: 1px;
+    background: var(--faint);
+  }
+  .statement-text {
+    font-size: clamp(22px, 2.8vw, 36px); font-weight: 300;
+    line-height: 1.75; color: var(--mid);
+  }
+  .statement-text strong { font-weight: 500; color: var(--white); }
+
+  /* ── FEATURES ─────────────────────────── */
+  .features { border-bottom: 1px solid var(--rule); }
+  .feature-item {
+    display: grid; grid-template-columns: 260px 1fr;
+    border-bottom: 1px solid var(--rule); min-height: 260px;
+  }
+  .feature-item:last-child { border-bottom: none; }
+  .fi-left {
+    padding: 64px 48px; border-right: 1px solid var(--rule);
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .fi-num {
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    letter-spacing: 0.2em; color: var(--faint);
+  }
+  .fi-title {
+    font-size: clamp(22px, 2.2vw, 30px); font-weight: 300;
+    line-height: 1.35; color: var(--white);
+  }
+  .fi-title strong { font-weight: 500; display: block; }
+  .fi-right {
+    padding: 64px 64px 64px 64px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .fi-body {
+    font-size: 15px; line-height: 1.95; color: var(--mid);
+    max-width: 520px; margin-bottom: 36px;
+  }
+  .fi-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .fi-tag {
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--faint); border: 1px solid var(--faint);
+    padding: 5px 10px; border-radius: 2px;
+  }
+
+  /* ── TIMELINE VISUAL ──────────────────── */
+  .tl-section {
+    padding: 100px 48px;
+    display: grid; grid-template-columns: 1fr 400px;
+    gap: 80px; align-items: center;
+    background: var(--surface);
+    border-bottom: 1px solid var(--rule);
+  }
+  .tl-left {}
+  .tl-eyebrow {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--mid); margin-bottom: 28px;
+  }
+  .tl-title {
+    font-size: clamp(28px, 3.5vw, 44px); font-weight: 300;
+    line-height: 1.3; margin-bottom: 28px; color: var(--white);
+  }
+  .tl-body { font-size: 14px; line-height: 1.9; color: var(--mid); max-width: 440px; }
+  .tl-visual {}
+  .tl-header {
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--faint); margin-bottom: 16px;
+    display: flex; justify-content: space-between;
+  }
+  .tl-tabs { display: flex; gap: 2px; margin-bottom: 20px; }
+  .tl-tab {
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    padding: 6px 14px; border: 1px solid var(--faint);
+    color: var(--faint); cursor: default;
+  }
+  .tl-tab.active { border-color: rgba(255,255,255,0.18); color: var(--mid); }
+  .tl-rows { display: flex; flex-direction: column; gap: 3px; }
+  .tl-row { display: flex; align-items: center; gap: 14px; }
+  .tl-time {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    color: var(--faint); width: 38px; flex-shrink: 0; text-align: right;
+  }
+  .tl-bar-bg { flex: 1; height: 26px; background: #131211; }
+  .tl-bar {
+    height: 100%; display: flex; align-items: center;
+    padding: 0 10px; font-family: 'DM Mono', monospace;
+    font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .b1 { background: #1d1c1a; color: #686460; width: 50%; }
+  .b2 { background: #191817; color: #524e4a; width: 24%; }
+  .b3 { background: #151413; color: #2e2c2a; width: 62%; }
+  .b4 { background: #1b1a18; color: #5e5a56; width: 36%; }
+  .b5 { background: #181716; color: #464240; width: 28%; }
+
+  /* ── GESTURES ─────────────────────────── */
+  .gestures {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1px solid var(--rule);
+  }
+  .g-item {
+    padding: 72px 48px; border-right: 1px solid var(--rule);
+  }
+  .g-item:last-child { border-right: none; }
+  .g-icon { margin-bottom: 28px; opacity: 0.4; }
+  .g-icon svg { width: 22px; height: 22px; stroke: var(--white); stroke-width: 1.25; }
+  .g-label {
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--faint); margin-bottom: 12px;
+  }
+  .g-action {
+    font-size: 20px; font-weight: 400; margin-bottom: 14px;
+    color: var(--white); line-height: 1.2;
+  }
+  .g-desc { font-size: 13px; line-height: 1.8; color: var(--mid); }
+
+  /* ── PRINCIPLES ──────────────────────── */
+  .principles {
+    padding: 100px 48px; background: var(--surface);
+    border-bottom: 1px solid var(--rule);
+  }
+  .principles-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 64px;
+  }
+  .principles-title {
+    font-size: clamp(24px, 2.5vw, 36px); font-weight: 300;
+    color: var(--white);
+  }
+  .principles-note {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint);
+  }
+  .principles-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--rule);
+  }
+  .principle {
+    background: var(--surface); padding: 40px 36px;
+  }
+  .principle-num {
+    font-family: 'DM Serif Display', serif; font-size: 48px;
+    color: var(--faint); line-height: 1; margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+  .principle-label {
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--faint); margin-bottom: 8px;
+  }
+  .principle-text { font-size: 13px; line-height: 1.8; color: var(--mid); }
+
+  /* ── FOOTER CTA ───────────────────────── */
+  .footer-cta {
+    padding: 160px 48px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .footer-cta::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(255,255,255,0.025) 0%, transparent 100%);
+    pointer-events: none;
+  }
+  .footer-cta-eyebrow {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--faint); margin-bottom: 40px;
+    position: relative; z-index: 1;
+  }
+  .footer-cta h2 {
+    font-size: clamp(32px, 4.5vw, 64px); font-weight: 300;
+    line-height: 1.35; margin-bottom: 20px;
+    position: relative; z-index: 1; color: var(--white);
+  }
+  .footer-cta h2 strong { font-weight: 500; }
+  .footer-cta-note {
+    font-size: 13px; color: var(--faint); margin-bottom: 52px;
+    position: relative; z-index: 1; letter-spacing: 0.04em;
+  }
+  .footer-cta .btn-fill { position: relative; z-index: 1; }
+  footer {
+    padding: 28px 48px; border-top: 1px solid var(--rule);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-text {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);
+  }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--mid); }
+
+  @media (max-width: 960px) {
+    nav { padding: 20px 24px; }
+    .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; }
+    .hero-left { padding-right: 0; border-right: none; border-bottom: 1px solid var(--rule); padding-bottom: 48px; margin-bottom: 48px; }
+    .hero-right { padding-left: 0; }
+    .statement { padding: 80px 24px; }
+    .feature-item { grid-template-columns: 1fr; }
+    .fi-left { border-right: none; border-bottom: 1px solid var(--rule); padding: 40px 24px; flex-direction: row; justify-content: space-between; align-items: center; min-height: auto; }
+    .fi-right { padding: 40px 24px; }
+    .tl-section { grid-template-columns: 1fr; padding: 60px 24px; gap: 48px; }
+    .gestures { grid-template-columns: 1fr; }
+    .g-item { border-right: none; border-bottom: 1px solid var(--rule); padding: 48px 24px; }
+    .g-item:last-child { border-bottom: none; }
+    .principles { padding: 60px 24px; }
+    .principles-grid { grid-template-columns: 1fr 1fr; }
+    .footer-cta { padding: 80px 24px; }
+    footer { padding: 24px; flex-direction: column; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div class="nav-icon">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="ng" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(255,255,255,0.6)"/>
+            <stop offset="50%" stop-color="rgba(255,255,255,0.15)"/>
+            <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+          </radialGradient>
+        </defs>
+        <ellipse cx="14" cy="14" rx="9" ry="9" fill="url(#ng)"/>
+        <circle cx="14" cy="14" r="3.5" fill="#ffffff"/>
+      </svg>
+    </div>
+    <span class="nav-wordmark">Focus Launcher</span>
+  </div>
+  <a href="#download" class="nav-cta">先行アクセス</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Android Launcher &middot; Beta</div>
+    <p class="hero-question">
+      集中力を、<em>取り戻す。</em>
+    </p>
+    <p class="hero-sub">Focus Launcher は、あなたの注意力を取り戻すためのAndroidランチャーです。アプリを消さなくていい。意志力に頼らなくていい。ルールを一度決めれば、あとは静かに動き続ける。</p>
+
+    <div class="hero-cta-row">
+      <a href="#download" class="btn-fill">ウェイトリストに登録</a>
+      <a href="#features" class="btn-text">詳しく見る</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="launcher-preview">
+      <div class="lp-time">09:41</div>
+      <div class="lp-date">木曜日 &middot; 3月8日</div>
+      <div class="lp-rule"></div>
+      <div class="lp-app"><span>Claude</span><span class="lp-dot"></span></div>
+      <div class="lp-app"><span>カレンダー</span><span class="lp-dot"></span></div>
+      <div class="lp-app"><span>マップ</span><span class="lp-dot"></span></div>
+      <div class="lp-app"><span>カメラ</span><span class="lp-dot"></span></div>
+      <div class="lp-app blocked"><span>Instagram</span><span class="lp-block">⊘</span></div>
+      <div class="lp-app blocked"><span>YouTube</span><span class="lp-block">⊘</span></div>
+      <div class="lp-app blocked"><span>Twitter / X</span><span class="lp-block">⊘</span></div>
+      <div class="lp-label">WiFiルール 適用中 &mdash; 3アプリ制限</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section class="statement">
+  <div class="statement-inner">
+    <div class="statement-label">Design Philosophy</div>
+    <p class="statement-text">
+      スマホは便利になりすぎた。<br>
+      だから<strong>使い方を設計する道具</strong>が必要になった。<br><br>
+      Focus Launcher は、<br>
+      あなたが冷静な時に決めたことを、<br>
+      衝動的な瞬間にも<strong>静かに守り続ける。</strong>
+    </p>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="feature-item">
+    <div class="fi-left">
+      <div class="fi-num">01</div>
+      <div class="fi-title">ブロック<strong>ルール</strong></div>
+    </div>
+    <div class="fi-right">
+      <p class="fi-body">WiFiネットワークや時間帯を条件に、アプリをブロックする。削除じゃない。ブロックとも少し違う。アプリはそこにある、ただ少し遠い。その距離が、衝動的に開く前の一呼吸になる。</p>
+      <div class="fi-tags">
+        <span class="fi-tag">WiFi Rules</span>
+        <span class="fi-tag">Time Rules</span>
+        <span class="fi-tag">Greyscale Filter</span>
+      </div>
+    </div>
+  </div>
+  <div class="feature-item">
+    <div class="fi-left">
+      <div class="fi-num">02</div>
+      <div class="fi-title">使用時間<strong>統計</strong></div>
+    </div>
+    <div class="fi-right">
+      <p class="fi-body">UsageStats APIを使い、どのアプリをいつ、どれだけ使ったかを時系列で記録する。自動的に。日付を切り替えれば過去も確認できる。見るだけでいい。そこに気づきが生まれる。</p>
+      <div class="fi-tags">
+        <span class="fi-tag">UsageStats</span>
+        <span class="fi-tag">日付切替</span>
+        <span class="fi-tag">タイムライン表示</span>
+      </div>
+    </div>
+  </div>
+  <div class="feature-item">
+    <div class="fi-left">
+      <div class="fi-num">03</div>
+      <div class="fi-title">シンプルな<strong>ホーム画面</strong></div>
+    </div>
+    <div class="fi-right">
+      <p class="fi-body">アイコングリッドはない。通知バッジもない。時刻と、自分が選んだアプリの名前だけ。何かを開く前に、それが必要かどうか考える余地が生まれる。</p>
+      <div class="fi-tags">
+        <span class="fi-tag">テキストUI</span>
+        <span class="fi-tag">ジェスチャー操作</span>
+        <span class="fi-tag">カスタムアプリ選択</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE VISUAL -->
+<section class="tl-section">
+  <div class="tl-left">
+    <div class="tl-eyebrow">Feature 02 &middot; Usage Timeline &middot; 開発中</div>
+    <h2 class="tl-title">自分でも気づいていなかった<br>パターンが見える。</h2>
+    <p class="tl-body">「そんなに使っていないつもり」が一番危ない。タイムラインは事実だけを静かに並べる。ゲーミフィケーションなし。ストリークなし。ただ、あなたの時間の使い方が、そこにある。</p>
+  </div>
+  <div class="tl-visual">
+    <div class="tl-tabs">
+      <div class="tl-tab">昨日</div>
+      <div class="tl-tab active">今日</div>
+    </div>
+    <div class="tl-header">
+      <span>アプリ</span><span>3/8 (土)</span>
+    </div>
+    <div class="tl-rows">
+      <div class="tl-row"><span class="tl-time">9:00</span><div class="tl-bar-bg"><div class="tl-bar b1">Claude</div></div></div>
+      <div class="tl-row"><span class="tl-time">9:48</span><div class="tl-bar-bg"><div class="tl-bar b2">マップ</div></div></div>
+      <div class="tl-row"><span class="tl-time">10:10</span><div class="tl-bar-bg"><div class="tl-bar b3"><span style="font-size:8px;letter-spacing:0.1em;color:#2e2c2a;">⊘ ブロック中</span></div></div></div>
+      <div class="tl-row"><span class="tl-time">11:00</span><div class="tl-bar-bg"><div class="tl-bar b4">カレンダー</div></div></div>
+      <div class="tl-row"><span class="tl-time">11:45</span><div class="tl-bar-bg"><div class="tl-bar b5">カメラ</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GESTURES -->
+<section class="gestures">
+  <div class="g-item">
+    <div class="g-icon"><i data-lucide="arrow-up"></i></div>
+    <div class="g-label">上スワイプ</div>
+    <div class="g-action">検索して開く</div>
+    <p class="g-desc">キーボードが即座に開く。アイコンを探さなくていい。</p>
+  </div>
+  <div class="g-item">
+    <div class="g-icon"><i data-lucide="arrow-down"></i></div>
+    <div class="g-label">下スワイプ</div>
+    <div class="g-action">通知を確認する</div>
+    <p class="g-desc">ホーム画面を離れずに通知シェードを展開。必要な時だけ開く。</p>
+  </div>
+  <div class="g-item">
+    <div class="g-icon"><i data-lucide="hand"></i></div>
+    <div class="g-label">ダブルタップ</div>
+    <div class="g-action">即座にロック</div>
+    <p class="g-desc">置いたら終わり。ボタンを探さなくていい。</p>
+  </div>
+</section>
+
+<!-- PRINCIPLES -->
+<section class="principles">
+  <div class="principles-head">
+    <h2 class="principles-title">このアプリが守っていること</h2>
+    <span class="principles-note">Design Principles</span>
+  </div>
+  <div class="principles-grid">
+    <div class="principle">
+      <div class="principle-num">0</div>
+      <div class="principle-label">広告</div>
+      <p class="principle-text">収益化のために、あなたの注意力を売らない。</p>
+    </div>
+    <div class="principle">
+      <div class="principle-num">0</div>
+      <div class="principle-label">外部送信</div>
+      <p class="principle-text">使用データはデバイスの外に出ない。</p>
+    </div>
+    <div class="principle">
+      <div class="principle-num">∞</div>
+      <div class="principle-label">ルール数</div>
+      <p class="principle-text">WiFiでも時間帯でも、ルールは自由に組み合わせられる。</p>
+    </div>
+    <div class="principle">
+      <div class="principle-num">1</div>
+      <div class="principle-label">ホーム画面</div>
+      <p class="principle-text">シンプルなテキストリスト。それだけが、あなたの入口になる。</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<section class="footer-cta" id="download">
+  <div class="footer-cta-eyebrow">Android 13+ &middot; 無料 &middot; アカウント不要</div>
+  <h2>今日の自分が決めたことを、<br><strong>明日の自分に守らせよう。</strong></h2>
+  <p class="footer-cta-note">ベータ期間中は無料。ウェイトリストに登録して先行アクセスを受け取る。</p>
+  <a href="#" class="btn-fill">ウェイトリストに登録</a>
+</section>
+
+<footer>
+  <span class="footer-text">&copy; 2026 Focus Launcher &middot; Made in Tokyo</span>
+  <div class="footer-links">
+    <a href="/focus-launcher/privacy-policy">Privacy Policy</a>
+    <a href="/focus-launcher/terms">Terms of Service</a>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  lucide.createIcons();
+});
+</script>
+</body>
+</html>
