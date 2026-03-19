@@ -107,31 +107,6 @@
   }
   .hero-phone img { width: 100%; display: block; }
 
-  /* ── STATEMENT ────────────────────────── */
-  .statement {
-    padding: 120px 48px;
-    border-bottom: 1px solid var(--rule);
-    background: var(--surface);
-  }
-  .statement-inner {
-    max-width: 800px; margin: 0 auto; text-align: center;
-  }
-  .statement-label {
-    font-family: 'DM Mono', monospace; font-size: 10px;
-    letter-spacing: 0.28em; text-transform: uppercase;
-    color: var(--mid); margin-bottom: 48px;
-    display: flex; align-items: center; justify-content: center; gap: 16px;
-  }
-  .statement-label::before, .statement-label::after {
-    content: ''; display: block; width: 32px; height: 1px;
-    background: var(--faint);
-  }
-  .statement-text {
-    font-size: clamp(22px, 2.8vw, 36px); font-weight: 300;
-    line-height: 1.75; color: var(--mid);
-  }
-  .statement-text strong { font-weight: 500; color: var(--white); }
-
   /* ── FEATURES ─────────────────────────── */
   .features { border-bottom: 1px solid var(--rule); }
   .feature-item {
@@ -345,7 +320,6 @@
     .hero-left { padding-right: 0; border-right: none; border-bottom: 1px solid var(--rule); padding-bottom: 48px; margin-bottom: 48px; }
     .hero-right { padding-left: 0; }
     .hero-phone { max-width: 200px; }
-    .statement { padding: 80px 24px; }
     .feature-item { grid-template-columns: 1fr; }
     .fi-left { border-right: none; border-bottom: 1px solid var(--rule); padding: 40px 24px; flex-direction: row; justify-content: space-between; align-items: center; min-height: auto; }
     .fi-right { padding: 40px 24px; }
@@ -404,17 +378,51 @@
   </div>
 </section>
 
-<!-- STATEMENT -->
-<section class="statement">
-  <div class="statement-inner">
-    <div class="statement-label">Design Philosophy</div>
-    <p class="statement-text">
-      スマホは便利になりすぎた。<br>
-      だから<strong>使い方を設計する道具</strong>が必要になった。<br><br>
-      Focus Launcher は、<br>
-      あなたが冷静な時に決めたことを、<br>
-      衝動的な瞬間にも<strong>静かに守り続ける。</strong>
-    </p>
+<!-- STORY -->
+<section class="story">
+  <div class="story-inner">
+    <div class="story-left">
+      <div class="story-eyebrow">なぜ作ったか</div>
+      <p class="story-pull">「シンプルなランチャーは、<br>シンプルすぎた。」</p>
+    </div>
+    <div class="story-right">
+      <p>私はかつて、重度のスマホ中毒でした。気づけば一日中、SNSのタイムラインやショート動画を縦スワイプしていました。</p>
+      <p>転機になったのは、シンプルなランチャー、アプリブロックツール、使用統計ツールとの出会いでした。「使いすぎているアプリを見えにくくする」という発想が、自分には効きました。</p>
+      <p>ただ、使い続けるうちに限界を感じるようになりました。「自宅のWi-Fiに接続しているときだけXをブロックする」ような条件付きの制限には、ランチャー以外のツールが必要でした。使用状況を確認するには別のアプリが必要で、それらは複数の課金体系を持ち、広告も入っていました。</p>
+      <p>シンプルさにも落とし穴がありました。GoogleとMicrosoftのAuthenticatorアプリのように、アイコンをなくしてしまうと区別がつかなくなるアプリがあります。シンプルすぎることも、それはそれで不便でした。</p>
+      <p class="story-closing">自分が本当に欲しかったのは、一つのアプリでした。そんな自分のために作ったのが、Focus Launcherです。</p>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENSHOTS -->
+<section class="screenshots">
+  <div class="screenshots-eyebrow">実際の画面</div>
+  <div class="screenshots-grid">
+    <div class="phone-card">
+      <div class="phone-frame-sm">
+        <img src="screenshots/Screenshot1_Home.png" alt="ホーム画面">
+      </div>
+      <span class="phone-caption">ホーム画面</span>
+    </div>
+    <div class="phone-card">
+      <div class="phone-frame-sm">
+        <img src="screenshots/Screenshot2_AllApps.png" alt="アプリ一覧">
+      </div>
+      <span class="phone-caption">アプリ一覧</span>
+    </div>
+    <div class="phone-card">
+      <div class="phone-frame-sm">
+        <img src="screenshots/Screenshot3_Settings.png" alt="設定・ブロックルール">
+      </div>
+      <span class="phone-caption">設定・ルール</span>
+    </div>
+    <div class="phone-card">
+      <div class="phone-frame-sm">
+        <img src="screenshots/Screenshot4_UsageStats.png" alt="使用状況">
+      </div>
+      <span class="phone-caption">使用状況</span>
+    </div>
   </div>
 </section>
 
@@ -479,37 +487,6 @@
   </div>
 </section>
 
-<!-- SCREENSHOTS -->
-<section class="screenshots">
-  <div class="screenshots-eyebrow">実際の画面</div>
-  <div class="screenshots-grid">
-    <div class="phone-card">
-      <div class="phone-frame-sm">
-        <img src="screenshots/Screenshot1_Home.png" alt="ホーム画面">
-      </div>
-      <span class="phone-caption">ホーム画面</span>
-    </div>
-    <div class="phone-card">
-      <div class="phone-frame-sm">
-        <img src="screenshots/Screenshot2_AllApps.png" alt="アプリ一覧">
-      </div>
-      <span class="phone-caption">アプリ一覧</span>
-    </div>
-    <div class="phone-card">
-      <div class="phone-frame-sm">
-        <img src="screenshots/Screenshot3_Settings.png" alt="設定・ブロックルール">
-      </div>
-      <span class="phone-caption">設定・ルール</span>
-    </div>
-    <div class="phone-card">
-      <div class="phone-frame-sm">
-        <img src="screenshots/Screenshot4_UsageStats.png" alt="使用状況">
-      </div>
-      <span class="phone-caption">使用状況</span>
-    </div>
-  </div>
-</section>
-
 <!-- TIMELINE VISUAL -->
 <section class="tl-section">
   <div class="tl-left">
@@ -519,23 +496,6 @@
   </div>
   <div class="tl-phone">
     <img src="screenshots/Screenshot4_UsageStats.png" alt="使用状況画面">
-  </div>
-</section>
-
-<!-- STORY -->
-<section class="story">
-  <div class="story-inner">
-    <div class="story-left">
-      <div class="story-eyebrow">なぜ作ったか</div>
-      <p class="story-pull">「シンプルなランチャーは、<br>シンプルすぎた。」</p>
-    </div>
-    <div class="story-right">
-      <p>私はかつて、重度のスマホ中毒でした。気づけば一日中、SNSのタイムラインやショート動画を縦スワイプしていました。</p>
-      <p>転機になったのは、シンプルなランチャー、アプリブロックツール、使用統計ツールとの出会いでした。「使いすぎているアプリを見えにくくする」という発想が、自分には効きました。</p>
-      <p>ただ、使い続けるうちに限界を感じるようになりました。「自宅のWi-Fiに接続しているときだけXをブロックする」ような条件付きの制限には、ランチャー以外のツールが必要でした。使用状況を確認するには別のアプリが必要で、それらは複数の課金体系を持ち、広告も入っていました。</p>
-      <p>シンプルさにも落とし穴がありました。GoogleとMicrosoftのAuthenticatorアプリのように、アイコンをなくしてしまうと区別がつかなくなるアプリがあります。シンプルすぎることも、それはそれで不便でした。</p>
-      <p class="story-closing">自分が本当に欲しかったのは、一つのアプリでした。そんな自分のために作ったのが、Focus Launcherです。</p>
-    </div>
   </div>
 </section>
 
