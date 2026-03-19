@@ -227,27 +227,38 @@
   }
   .tl-phone img { width: 100%; display: block; }
 
-  /* ── GESTURES ─────────────────────────── */
-  .gestures {
-    display: grid; grid-template-columns: repeat(3, 1fr);
+  /* ── STORY ────────────────────────────── */
+  .story {
+    padding: 100px 48px;
     border-bottom: 1px solid var(--rule);
   }
-  .g-item {
-    padding: 72px 48px; border-right: 1px solid var(--rule);
+  .story-inner {
+    display: grid; grid-template-columns: 280px 1fr;
+    gap: 80px; max-width: 1100px; margin: 0 auto;
+    align-items: start;
   }
-  .g-item:last-child { border-right: none; }
-  .g-icon { margin-bottom: 28px; opacity: 0.4; }
-  .g-icon svg { width: 22px; height: 22px; stroke: var(--white); stroke-width: 1.25; }
-  .g-label {
-    font-family: 'DM Mono', monospace; font-size: 9px;
-    letter-spacing: 0.22em; text-transform: uppercase;
-    color: var(--faint); margin-bottom: 12px;
+  .story-eyebrow {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--faint); margin-bottom: 28px;
   }
-  .g-action {
-    font-size: 20px; font-weight: 400; margin-bottom: 14px;
-    color: var(--white); line-height: 1.2;
+  .story-pull {
+    font-size: clamp(20px, 2vw, 26px); font-weight: 300;
+    line-height: 1.65; color: var(--white);
   }
-  .g-desc { font-size: 13px; line-height: 1.8; color: var(--mid); }
+  .story-right {
+    display: flex; flex-direction: column; gap: 22px;
+    padding-top: 4px;
+  }
+  .story-right p {
+    font-size: 15px; line-height: 2; color: var(--mid);
+  }
+  .story-closing {
+    font-size: 15px; line-height: 1.8;
+    color: var(--white);
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+  }
 
   /* ── PRINCIPLES ──────────────────────── */
   .principles {
@@ -341,9 +352,8 @@
     .screenshots { padding: 60px 24px; }
     .screenshots-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .tl-section { grid-template-columns: 1fr; padding: 60px 24px; gap: 48px; }
-    .gestures { grid-template-columns: 1fr; }
-    .g-item { border-right: none; border-bottom: 1px solid var(--rule); padding: 48px 24px; }
-    .g-item:last-child { border-bottom: none; }
+    .story { padding: 60px 24px; }
+    .story-inner { grid-template-columns: 1fr; gap: 40px; }
     .principles { padding: 60px 24px; }
     .principles-grid { grid-template-columns: 1fr 1fr; }
     .footer-cta { padding: 80px 24px; }
@@ -512,25 +522,20 @@
   </div>
 </section>
 
-<!-- GESTURES -->
-<section class="gestures">
-  <div class="g-item">
-    <div class="g-icon"><i data-lucide="arrow-up"></i></div>
-    <div class="g-label">上スワイプ</div>
-    <div class="g-action">検索して開く</div>
-    <p class="g-desc">キーボードが即座に開く。アイコンを探さなくていい。</p>
-  </div>
-  <div class="g-item">
-    <div class="g-icon"><i data-lucide="arrow-down"></i></div>
-    <div class="g-label">下スワイプ</div>
-    <div class="g-action">通知を確認する</div>
-    <p class="g-desc">ホーム画面を離れずに通知シェードを展開。必要な時だけ開く。</p>
-  </div>
-  <div class="g-item">
-    <div class="g-icon"><i data-lucide="hand"></i></div>
-    <div class="g-label">ダブルタップ</div>
-    <div class="g-action">即座にロック</div>
-    <p class="g-desc">置いたら終わり。ボタンを探さなくていい。</p>
+<!-- STORY -->
+<section class="story">
+  <div class="story-inner">
+    <div class="story-left">
+      <div class="story-eyebrow">なぜ作ったか</div>
+      <p class="story-pull">「シンプルなランチャーは、<br>シンプルすぎた。」</p>
+    </div>
+    <div class="story-right">
+      <p>私はかつて、重度のスマホ中毒でした。気づけば一日中、SNSのタイムラインやショート動画を縦スワイプしていました。</p>
+      <p>転機になったのは、シンプルなランチャー、アプリブロックツール、使用統計ツールとの出会いでした。「使いすぎているアプリを見えにくくする」という発想が、自分には効きました。</p>
+      <p>ただ、使い続けるうちに限界を感じるようになりました。「自宅のWi-Fiに接続しているときだけXをブロックする」ような条件付きの制限は、どのツールにもできませんでした。使用状況を確認するには別のアプリが必要で、それらは複数の課金体系を持ち、広告も入っていました。</p>
+      <p>シンプルさにも落とし穴がありました。GoogleとMicrosoftのAuthenticatorアプリのように、アイコンをなくしてしまうと区別がつかなくなるアプリがあります。シンプルすぎることも、それはそれで不便でした。</p>
+      <p class="story-closing">自分が本当に欲しかったのは、一つのアプリでした。そんな自分のために作ったのが、Focus Launcherです。</p>
+    </div>
   </div>
 </section>
 
