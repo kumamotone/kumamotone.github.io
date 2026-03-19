@@ -326,19 +326,27 @@
     .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; }
     .hero-left { padding-right: 0; border-right: none; border-bottom: 1px solid var(--rule); padding-bottom: 48px; margin-bottom: 48px; }
     .hero-right { padding-left: 0; }
-    .hero-phone { max-width: 200px; }
-    .feature-item { grid-template-columns: 1fr; }
-    .fi-left { border-right: none; border-bottom: 1px solid var(--rule); padding: 40px 24px; flex-direction: row; justify-content: space-between; align-items: center; min-height: auto; }
-    .fi-right { padding: 40px 24px; }
+    .hero-phone { max-width: 220px; margin: 0 auto; }
     .screenshots { padding: 60px 24px; }
-    .screenshots-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 100%; }
-    .tl-section { grid-template-columns: 1fr; padding: 60px 24px; gap: 48px; }
+    .screenshots-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 100%; }
+    /* Feature セクション：モバイルは1列、テキスト→画像の順に統一 */
+    .tl-section { grid-template-columns: 1fr; padding: 60px 24px; gap: 36px; }
+    .tl-section--reverse { grid-template-columns: 1fr; }
+    .tl-section--reverse .tl-left { order: -1; }
+    .tl-section--reverse .tl-phone { order: 1; }
+    .tl-phone { max-width: 280px; margin: 0 auto; }
+    .tl-title { font-size: clamp(24px, 6vw, 36px); }
     .story { padding: 60px 24px; }
     .story-inner { grid-template-columns: 1fr; gap: 40px; }
     .principles { padding: 60px 24px; }
+    .principles-head { margin-bottom: 40px; }
     .principles-grid { grid-template-columns: 1fr 1fr; }
+    .principle { padding: 28px 20px; }
+    .principle-num { font-size: 32px; margin-bottom: 12px; }
     .footer-cta { padding: 80px 24px; }
+    .footer-cta h2 { font-size: clamp(26px, 7vw, 48px); }
     footer { padding: 24px; flex-direction: column; gap: 10px; }
+    .footer-links { gap: 16px; }
   }
 </style>
 </head>
