@@ -35,7 +35,6 @@
     width: 26px; height: 26px; border-radius: 6px;
     background: linear-gradient(150deg, #1a2e4a 0%, #0d1f35 100%);
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 16px rgba(255,255,255,0.06);
   }
   .nav-icon svg { width: 13px; height: 13px; }
   .nav-wordmark {
@@ -91,37 +90,18 @@
   }
   .btn-text:hover { border-color: var(--mid); }
 
-  /* ── LAUNCHER PREVIEW (right side of hero) ── */
-  .hero-right { padding-left: 80px; }
-  .launcher-preview { display: flex; flex-direction: column; }
-  .lp-time {
-    font-family: 'DM Serif Display', serif; font-size: 64px;
-    line-height: 1; color: var(--white); margin-bottom: 6px;
+  /* ── HERO PHONE (right side) ── */
+  .hero-right {
+    padding-left: 80px;
+    display: flex; align-items: center; justify-content: center;
   }
-  .lp-date {
-    font-family: 'DM Mono', monospace; font-size: 11px;
-    letter-spacing: 0.16em; color: var(--mid); text-transform: uppercase;
-    margin-bottom: 36px;
+  .hero-phone {
+    border-radius: 40px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+    max-width: 260px; width: 100%;
+    box-shadow: 0 0 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
   }
-  .lp-rule { height: 1px; background: var(--rule); margin-bottom: 28px; }
-  .lp-app {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.03);
-    font-family: 'DM Mono', monospace; font-size: 14px; letter-spacing: 0.03em;
-    color: rgba(238,236,232,0.85);
-    transition: color 0.2s;
-  }
-  .lp-app.blocked {
-    color: var(--faint);
-  }
-  .lp-app .lp-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.2); }
-  .lp-app.blocked .lp-dot { background: var(--faint); }
-  .lp-app .lp-block { font-size: 10px; color: var(--faint); }
-  .lp-label {
-    font-family: 'DM Mono', monospace; font-size: 9px;
-    letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint);
-    margin-top: 24px;
-  }
+  .hero-phone img { width: 100%; display: block; }
 
   /* ── STATEMENT ────────────────────────── */
   .statement {
@@ -184,15 +164,48 @@
     padding: 5px 10px; border-radius: 2px;
   }
 
+  /* ── SCREENSHOTS ──────────────────────── */
+  .screenshots {
+    padding: 100px 48px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--surface);
+  }
+  .screenshots-eyebrow {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--mid); margin-bottom: 64px; text-align: center;
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+  }
+  .screenshots-eyebrow::before, .screenshots-eyebrow::after {
+    content: ''; display: block; width: 32px; height: 1px; background: var(--faint);
+  }
+  .screenshots-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 24px; max-width: 960px; margin: 0 auto;
+  }
+  .phone-card {
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+  .phone-frame-sm {
+    border-radius: 28px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    width: 100%;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+  }
+  .phone-frame-sm img { width: 100%; display: block; }
+  .phone-caption {
+    font-family: 'DM Mono', monospace; font-size: 9px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--faint); text-align: center;
+  }
+
   /* ── TIMELINE VISUAL ──────────────────── */
   .tl-section {
     padding: 100px 48px;
-    display: grid; grid-template-columns: 1fr 400px;
+    display: grid; grid-template-columns: 1fr 360px;
     gap: 80px; align-items: center;
-    background: var(--surface);
     border-bottom: 1px solid var(--rule);
   }
-  .tl-left {}
   .tl-eyebrow {
     font-family: 'DM Mono', monospace; font-size: 10px;
     letter-spacing: 0.28em; text-transform: uppercase;
@@ -203,39 +216,12 @@
     line-height: 1.3; margin-bottom: 28px; color: var(--white);
   }
   .tl-body { font-size: 14px; line-height: 1.9; color: var(--mid); max-width: 440px; }
-  .tl-visual {}
-  .tl-header {
-    font-family: 'DM Mono', monospace; font-size: 9px;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--faint); margin-bottom: 16px;
-    display: flex; justify-content: space-between;
+  .tl-phone {
+    border-radius: 32px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 8px 60px rgba(0,0,0,0.5);
   }
-  .tl-tabs { display: flex; gap: 2px; margin-bottom: 20px; }
-  .tl-tab {
-    font-family: 'DM Mono', monospace; font-size: 9px;
-    letter-spacing: 0.16em; text-transform: uppercase;
-    padding: 6px 14px; border: 1px solid var(--faint);
-    color: var(--faint); cursor: default;
-  }
-  .tl-tab.active { border-color: rgba(255,255,255,0.18); color: var(--mid); }
-  .tl-rows { display: flex; flex-direction: column; gap: 3px; }
-  .tl-row { display: flex; align-items: center; gap: 14px; }
-  .tl-time {
-    font-family: 'DM Mono', monospace; font-size: 10px;
-    color: var(--faint); width: 38px; flex-shrink: 0; text-align: right;
-  }
-  .tl-bar-bg { flex: 1; height: 26px; background: #131211; }
-  .tl-bar {
-    height: 100%; display: flex; align-items: center;
-    padding: 0 10px; font-family: 'DM Mono', monospace;
-    font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
-    white-space: nowrap;
-  }
-  .b1 { background: #1d1c1a; color: #686460; width: 50%; }
-  .b2 { background: #191817; color: #524e4a; width: 24%; }
-  .b3 { background: #151413; color: #2e2c2a; width: 62%; }
-  .b4 { background: #1b1a18; color: #5e5a56; width: 36%; }
-  .b5 { background: #181716; color: #464240; width: 28%; }
+  .tl-phone img { width: 100%; display: block; }
 
   /* ── GESTURES ─────────────────────────── */
   .gestures {
@@ -343,10 +329,13 @@
     .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; }
     .hero-left { padding-right: 0; border-right: none; border-bottom: 1px solid var(--rule); padding-bottom: 48px; margin-bottom: 48px; }
     .hero-right { padding-left: 0; }
+    .hero-phone { max-width: 200px; }
     .statement { padding: 80px 24px; }
     .feature-item { grid-template-columns: 1fr; }
     .fi-left { border-right: none; border-bottom: 1px solid var(--rule); padding: 40px 24px; flex-direction: row; justify-content: space-between; align-items: center; min-height: auto; }
     .fi-right { padding: 40px 24px; }
+    .screenshots { padding: 60px 24px; }
+    .screenshots-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .tl-section { grid-template-columns: 1fr; padding: 60px 24px; gap: 48px; }
     .gestures { grid-template-columns: 1fr; }
     .g-item { border-right: none; border-bottom: 1px solid var(--rule); padding: 48px 24px; }
@@ -377,36 +366,26 @@
     </div>
     <span class="nav-wordmark">Focus Launcher</span>
   </div>
-  <a href="#download" class="nav-cta">先行アクセス</a>
+  <a href="#download" class="nav-cta">ダウンロード</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <div class="hero-eyebrow">Android Launcher &middot; Beta</div>
+    <div class="hero-eyebrow">Android 13+ &middot; 無料 &middot; アカウント不要</div>
     <p class="hero-question">
       集中力を、<em>取り戻す。</em>
     </p>
     <p class="hero-sub">Focus Launcher は、あなたの注意力を取り戻すためのAndroidランチャーです。アプリを消さなくていい。意志力に頼らなくていい。ルールを一度決めれば、あとは静かに動き続ける。</p>
 
     <div class="hero-cta-row">
-      <a href="#download" class="btn-fill">ウェイトリストに登録</a>
+      <a href="#download" class="btn-fill">Google Play で入手</a>
       <a href="#features" class="btn-text">詳しく見る</a>
     </div>
   </div>
   <div class="hero-right">
-    <div class="launcher-preview">
-      <div class="lp-time">09:41</div>
-      <div class="lp-date">木曜日 &middot; 3月8日</div>
-      <div class="lp-rule"></div>
-      <div class="lp-app"><span>Claude</span><span class="lp-dot"></span></div>
-      <div class="lp-app"><span>カレンダー</span><span class="lp-dot"></span></div>
-      <div class="lp-app"><span>マップ</span><span class="lp-dot"></span></div>
-      <div class="lp-app"><span>カメラ</span><span class="lp-dot"></span></div>
-      <div class="lp-app blocked"><span>Instagram</span><span class="lp-block">⊘</span></div>
-      <div class="lp-app blocked"><span>YouTube</span><span class="lp-block">⊘</span></div>
-      <div class="lp-app blocked"><span>Twitter / X</span><span class="lp-block">⊘</span></div>
-      <div class="lp-label">WiFiルール 適用中 &mdash; 3アプリ制限</div>
+    <div class="hero-phone">
+      <img src="screenshots/Screenshot1_Home.png" alt="Focus Launcher ホーム画面">
     </div>
   </div>
 </section>
@@ -433,11 +412,12 @@
       <div class="fi-title">ブロック<strong>ルール</strong></div>
     </div>
     <div class="fi-right">
-      <p class="fi-body">WiFiネットワークや時間帯を条件に、アプリをブロックする。削除じゃない。ブロックとも少し違う。アプリはそこにある、ただ少し遠い。その距離が、衝動的に開く前の一呼吸になる。</p>
+      <p class="fi-body">WiFiネットワークや時間帯、集中モードを条件に、アプリをブロックする。削除じゃない。ブロックとも少し違う。アプリはそこにある、ただ少し遠い。その距離が、衝動的に開く前の一呼吸になる。</p>
       <div class="fi-tags">
-        <span class="fi-tag">WiFi Rules</span>
-        <span class="fi-tag">Time Rules</span>
-        <span class="fi-tag">Greyscale Filter</span>
+        <span class="fi-tag">Wi-Fi ルール</span>
+        <span class="fi-tag">時間ルール</span>
+        <span class="fi-tag">集中モード</span>
+        <span class="fi-tag">グレースケール</span>
       </div>
     </div>
   </div>
@@ -447,11 +427,11 @@
       <div class="fi-title">使用時間<strong>統計</strong></div>
     </div>
     <div class="fi-right">
-      <p class="fi-body">UsageStats APIを使い、どのアプリをいつ、どれだけ使ったかを時系列で記録する。自動的に。日付を切り替えれば過去も確認できる。見るだけでいい。そこに気づきが生まれる。</p>
+      <p class="fi-body">どのアプリをいつ、どれだけ使ったかを日別に記録する。自動的に。日付を切り替えれば過去も確認できる。見るだけでいい。そこに気づきが生まれる。</p>
       <div class="fi-tags">
-        <span class="fi-tag">UsageStats</span>
-        <span class="fi-tag">日付切替</span>
-        <span class="fi-tag">タイムライン表示</span>
+        <span class="fi-tag">日別集計</span>
+        <span class="fi-tag">アプリ別内訳</span>
+        <span class="fi-tag">30日間記録</span>
       </div>
     </div>
   </div>
@@ -469,30 +449,62 @@
       </div>
     </div>
   </div>
+  <div class="feature-item">
+    <div class="fi-left">
+      <div class="fi-num">04</div>
+      <div class="fi-title">ジャーナル<strong>メモ</strong></div>
+    </div>
+    <div class="fi-right">
+      <p class="fi-body">アプリをブロックされたとき、なぜ開こうとしたのかを記録できる。衝動を言語化することで、パターンに気づき始める。ブロック記録はあとから読み返すこともできる。</p>
+      <div class="fi-tags">
+        <span class="fi-tag">ブロック時メモ</span>
+        <span class="fi-tag">記録一覧</span>
+        <span class="fi-tag">振り返り</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREENSHOTS -->
+<section class="screenshots">
+  <div class="screenshots-eyebrow">実際の画面</div>
+  <div class="screenshots-grid">
+    <div class="phone-card">
+      <div class="phone-frame-sm">
+        <img src="screenshots/Screenshot1_Home.png" alt="ホーム画面">
+      </div>
+      <span class="phone-caption">ホーム画面</span>
+    </div>
+    <div class="phone-card">
+      <div class="phone-frame-sm">
+        <img src="screenshots/Screenshot2_AllApps.png" alt="アプリ一覧">
+      </div>
+      <span class="phone-caption">アプリ一覧</span>
+    </div>
+    <div class="phone-card">
+      <div class="phone-frame-sm">
+        <img src="screenshots/Screenshot3_Settings.png" alt="設定・ブロックルール">
+      </div>
+      <span class="phone-caption">設定・ルール</span>
+    </div>
+    <div class="phone-card">
+      <div class="phone-frame-sm">
+        <img src="screenshots/Screenshot4_UsageStats.png" alt="使用状況">
+      </div>
+      <span class="phone-caption">使用状況</span>
+    </div>
+  </div>
 </section>
 
 <!-- TIMELINE VISUAL -->
 <section class="tl-section">
   <div class="tl-left">
-    <div class="tl-eyebrow">Feature 02 &middot; Usage Timeline &middot; 開発中</div>
+    <div class="tl-eyebrow">Feature 02 &middot; Usage Stats</div>
     <h2 class="tl-title">自分でも気づいていなかった<br>パターンが見える。</h2>
-    <p class="tl-body">「そんなに使っていないつもり」が一番危ない。タイムラインは事実だけを静かに並べる。ゲーミフィケーションなし。ストリークなし。ただ、あなたの時間の使い方が、そこにある。</p>
+    <p class="tl-body">「そんなに使っていないつもり」が一番危ない。使用状況は事実だけを静かに並べる。ゲーミフィケーションなし。ストリークなし。ただ、あなたの時間の使い方が、そこにある。</p>
   </div>
-  <div class="tl-visual">
-    <div class="tl-tabs">
-      <div class="tl-tab">昨日</div>
-      <div class="tl-tab active">今日</div>
-    </div>
-    <div class="tl-header">
-      <span>アプリ</span><span>3/8 (土)</span>
-    </div>
-    <div class="tl-rows">
-      <div class="tl-row"><span class="tl-time">9:00</span><div class="tl-bar-bg"><div class="tl-bar b1">Claude</div></div></div>
-      <div class="tl-row"><span class="tl-time">9:48</span><div class="tl-bar-bg"><div class="tl-bar b2">マップ</div></div></div>
-      <div class="tl-row"><span class="tl-time">10:10</span><div class="tl-bar-bg"><div class="tl-bar b3"><span style="font-size:8px;letter-spacing:0.1em;color:#2e2c2a;">⊘ ブロック中</span></div></div></div>
-      <div class="tl-row"><span class="tl-time">11:00</span><div class="tl-bar-bg"><div class="tl-bar b4">カレンダー</div></div></div>
-      <div class="tl-row"><span class="tl-time">11:45</span><div class="tl-bar-bg"><div class="tl-bar b5">カメラ</div></div></div>
-    </div>
+  <div class="tl-phone">
+    <img src="screenshots/Screenshot4_UsageStats.png" alt="使用状況画面">
   </div>
 </section>
 
@@ -538,7 +550,7 @@
     <div class="principle">
       <div class="principle-num">∞</div>
       <div class="principle-label">ルール数</div>
-      <p class="principle-text">WiFiでも時間帯でも、ルールは自由に組み合わせられる。</p>
+      <p class="principle-text">WiFiでも時間帯でも集中モードでも、ルールは自由に組み合わせられる。</p>
     </div>
     <div class="principle">
       <div class="principle-num">1</div>
@@ -552,8 +564,8 @@
 <section class="footer-cta" id="download">
   <div class="footer-cta-eyebrow">Android 13+ &middot; 無料 &middot; アカウント不要</div>
   <h2>今日の自分が決めたことを、<br><strong>明日の自分に守らせよう。</strong></h2>
-  <p class="footer-cta-note">ベータ期間中は無料。ウェイトリストに登録して先行アクセスを受け取る。</p>
-  <a href="#" class="btn-fill">ウェイトリストに登録</a>
+  <p class="footer-cta-note">広告なし。サーバーなし。あなたのデータはあなたのデバイスだけに。</p>
+  <a href="https://play.google.com/store/apps/details?id=dev.kuma.focuslauncher" class="btn-fill">Google Play で入手</a>
 </section>
 
 <footer>
