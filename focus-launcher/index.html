@@ -191,6 +191,7 @@
     gap: 80px; align-items: center;
     border-bottom: 1px solid var(--rule);
   }
+  .tl-section--reverse { grid-template-columns: 360px 1fr; }
   .tl-eyebrow {
     font-family: 'DM Mono', monospace; font-size: 10px;
     letter-spacing: 0.28em; text-transform: uppercase;
@@ -446,76 +447,51 @@
   </div>
 </section>
 
-<!-- FEATURES -->
-<section class="features" id="features">
-  <div class="feature-item">
-    <div class="fi-left">
-      <div class="fi-num">01</div>
-      <div class="fi-title">ブロック<strong>ルール</strong></div>
-    </div>
-    <div class="fi-right">
-      <p class="fi-body">WiFiネットワークや時間帯、集中モードを条件に、アプリをブロックする。削除じゃない。ブロックとも少し違う。アプリはそこにある、ただ少し遠い。その距離が、衝動的に開く前の一呼吸になる。</p>
-      <div class="fi-tags">
-        <span class="fi-tag">Wi-Fi ルール</span>
-        <span class="fi-tag">時間ルール</span>
-        <span class="fi-tag">集中モード</span>
-        <span class="fi-tag">グレースケール</span>
-      </div>
-    </div>
+<!-- FEATURE 01 -->
+<section class="tl-section" id="features">
+  <div class="tl-left">
+    <div class="tl-eyebrow">Feature 01 &middot; Block Rules</div>
+    <h2 class="tl-title">気になるアプリを、<br>少しだけ遠くに置く。</h2>
+    <p class="tl-body">削除じゃない。WiFiや時間帯、集中モードを条件にアプリをブロックする。アプリはそこにある、ただ少し遠い。その距離が、衝動的に開く前の一呼吸になる。</p>
   </div>
-  <div class="feature-item">
-    <div class="fi-left">
-      <div class="fi-num">02</div>
-      <div class="fi-title">使用時間<strong>統計</strong></div>
-    </div>
-    <div class="fi-right">
-      <p class="fi-body">どのアプリをいつ、どれだけ使ったかを日別に記録する。自動的に。日付を切り替えれば過去も確認できる。見るだけでいい。そこに気づきが生まれる。</p>
-      <div class="fi-tags">
-        <span class="fi-tag">日別集計</span>
-        <span class="fi-tag">アプリ別内訳</span>
-        <span class="fi-tag">30日間記録</span>
-      </div>
-    </div>
-  </div>
-  <div class="feature-item">
-    <div class="fi-left">
-      <div class="fi-num">03</div>
-      <div class="fi-title">シンプルな<strong>ホーム画面</strong></div>
-    </div>
-    <div class="fi-right">
-      <p class="fi-body">アイコングリッドはない。通知バッジもない。時刻と、自分が選んだアプリの名前だけ。何かを開く前に、それが必要かどうか考える余地が生まれる。</p>
-      <div class="fi-tags">
-        <span class="fi-tag">テキストUI</span>
-        <span class="fi-tag">ジェスチャー操作</span>
-        <span class="fi-tag">カスタムアプリ選択</span>
-      </div>
-    </div>
-  </div>
-  <div class="feature-item">
-    <div class="fi-left">
-      <div class="fi-num">04</div>
-      <div class="fi-title">ジャーナル<strong>メモ</strong></div>
-    </div>
-    <div class="fi-right">
-      <p class="fi-body">アプリをブロックされたとき、なぜ開こうとしたのかを記録できる。衝動を言語化することで、パターンに気づき始める。ブロック記録はあとから読み返すこともできる。</p>
-      <div class="fi-tags">
-        <span class="fi-tag">ブロック時メモ</span>
-        <span class="fi-tag">記録一覧</span>
-        <span class="fi-tag">振り返り</span>
-      </div>
-    </div>
+  <div class="tl-phone">
+    <img src="screenshots/Screenshot5_BlockRules.png" alt="ブロックルール画面">
   </div>
 </section>
 
-<!-- TIMELINE VISUAL -->
-<section class="tl-section">
+<!-- FEATURE 02 -->
+<section class="tl-section tl-section--reverse">
+  <div class="tl-phone">
+    <img src="screenshots/Screenshot4_UsageStats.png" alt="使用状況画面">
+  </div>
   <div class="tl-left">
     <div class="tl-eyebrow">Feature 02 &middot; Usage Stats</div>
     <h2 class="tl-title">自分でも気づいていなかった<br>パターンが見える。</h2>
     <p class="tl-body">「そんなに使っていないつもり」が一番危ない。使用状況は事実だけを静かに並べる。ゲーミフィケーションなし。ストリークなし。ただ、あなたの時間の使い方が、そこにある。</p>
   </div>
+</section>
+
+<!-- FEATURE 03 -->
+<section class="tl-section">
+  <div class="tl-left">
+    <div class="tl-eyebrow">Feature 03 &middot; Home Screen</div>
+    <h2 class="tl-title">アイコンを捨てたら、<br>開く前に考えるようになった。</h2>
+    <p class="tl-body">グリッドなし、バッジなし。時刻と自分が選んだアプリの名前だけ。スクロールの先に何もない入口が、衝動的な操作を静かに止める。</p>
+  </div>
   <div class="tl-phone">
-    <img src="screenshots/Screenshot4_UsageStats.png" alt="使用状況画面">
+    <img src="screenshots/Screenshot1_Home.png" alt="ホーム画面">
+  </div>
+</section>
+
+<!-- FEATURE 04 -->
+<section class="tl-section tl-section--reverse">
+  <div class="tl-phone">
+    <img src="screenshots/Screenshot6_JournalMemo.png" alt="ジャーナルメモ画面">
+  </div>
+  <div class="tl-left">
+    <div class="tl-eyebrow">Feature 04 &middot; Journal</div>
+    <h2 class="tl-title">衝動を言葉にしたとき、<br>変化が始まる。</h2>
+    <p class="tl-body">ブロックされたとき、なぜ開こうとしたかをメモできる。振り返ることで、自分の行動の引き金に気づき始める。</p>
   </div>
 </section>
 
@@ -533,18 +509,18 @@
     </div>
     <div class="principle">
       <div class="principle-num">0</div>
-      <div class="principle-label">外部送信</div>
-      <p class="principle-text">使用データはデバイスの外に出ない。</p>
+      <div class="principle-label">データ売却</div>
+      <p class="principle-text">あなたの使用データは端末の外へ出ない。収集して第三者に売ることもない。</p>
     </div>
     <div class="principle">
-      <div class="principle-num">∞</div>
-      <div class="principle-label">ルール数</div>
-      <p class="principle-text">WiFiでも時間帯でも集中モードでも、ルールは自由に組み合わせられる。</p>
+      <div class="principle-num">0</div>
+      <div class="principle-label">ログイン</div>
+      <p class="principle-text">アカウント不要。インストールしたその日から、すぐ使い始められる。</p>
     </div>
     <div class="principle">
-      <div class="principle-num">1</div>
-      <div class="principle-label">ホーム画面</div>
-      <p class="principle-text">シンプルなテキストリスト。それだけが、あなたの入口になる。</p>
+      <div class="principle-num">↑</div>
+      <div class="principle-label">集中力</div>
+      <p class="principle-text">アプリを制限し、気が散る原因を防止。マインドフルネスを、日常の習慣に。</p>
     </div>
   </div>
 </section>
