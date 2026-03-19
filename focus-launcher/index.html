@@ -86,6 +86,12 @@
     transition: opacity 0.2s; border-radius: 2px; display: inline-block;
   }
   .btn-fill:hover { opacity: 0.8; }
+  .btn-play {
+    display: inline-block; text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .btn-play:hover { opacity: 0.85; }
+  .btn-play img { height: 56px; width: auto; display: block; border-radius: 8px; }
   .btn-text {
     font-family: 'DM Mono', monospace; font-size: 10px;
     letter-spacing: 0.14em; text-transform: uppercase;
@@ -159,7 +165,7 @@
     content: ''; display: block; width: 32px; height: 1px; background: var(--faint);
   }
   .screenshots-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr);
+    display: grid; grid-template-columns: repeat(3, 1fr);
     gap: 24px; max-width: 960px; margin: 0 auto;
   }
   .phone-card {
@@ -324,7 +330,7 @@
     .fi-left { border-right: none; border-bottom: 1px solid var(--rule); padding: 40px 24px; flex-direction: row; justify-content: space-between; align-items: center; min-height: auto; }
     .fi-right { padding: 40px 24px; }
     .screenshots { padding: 60px 24px; }
-    .screenshots-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .screenshots-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 100%; }
     .tl-section { grid-template-columns: 1fr; padding: 60px 24px; gap: 48px; }
     .story { padding: 60px 24px; }
     .story-inner { grid-template-columns: 1fr; gap: 40px; }
@@ -367,7 +373,9 @@
     <p class="hero-sub">Focus Launcher は、あなたの注意力を取り戻すためのAndroidランチャーです。アプリを消さなくていい。意志力に頼らなくていい。ルールを一度決めれば、あとは静かに動き続ける。</p>
 
     <div class="hero-cta-row">
-      <a href="#download" class="btn-fill">Google Play で入手</a>
+      <a href="https://play.google.com/store/apps/details?id=dev.kuma.focuslauncher" class="btn-play">
+        <img src="google_play_btn_white.svg" alt="Google Play で入手">
+      </a>
       <a href="#features" class="btn-text">詳しく見る</a>
     </div>
   </div>
@@ -422,6 +430,18 @@
         <img src="screenshots/Screenshot4_UsageStats.png" alt="使用状況">
       </div>
       <span class="phone-caption">使用状況</span>
+    </div>
+    <div class="phone-card">
+      <div class="phone-frame-sm">
+        <img src="screenshots/Screenshot5_BlockRules.png" alt="ルール編集">
+      </div>
+      <span class="phone-caption">ルール編集</span>
+    </div>
+    <div class="phone-card">
+      <div class="phone-frame-sm">
+        <img src="screenshots/Screenshot6_JournalMemo.png" alt="ブロック画面">
+      </div>
+      <span class="phone-caption">ブロック画面</span>
     </div>
   </div>
 </section>
@@ -534,7 +554,9 @@
   <div class="footer-cta-eyebrow">Android 13+ &middot; 無料 &middot; アカウント不要</div>
   <h2>今日の自分が決めたことを、<br><strong>明日の自分に守らせよう。</strong></h2>
   <p class="footer-cta-note">広告なし。サーバーなし。あなたのデータはあなたのデバイスだけに。</p>
-  <a href="https://play.google.com/store/apps/details?id=dev.kuma.focuslauncher" class="btn-fill">Google Play で入手</a>
+  <a href="https://play.google.com/store/apps/details?id=dev.kuma.focuslauncher" class="btn-play">
+    <img src="google_play_btn_white.svg" alt="Google Play で入手">
+  </a>
 </section>
 
 <footer>
