@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>プライバシーポリシー — AutoType</title>
+<style>
+  :root {
+    --purple: #6C5CE7;
+    --purple-dark: #4834D4;
+    --bg: #0e0e14;
+    --surface: #16161e;
+    --surface-border: rgba(255,255,255,0.06);
+    --text: #e8e8ed;
+    --text-dim: rgba(255,255,255,0.45);
+    --text-dimmer: rgba(255,255,255,0.25);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  nav {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--surface-border);
+  }
+  nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .nav-logo-icon { width: 28px; height: 28px; }
+  .nav-logo span { font-size: 16px; font-weight: 600; letter-spacing: -0.3px; }
+  .nav-back {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--text); }
+
+  .legal {
+    padding: 80px 0;
+  }
+  .legal h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .legal .updated {
+    font-size: 13px;
+    color: var(--text-dimmer);
+    margin-bottom: 48px;
+  }
+  .legal h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 12px;
+    padding-top: 8px;
+  }
+  .legal p, .legal li {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+  .legal ul, .legal ol {
+    padding-left: 20px;
+    margin-bottom: 12px;
+  }
+  .legal li {
+    margin-bottom: 6px;
+  }
+  .legal table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 16px;
+    font-size: 13px;
+  }
+  .legal th, .legal td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--surface-border);
+    color: var(--text-dim);
+  }
+  .legal th {
+    color: var(--text);
+    font-weight: 600;
+    background: var(--surface);
+  }
+
+  footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--surface-border);
+    text-align: center;
+  }
+  footer p {
+    font-size: 12px;
+    color: var(--text-dimmer);
+  }
+  footer a {
+    color: var(--text-dim);
+    text-decoration: none;
+  }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a class="nav-logo" href="index.html">
+      <svg class="nav-logo-icon" viewBox="0 0 1024 1024" fill="none">
+        <rect width="1024" height="1024" rx="225" fill="url(#nav-bg)"/>
+        <rect width="1024" height="1024" rx="225" fill="url(#nav-sheen)"/>
+        <rect x="402" y="248" width="176" height="304" rx="88" fill="white"/>
+        <path d="M348,480 A164,164 0 0,0 676,480" stroke="white" stroke-width="20" fill="none" stroke-opacity="0.9" stroke-linecap="round"/>
+        <rect x="502" y="624" width="20" height="96" rx="10" fill="white" fill-opacity="0.9"/>
+        <rect x="380" y="768" width="264" height="24" rx="12" fill="#A8E6CF"/>
+        <defs>
+          <linearGradient id="nav-bg" x1="0" y1="0" x2="1024" y2="1024"><stop stop-color="#6C5CE7"/><stop offset="1" stop-color="#4834D4"/></linearGradient>
+          <radialGradient id="nav-sheen" cx="30%" cy="25%" r="60%"><stop stop-color="white" stop-opacity="0.15"/><stop offset="1" stop-color="white" stop-opacity="0"/></radialGradient>
+        </defs>
+      </svg>
+      <span>AutoType</span>
+    </a>
+    <a class="nav-back" href="index.html">トップに戻る</a>
+  </div>
+</nav>
+
+<section class="legal">
+  <div class="container">
+    <h1>プライバシーポリシー</h1>
+    <p class="updated">最終更新日: 2026年3月21日</p>
+
+    <p>AutoType（以下「本サービス」）は、ユーザーのプライバシーを重視しています。本ポリシーでは、本サービスにおけるデータの取り扱いについて説明します。</p>
+
+    <h2>1. 収集するデータ</h2>
+
+    <table>
+      <tr>
+        <th>データの種類</th>
+        <th>目的</th>
+        <th>保存</th>
+      </tr>
+      <tr>
+        <td>音声データ</td>
+        <td>テキストへの書き起こし</td>
+        <td>保存しません。リアルタイムで処理後、即時破棄されます。</td>
+      </tr>
+      <tr>
+        <td>書き起こしテキスト</td>
+        <td>整形処理・ユーザーへの表示</td>
+        <td>保存しません。セッション終了時に破棄されます。</td>
+      </tr>
+      <tr>
+        <td>APIキー</td>
+        <td>外部APIへの認証</td>
+        <td>ユーザーのmacOS端末にのみ保存されます。サーバーには保存しません。</td>
+      </tr>
+      <tr>
+        <td>設定情報</td>
+        <td>言語設定、用語集など</td>
+        <td>ユーザーの端末にのみ保存されます。</td>
+      </tr>
+    </table>
+
+    <h2>2. データの送信先</h2>
+    <p>本サービスは、機能を提供するために以下の外部サービスにデータを送信します。</p>
+    <ul>
+      <li><strong>AutoTypeバックエンドサーバー</strong> — 音声データを中継し、書き起こし・整形処理を行います。処理完了後、データは即時破棄されます。</li>
+      <li><strong>OpenAI</strong> — 音声データを送信し、テキストに書き起こします。OpenAIのデータ取り扱いについては<a href="https://openai.com/policies/privacy-policy" style="color: var(--purple);">OpenAIのプライバシーポリシー</a>をご確認ください。</li>
+      <li><strong>Google（Gemini API）</strong> — 書き起こしテキストを送信し、整形処理を行います。Googleのデータ取り扱いについては<a href="https://policies.google.com/privacy" style="color: var(--purple);">Googleのプライバシーポリシー</a>をご確認ください。</li>
+      <li><strong>Anthropic</strong> — 高度な整形を利用する際に、テキストを送信します。Anthropicのデータ取り扱いについては<a href="https://www.anthropic.com/privacy" style="color: var(--purple);">Anthropicのプライバシーポリシー</a>をご確認ください。</li>
+    </ul>
+
+    <h2>3. データを保存しないこと</h2>
+    <p>本サービスは、以下のデータをサーバー上に保存しません。</p>
+    <ul>
+      <li>音声データ</li>
+      <li>書き起こしテキスト</li>
+      <li>整形後のテキスト</li>
+      <li>ユーザーのAPIキー</li>
+    </ul>
+    <p>すべてのデータはリアルタイムで処理され、セッション終了とともにメモリから破棄されます。ログに書き起こし内容が記録されることはありません。</p>
+
+    <h2>4. 端末上のデータ</h2>
+    <p>以下のデータはユーザーのmacOS端末上に保存されます。</p>
+    <ul>
+      <li>APIキー（UserDefaults。将来的にKeychainへ移行予定）</li>
+      <li>言語設定</li>
+      <li>カスタム用語集</li>
+      <li>サーバーURL設定</li>
+    </ul>
+    <p>これらのデータはアプリのアンインストール時に削除されます。</p>
+
+    <h2>5. アクセス権限</h2>
+    <p>本サービスは以下のmacOS権限を使用します。</p>
+    <ul>
+      <li><strong>マイク</strong> — 音声の録音に使用します。録音データはリアルタイムでサーバーに送信され、端末上には保存されません。</li>
+      <li><strong>アクセシビリティ</strong> — ホットキーの検知およびテキストの自動入力に使用します。キーストロークの記録や画面内容の読み取りには使用しません。</li>
+    </ul>
+
+    <h2>6. Cookieとトラッキング</h2>
+    <p>本サービスはCookie、トラッキングツール、アナリティクスを使用しません。</p>
+
+    <h2>7. 子どものプライバシー</h2>
+    <p>本サービスは13歳未満の子どもを対象としていません。13歳未満の方は本サービスを利用しないでください。</p>
+
+    <h2>8. ポリシーの変更</h2>
+    <p>本ポリシーは必要に応じて更新されることがあります。重要な変更がある場合は、本サービス上で通知します。</p>
+
+    <h2>9. お問い合わせ</h2>
+    <p>プライバシーに関するご質問は、以下までお問い合わせください。</p>
+    <p>メール: <a href="mailto:support@autotype.app" style="color: var(--purple);">support@autotype.app</a></p>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026 AutoType ・ <a href="terms.html">利用規約</a> ・ <a href="privacy.html">プライバシーポリシー</a> ・ <a href="index.html">トップ</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

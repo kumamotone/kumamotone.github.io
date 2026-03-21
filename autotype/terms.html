@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>利用規約 — AutoType</title>
+<style>
+  :root {
+    --purple: #6C5CE7;
+    --purple-dark: #4834D4;
+    --bg: #0e0e14;
+    --surface: #16161e;
+    --surface-border: rgba(255,255,255,0.06);
+    --text: #e8e8ed;
+    --text-dim: rgba(255,255,255,0.45);
+    --text-dimmer: rgba(255,255,255,0.25);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  nav {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--surface-border);
+  }
+  nav .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .nav-logo-icon { width: 28px; height: 28px; }
+  .nav-logo span { font-size: 16px; font-weight: 600; letter-spacing: -0.3px; }
+  .nav-back {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--text); }
+
+  .legal {
+    padding: 80px 0;
+  }
+  .legal h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .legal .updated {
+    font-size: 13px;
+    color: var(--text-dimmer);
+    margin-bottom: 48px;
+  }
+  .legal h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 12px;
+    padding-top: 8px;
+  }
+  .legal p, .legal li {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+  .legal ul, .legal ol {
+    padding-left: 20px;
+    margin-bottom: 12px;
+  }
+  .legal li {
+    margin-bottom: 6px;
+  }
+
+  footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--surface-border);
+    text-align: center;
+  }
+  footer p {
+    font-size: 12px;
+    color: var(--text-dimmer);
+  }
+  footer a {
+    color: var(--text-dim);
+    text-decoration: none;
+  }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a class="nav-logo" href="index.html">
+      <svg class="nav-logo-icon" viewBox="0 0 1024 1024" fill="none">
+        <rect width="1024" height="1024" rx="225" fill="url(#nav-bg)"/>
+        <rect width="1024" height="1024" rx="225" fill="url(#nav-sheen)"/>
+        <rect x="402" y="248" width="176" height="304" rx="88" fill="white"/>
+        <path d="M348,480 A164,164 0 0,0 676,480" stroke="white" stroke-width="20" fill="none" stroke-opacity="0.9" stroke-linecap="round"/>
+        <rect x="502" y="624" width="20" height="96" rx="10" fill="white" fill-opacity="0.9"/>
+        <rect x="380" y="768" width="264" height="24" rx="12" fill="#A8E6CF"/>
+        <defs>
+          <linearGradient id="nav-bg" x1="0" y1="0" x2="1024" y2="1024"><stop stop-color="#6C5CE7"/><stop offset="1" stop-color="#4834D4"/></linearGradient>
+          <radialGradient id="nav-sheen" cx="30%" cy="25%" r="60%"><stop stop-color="white" stop-opacity="0.15"/><stop offset="1" stop-color="white" stop-opacity="0"/></radialGradient>
+        </defs>
+      </svg>
+      <span>AutoType</span>
+    </a>
+    <a class="nav-back" href="index.html">トップに戻る</a>
+  </div>
+</nav>
+
+<section class="legal">
+  <div class="container">
+    <h1>利用規約</h1>
+    <p class="updated">最終更新日: 2026年3月21日</p>
+
+    <p>この利用規約（以下「本規約」）は、AutoType（以下「本サービス」）の利用条件を定めるものです。本サービスをダウンロードまたは使用することにより、本規約に同意したものとみなします。</p>
+
+    <h2>第1条（定義）</h2>
+    <p>「本サービス」とは、AutoTypeアプリケーションおよびそれに関連するバックエンドサービスを指します。「ユーザー」とは、本サービスを利用するすべての個人または法人を指します。</p>
+
+    <h2>第2条（サービスの内容）</h2>
+    <p>本サービスは、音声をリアルタイムでテキストに変換し、macOS上のアプリケーションに入力する機能を提供します。本サービスは以下の外部APIを利用しています。</p>
+    <ul>
+      <li>OpenAI API（音声認識）</li>
+      <li>Google Gemini API（テキスト整形）</li>
+      <li>Anthropic API（高度なテキスト整形）</li>
+    </ul>
+    <p>これらの外部サービスの利用にはそれぞれのAPIキーが必要であり、ユーザーが各サービスの利用規約に同意の上で取得・設定するものとします。</p>
+
+    <h2>第3条（利用条件）</h2>
+    <ul>
+      <li>本サービスの利用にはmacOS 14 (Sonoma) 以降が必要です。</li>
+      <li>アクセシビリティ権限およびマイク権限の付与が必要です。</li>
+      <li>外部APIの利用料金は、ユーザーが各サービス提供者に直接お支払いいただきます。</li>
+    </ul>
+
+    <h2>第4条（禁止事項）</h2>
+    <p>ユーザーは以下の行為を行ってはなりません。</p>
+    <ul>
+      <li>本サービスの逆コンパイル、リバースエンジニアリング、または逆アセンブル</li>
+      <li>本サービスを利用した違法行為</li>
+      <li>本サービスの機能を不正に利用し、外部APIに過度な負荷をかける行為</li>
+      <li>他者のプライバシーを侵害する目的での音声録音</li>
+      <li>本サービスを第三者に再配布または転売する行為</li>
+    </ul>
+
+    <h2>第5条（知的財産権）</h2>
+    <p>本サービスに関する知的財産権はAutoType開発者に帰属します。ユーザーが本サービスを使用して生成したテキストの権利はユーザーに帰属します。</p>
+
+    <h2>第6条（免責事項）</h2>
+    <ul>
+      <li>本サービスは「現状有姿」で提供され、明示的または黙示的な保証はありません。</li>
+      <li>音声認識およびテキスト整形の精度について保証するものではありません。</li>
+      <li>外部APIの障害、仕様変更、料金変更に起因する問題について、当方は責任を負いません。</li>
+      <li>本サービスの利用により生じた損害について、当方の故意または重過失による場合を除き、責任を負いません。</li>
+    </ul>
+
+    <h2>第7条（サービスの変更・終了）</h2>
+    <p>当方は、事前の通知なく本サービスの内容を変更、または提供を終了することができます。ベータ版から有料版への移行時には、事前にユーザーに通知します。</p>
+
+    <h2>第8条（規約の変更）</h2>
+    <p>当方は、必要に応じて本規約を変更できます。変更後の利用規約は、本サービス上で公開した時点から効力を生じます。変更後も本サービスの利用を継続した場合、変更後の規約に同意したものとみなします。</p>
+
+    <h2>第9条（準拠法・管轄）</h2>
+    <p>本規約は日本法に準拠し、本サービスに関する紛争については東京地方裁判所を第一審の専属的合意管轄裁判所とします。</p>
+
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026 AutoType ・ <a href="terms.html">利用規約</a> ・ <a href="privacy.html">プライバシーポリシー</a> ・ <a href="index.html">トップ</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
