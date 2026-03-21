@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoType - AI Voice Typing for macOS</title>
+    <meta name="description" content="AutoType is a real-time AI voice typing app for macOS. Press a hotkey, speak, and your words appear as polished text anywhere on your Mac.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            line-height: 1.7;
+            color: #1d1d1f;
+            background: #fbfbfd;
+        }
+        .hero {
+            text-align: center;
+            padding: 80px 20px 60px;
+            background: linear-gradient(180deg, #f5f5f7 0%, #fbfbfd 100%);
+        }
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+        }
+        .hero .tagline {
+            font-size: 21px;
+            color: #6e6e73;
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+        .download-btn {
+            display: inline-block;
+            background: #0071e3;
+            color: #fff;
+            padding: 14px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .download-btn:hover {
+            background: #0077ed;
+        }
+        .download-note {
+            margin-top: 12px;
+            font-size: 13px;
+            color: #86868b;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .section {
+            padding: 60px 0;
+        }
+        .section h2 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+        .flow {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        .flow-step {
+            background: #f5f5f7;
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            flex: 1;
+            min-width: 160px;
+            max-width: 200px;
+        }
+        .flow-step .icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        .flow-step .label {
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .flow-step .desc {
+            font-size: 13px;
+            color: #6e6e73;
+            margin-top: 4px;
+        }
+        .flow-arrow {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            color: #86868b;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        .feature-card {
+            background: #f5f5f7;
+            border-radius: 16px;
+            padding: 28px;
+        }
+        .feature-card h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .feature-card p {
+            font-size: 14px;
+            color: #6e6e73;
+        }
+        .tech-stack {
+            background: #f5f5f7;
+            border-radius: 16px;
+            padding: 32px;
+        }
+        .tech-stack h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .tech-stack ul {
+            list-style: none;
+            padding: 0;
+        }
+        .tech-stack li {
+            padding: 4px 0;
+            font-size: 14px;
+            color: #6e6e73;
+        }
+        .tech-stack li::before {
+            content: "- ";
+        }
+        .setup {
+            background: #f5f5f7;
+            border-radius: 16px;
+            padding: 32px;
+        }
+        .setup h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .setup ol {
+            padding-left: 20px;
+        }
+        .setup li {
+            padding: 6px 0;
+            font-size: 14px;
+            color: #6e6e73;
+        }
+        .setup code {
+            background: #e8e8ed;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 13px;
+            color: #86868b;
+            border-top: 1px solid #e8e8ed;
+        }
+        footer a {
+            color: #0071e3;
+            text-decoration: none;
+        }
+        .lang-switch {
+            text-align: right;
+            padding: 16px 20px 0;
+            max-width: 840px;
+            margin: 0 auto;
+        }
+        .lang-switch a {
+            color: #0071e3;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .en, .ja { display: none; }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 32px; }
+            .hero .tagline { font-size: 17px; }
+            .features { grid-template-columns: 1fr; }
+            .flow { flex-direction: column; align-items: center; }
+            .flow-arrow { transform: rotate(90deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="lang-switch">
+        <a href="#" onclick="switchLanguage('en'); return false;">English</a> |
+        <a href="#" onclick="switchLanguage('ja'); return false;">Japanese</a>
+    </div>
+
+    <div class="hero">
+        <h1>AutoType</h1>
+        <p class="tagline ja">Fn キーを押して話すだけ。AI がリアルタイムで書き起こし、整形して、どこにでも入力します。</p>
+        <p class="tagline en">Press Fn and speak. AI transcribes in real-time, polishes your words, and types them anywhere.</p>
+        <a href="https://github.com/kumamotone/AutoType/releases/latest" class="download-btn">
+            <span class="ja">ダウンロード</span>
+            <span class="en">Download</span>
+        </a>
+        <p class="download-note">
+            <span class="ja">macOS 14 Sonoma 以降対応</span>
+            <span class="en">Requires macOS 14 Sonoma or later</span>
+        </p>
+    </div>
+
+    <div class="container">
+        <!-- How it works -->
+        <div class="section">
+            <h2 class="ja">使い方</h2>
+            <h2 class="en">How It Works</h2>
+            <div class="flow">
+                <div class="flow-step">
+                    <div class="icon">🎤</div>
+                    <div class="label ja">Fn ダブルタップ</div>
+                    <div class="label en">Double-tap Fn</div>
+                    <div class="desc ja">録音開始</div>
+                    <div class="desc en">Start recording</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="icon">🗣️</div>
+                    <div class="label ja">話す</div>
+                    <div class="label en">Speak</div>
+                    <div class="desc ja">リアルタイム表示</div>
+                    <div class="desc en">Live transcription</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="icon">✨</div>
+                    <div class="label ja">AI 整形</div>
+                    <div class="label en">AI Polish</div>
+                    <div class="desc ja">句読点・用語修正</div>
+                    <div class="desc en">Punctuation & terms</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="icon">⌨️</div>
+                    <div class="label ja">入力</div>
+                    <div class="label en">Type</div>
+                    <div class="desc ja">どのアプリにも</div>
+                    <div class="desc en">Into any app</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="section">
+            <h2 class="ja">特徴</h2>
+            <h2 class="en">Features</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3 class="ja">リアルタイム書き起こし</h3>
+                    <h3 class="en">Real-time Transcription</h3>
+                    <p class="ja">OpenAI の音声認識モデルでストリーミング書き起こし。話しながらテキストがリアルタイムで表示されます。</p>
+                    <p class="en">Streaming transcription powered by OpenAI. See your words appear as you speak.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="ja">2段階 AI 整形</h3>
+                    <h3 class="en">Two-stage AI Refinement</h3>
+                    <p class="ja">Gemini による軽量リアルタイム整形（句読点・用語）+ Claude による深い整形（口語→書き言葉）をオンデマンドで。</p>
+                    <p class="en">Light real-time polish with Gemini (punctuation & terms) + deep refinement with Claude (spoken to written) on demand.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="ja">OS 全体で動作</h3>
+                    <h3 class="en">Works System-wide</h3>
+                    <p class="ja">メニューバーに常駐し、どのアプリのテキストフィールドにも入力。Fn キーでいつでも起動。</p>
+                    <p class="en">Lives in the menu bar, types into any text field in any app. Activate anytime with the Fn key.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="ja">カスタム用語集</h3>
+                    <h3 class="en">Custom Glossary</h3>
+                    <p class="ja">技術用語や固有名詞を登録すれば、正しい表記で自動変換。「タイプスクリプト」→「TypeScript」。</p>
+                    <p class="en">Register technical terms and proper nouns for accurate conversion. "タイプスクリプト" becomes "TypeScript".</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="ja">Push-to-Talk 対応</h3>
+                    <h3 class="en">Push-to-Talk</h3>
+                    <p class="ja">Fn 長押しで話し、離すと停止。短い発話に最適な操作モード。</p>
+                    <p class="en">Hold Fn to speak, release to stop. Ideal for quick dictations.</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="ja">録音履歴</h3>
+                    <h3 class="en">Session History</h3>
+                    <p class="ja">過去のセッションを音声付きで保存・再生。書き起こし結果のセグメントごとの確認も可能。</p>
+                    <p class="en">Save and replay past sessions with audio. Review transcription segment by segment.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Setup -->
+        <div class="section">
+            <h2 class="ja">セットアップ</h2>
+            <h2 class="en">Setup</h2>
+            <div class="setup">
+                <h3 class="ja">必要なもの</h3>
+                <h3 class="en">Requirements</h3>
+                <ol>
+                    <li class="ja">macOS 14 Sonoma 以降</li>
+                    <li class="en">macOS 14 Sonoma or later</li>
+                    <li class="ja">OpenAI API キー（音声認識用）</li>
+                    <li class="en">OpenAI API key (for transcription)</li>
+                    <li class="ja">Gemini API キー（軽量整形用、任意）</li>
+                    <li class="en">Gemini API key (for light refinement, optional)</li>
+                    <li class="ja">Anthropic API キー（深い整形用、任意）</li>
+                    <li class="en">Anthropic API key (for deep refinement, optional)</li>
+                </ol>
+            </div>
+            <div class="setup" style="margin-top: 24px;">
+                <h3 class="ja">インストール手順</h3>
+                <h3 class="en">Installation</h3>
+                <ol>
+                    <li class="ja"><a href="https://github.com/kumamotone/AutoType/releases/latest">最新リリース</a>から <code>AutoType.dmg</code> をダウンロード</li>
+                    <li class="en">Download <code>AutoType.dmg</code> from the <a href="https://github.com/kumamotone/AutoType/releases/latest">latest release</a></li>
+                    <li class="ja"><code>AutoType.app</code> を Applications フォルダにドラッグ</li>
+                    <li class="en">Drag <code>AutoType.app</code> to the Applications folder</li>
+                    <li class="ja">初回起動時にアクセシビリティ権限とマイク権限を許可</li>
+                    <li class="en">Grant accessibility and microphone permissions on first launch</li>
+                    <li class="ja">設定画面で API キーとバックエンド URL を入力</li>
+                    <li class="en">Enter your API keys and backend URL in Settings</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Tech -->
+        <div class="section">
+            <h2 class="ja">技術</h2>
+            <h2 class="en">Technology</h2>
+            <div class="tech-stack">
+                <ul>
+                    <li class="ja">Swift + SwiftUI / AppKit（ネイティブ macOS アプリ）</li>
+                    <li class="en">Swift + SwiftUI / AppKit (native macOS app)</li>
+                    <li class="ja">Go バックエンド（WebSocket、STT パイプライン）</li>
+                    <li class="en">Go backend (WebSocket, STT pipeline)</li>
+                    <li class="ja">OpenAI Realtime API（gpt-4o-mini-transcribe）</li>
+                    <li class="en">OpenAI Realtime API (gpt-4o-mini-transcribe)</li>
+                    <li class="ja">Gemini Flash-Lite（リアルタイム軽量整形）</li>
+                    <li class="en">Gemini Flash-Lite (real-time light refinement)</li>
+                    <li class="ja">Claude Opus（オンデマンド深い整形）</li>
+                    <li class="en">Claude Opus (on-demand deep refinement)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            <a href="https://github.com/kumamotone/AutoType">GitHub</a>
+            <span class="ja"> | オープンソース | &copy; 2025 kumamotone</span>
+            <span class="en"> | Open Source | &copy; 2025 kumamotone</span>
+        </p>
+    </footer>
+
+    <script>
+        function switchLanguage(lang) {
+            document.querySelectorAll('.en, .ja').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.' + lang).forEach(el => {
+                const tag = el.tagName.toLowerCase();
+                const display = (tag === 'span') ? 'inline' :
+                                (tag === 'li') ? 'list-item' :
+                                (tag === 'div' && el.classList.contains('flow-arrow')) ? 'flex' : 'block';
+                el.style.display = display;
+            });
+            document.documentElement.lang = lang === 'ja' ? 'ja' : 'en';
+        }
+        const userLang = navigator.language || navigator.userLanguage;
+        switchLanguage(userLang.startsWith('ja') ? 'ja' : 'en');
+    </script>
+</body>
+</html>
