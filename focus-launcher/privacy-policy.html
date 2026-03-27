@@ -32,15 +32,15 @@
 
   <!-- 日本語版 -->
   <h1>プライバシーポリシー</h1>
-  <p class="updated">最終更新日: 2026年3月19日</p>
+  <p class="updated">最終更新日: 2026年3月27日</p>
 
   <div class="section">
     <p>Focus Launcher（以下「本アプリ」）は、デジタルデトックスを目的としたAndroidランチャーアプリです。本プライバシーポリシーは、本アプリが収集・利用する情報について説明します。</p>
   </div>
 
   <div class="section">
-    <h2>1. 収集する情報</h2>
-    <p>本アプリは以下の情報を端末内で処理します。<strong>いかなる情報も外部サーバーへ送信しません。</strong></p>
+    <h2>1. 端末内で処理する情報</h2>
+    <p>以下の情報は端末内でのみ処理・保存し、外部サーバーへ送信しません。</p>
     <ul>
       <li><strong>アプリ使用状況</strong>: どのアプリをいつ起動・使用したかの記録。タイムライン表示のためにのみ使用し、端末内のデータベースにのみ保存します。</li>
       <li><strong>Wi-Fi ネットワーク名（SSID）</strong>: ユーザーがWi-Fiトリガーのルールを設定する際に、接続中のネットワーク名を読み取ります。実際の位置情報（緯度・経度）は取得・記録しません。</li>
@@ -49,7 +49,18 @@
   </div>
 
   <div class="section">
-    <h2>2. 利用する権限とその目的</h2>
+    <h2>2. 外部サービスに送信する情報</h2>
+    <p>本アプリはアプリの品質改善のために、以下の外部サービスを利用しています。</p>
+    <ul>
+      <li><strong>Firebase Crashlytics</strong>: アプリのクラッシュ情報（スタックトレース、端末モデル、OSバージョン等）を自動的に収集し、Googleのサーバーに送信します。個人を特定する情報は含まれません。</li>
+      <li><strong>Firebase Analytics</strong>: アプリの使用状況に関する匿名の分析データ（オンボーディングの進捗状況、機能の利用頻度等）を収集します。個人を特定する情報は含まれません。</li>
+    </ul>
+    <p>これらのサービスのプライバシーポリシーについては、<a href="https://firebase.google.com/support/privacy">Firebase のプライバシーとセキュリティ</a>をご確認ください。</p>
+    <p><strong>本アプリが収集・送信する情報には、アプリの使用履歴（どのアプリをいつ使用したか）、ブロックルールの内容、Wi-Fi ネットワーク名、ジャーナルの内容は一切含まれません。</strong></p>
+  </div>
+
+  <div class="section">
+    <h2>3. 利用する権限とその目的</h2>
     <ul>
       <li><strong>アクセシビリティサービス（AccessibilityService）</strong>: 起動されたアプリのパッケージ名を検知し、ブロックルールに従って警告画面を表示するためにのみ使用します。キーロガー、パスワードの読み取り、画面内容の記録、ユーザーのタップ操作の追跡は一切行いません。</li>
       <li><strong>使用状況へのアクセス（PACKAGE_USAGE_STATS）</strong>: アプリの使用履歴を取得し、タイムライン画面に表示するために使用します。</li>
@@ -57,21 +68,22 @@
       <li><strong>位置情報（ACCESS_FINE_LOCATION）</strong>: AndroidがWi-FiネットワークのSSIDを読み取るために位置情報権限を要求します。本アプリは実際の位置情報（GPSやネットワーク経由の緯度・経度）を取得・保存・送信しません。</li>
       <li><strong>バッテリー最適化の無視</strong>: バックグラウンドでのアプリ監視サービスが停止しないようにするために使用します。</li>
       <li><strong>起動完了の受信（RECEIVE_BOOT_COMPLETED）</strong>: 端末の再起動後にサービスを自動で再開するために使用します。</li>
+      <li><strong>インターネット（INTERNET）</strong>: Firebase Crashlytics / Analytics のデータ送信に使用します。</li>
     </ul>
   </div>
 
   <div class="section">
-    <h2>3. データの共有・外部送信</h2>
-    <p>本アプリは収集したいかなる情報も、第三者・外部サーバーへ送信・共有しません。すべてのデータは端末内にのみ保存されます。</p>
+    <h2>4. データの共有</h2>
+    <p>本アプリは、上記のFirebaseサービスを通じてクラッシュレポートおよび匿名の分析データをGoogleに送信する以外に、収集した情報を第三者と共有・売却・提供することはありません。</p>
   </div>
 
   <div class="section">
-    <h2>4. プライバシーポリシーの変更</h2>
+    <h2>5. プライバシーポリシーの変更</h2>
     <p>本ポリシーを変更する場合は、このページを更新します。定期的にご確認ください。</p>
   </div>
 
   <div class="section">
-    <h2>5. お問い合わせ</h2>
+    <h2>6. お問い合わせ</h2>
     <p>本プライバシーポリシーに関するご質問は、以下までご連絡ください。</p>
     <p>開発者: kumamotone<br>
     X (Twitter): <a href="https://x.com/kumamo_tone">https://x.com/kumamo_tone</a><br>
@@ -82,15 +94,15 @@
 
   <!-- English version -->
   <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: March 19, 2026</p>
+  <p class="updated">Last updated: March 27, 2026</p>
 
   <div class="section">
     <p>Focus Launcher ("the App") is an Android launcher designed to help users with digital detox. This Privacy Policy explains what information the App collects and how it is used.</p>
   </div>
 
   <div class="section">
-    <h2>1. Information We Collect</h2>
-    <p>The App processes the following information locally on your device. <strong>No information is ever transmitted to external servers.</strong></p>
+    <h2>1. Information Processed Locally</h2>
+    <p>The following information is processed and stored solely on your device and is never transmitted to external servers.</p>
     <ul>
       <li><strong>App Usage Data</strong>: Records of which apps were launched and when. Used solely to display the usage timeline, stored only in the local on-device database.</li>
       <li><strong>Wi-Fi Network Name (SSID)</strong>: When you configure a Wi-Fi-based blocking rule, the App reads the name of the currently connected network. Actual location data (latitude/longitude) is never collected or stored.</li>
@@ -99,7 +111,18 @@
   </div>
 
   <div class="section">
-    <h2>2. Permissions and Their Purpose</h2>
+    <h2>2. Information Sent to External Services</h2>
+    <p>The App uses the following external services to improve quality and stability.</p>
+    <ul>
+      <li><strong>Firebase Crashlytics</strong>: Automatically collects crash information (stack traces, device model, OS version, etc.) and sends it to Google's servers. No personally identifiable information is included.</li>
+      <li><strong>Firebase Analytics</strong>: Collects anonymous usage analytics (onboarding progress, feature usage frequency, etc.). No personally identifiable information is included.</li>
+    </ul>
+    <p>For details on these services' privacy practices, please see <a href="https://firebase.google.com/support/privacy">Firebase Privacy and Security</a>.</p>
+    <p><strong>The App never collects or transmits your app usage history (which apps you used and when), blocking rule contents, Wi-Fi network names, or journal entries.</strong></p>
+  </div>
+
+  <div class="section">
+    <h2>3. Permissions and Their Purpose</h2>
     <ul>
       <li><strong>Accessibility Service</strong>: Used solely to detect the package name of the launched app and display a blocking screen when a rule is triggered. The App does not perform keylogging, read passwords, record screen content, or track touch input in any way.</li>
       <li><strong>Usage Access (PACKAGE_USAGE_STATS)</strong>: Used to retrieve app usage history for display in the timeline screen.</li>
@@ -107,21 +130,22 @@
       <li><strong>Location (ACCESS_FINE_LOCATION)</strong>: Android requires this permission to read Wi-Fi SSIDs. The App does not collect, store, or transmit actual geographic location (GPS or network-based coordinates).</li>
       <li><strong>Ignore Battery Optimizations</strong>: Used to prevent the background monitoring service from being killed by the system.</li>
       <li><strong>Receive Boot Completed</strong>: Used to restart the monitoring service automatically after device reboot.</li>
+      <li><strong>Internet</strong>: Used to send data to Firebase Crashlytics and Analytics.</li>
     </ul>
   </div>
 
   <div class="section">
-    <h2>3. Data Sharing</h2>
-    <p>The App does not share or transmit any collected information to third parties or external servers. All data remains on your device.</p>
+    <h2>4. Data Sharing</h2>
+    <p>Other than sending crash reports and anonymous analytics data to Google through the Firebase services described above, the App does not share, sell, or provide any collected information to third parties.</p>
   </div>
 
   <div class="section">
-    <h2>4. Changes to This Policy</h2>
+    <h2>5. Changes to This Policy</h2>
     <p>If we update this policy, we will revise this page. Please check back periodically.</p>
   </div>
 
   <div class="section">
-    <h2>5. Contact</h2>
+    <h2>6. Contact</h2>
     <p>If you have questions about this Privacy Policy, please contact:<br>
     Developer: kumamotone<br>
     X (Twitter): <a href="https://x.com/kumamo_tone">https://x.com/kumamo_tone</a><br>

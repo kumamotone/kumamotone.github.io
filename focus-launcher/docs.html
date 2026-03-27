@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docs - Focus Launcher</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      color: #222;
+      line-height: 1.7;
+    }
+    h1 { font-size: 1.8em; border-bottom: 2px solid #eee; padding-bottom: 12px; }
+    h2 { font-size: 1.3em; margin-top: 2em; color: #333; }
+    h3 { font-size: 1.05em; margin-top: 1.5em; color: #444; }
+    p, li { font-size: 0.97em; }
+    ul { padding-left: 1.4em; }
+    .section { margin-bottom: 2em; }
+    .updated { color: #888; font-size: 0.88em; }
+    table { border-collapse: collapse; width: 100%; margin: 16px 0; }
+    th, td { border: 1px solid #ddd; padding: 10px 14px; text-align: left; font-size: 0.93em; }
+    th { background: #f8f8f8; font-weight: 600; }
+    code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+    .lang-switch { text-align: right; margin-bottom: 24px; font-size: 0.9em; }
+    .lang-switch a { color: #0066cc; text-decoration: none; }
+    hr { border: none; border-top: 1px solid #eee; margin: 48px 0; }
+  </style>
+</head>
+<body>
+
+  <div class="lang-switch">
+    <a href="#english">English version below</a>
+  </div>
+
+  <h1>Focus Launcher ドキュメント</h1>
+  <p class="updated">最終更新日: 2026年3月27日</p>
+
+  <div class="section">
+    <h2>収集データの透明性について</h2>
+    <p>Focus Launcher はアプリの品質改善とユーザー体験の向上のために、Firebase Analytics を利用して匿名の分析データを収集しています。このページでは、収集するデータの詳細を公開します。</p>
+    <p>収集するデータには個人を特定する情報は一切含まれません。また、アプリの使用履歴（どのアプリをいつ使用したか）、ブロックルールの内容、Wi-Fi ネットワーク名、ジャーナルの内容は収集・送信されません。</p>
+  </div>
+
+  <div class="section">
+    <h2>収集するイベント一覧</h2>
+
+    <h3>オンボーディング</h3>
+    <table>
+      <tr><th>イベント名</th><th>タイミング</th><th>パラメータ</th></tr>
+      <tr><td><code>onboarding_step_view</code></td><td>オンボーディングの各ステップ表示時</td><td>ステップ番号、ステップ種別（ナラティブ/権限）</td></tr>
+      <tr><td><code>onboarding_permission_granted</code></td><td>権限が許可された時</td><td>権限の種類</td></tr>
+      <tr><td><code>onboarding_permission_skipped</code></td><td>権限がスキップされた時</td><td>権限の種類</td></tr>
+      <tr><td><code>onboarding_complete</code></td><td>オンボーディング完了時</td><td>なし</td></tr>
+    </table>
+
+    <h3>チュートリアル</h3>
+    <table>
+      <tr><th>イベント名</th><th>タイミング</th><th>パラメータ</th></tr>
+      <tr><td><code>tutorial_step_complete</code></td><td>チュートリアルの各ステップ完了時</td><td>ステップ番号、完了方法</td></tr>
+      <tr><td><code>tutorial_complete</code></td><td>チュートリアル全完了時</td><td>なし</td></tr>
+    </table>
+
+    <h3>ルール設定</h3>
+    <table>
+      <tr><th>イベント名</th><th>タイミング</th><th>パラメータ</th></tr>
+      <tr><td><code>rule_created</code></td><td>新規ルール作成時</td><td>トリガー種別、制限レベル、対象アプリ数</td></tr>
+      <tr><td><code>rule_edited</code></td><td>ルール編集時</td><td>トリガー種別、制限レベル、対象アプリ数</td></tr>
+      <tr><td><code>rule_deleted</code></td><td>ルール削除時</td><td>なし</td></tr>
+      <tr><td><code>rule_toggled</code></td><td>ルールの有効/無効切替時</td><td>有効/無効</td></tr>
+    </table>
+
+    <h3>ペイウォール・課金</h3>
+    <table>
+      <tr><th>イベント名</th><th>タイミング</th><th>パラメータ</th></tr>
+      <tr><td><code>paywall_view</code></td><td>ペイウォール画面表示時</td><td>表示元（起動時/オンボーディング/設定/ゲート）</td></tr>
+      <tr><td><code>paywall_plan_selected</code></td><td>プラン選択時</td><td>プラン種別</td></tr>
+      <tr><td><code>paywall_purchase_started</code></td><td>購入フロー開始時</td><td>プラン種別</td></tr>
+      <tr><td><code>paywall_purchase_complete</code></td><td>購入完了時</td><td>プラン種別</td></tr>
+      <tr><td><code>paywall_skipped</code></td><td>ペイウォールスキップ時</td><td>なし</td></tr>
+      <tr><td><code>premium_gate_shown</code></td><td>プレミアム機能制限ダイアログ表示時</td><td>機能名</td></tr>
+      <tr><td><code>premium_gate_upgrade_tapped</code></td><td>制限ダイアログからペイウォールへ遷移時</td><td>機能名</td></tr>
+    </table>
+
+    <h3>エンゲージメント</h3>
+    <table>
+      <tr><th>イベント名</th><th>タイミング</th><th>パラメータ</th></tr>
+      <tr><td><code>review_prompt_shown</code></td><td>レビュー訴求ダイアログ表示時</td><td>なし</td></tr>
+      <tr><td><code>focus_mode_enabled</code></td><td>集中モード有効化時</td><td>なし</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>クラッシュレポート</h2>
+    <p>Firebase Crashlytics を使用して、アプリがクラッシュした際のスタックトレース、端末モデル、OS バージョン等の情報を自動収集しています。デバッグビルドではこの機能は無効化されています。</p>
+  </div>
+
+  <div class="section">
+    <h2>関連リンク</h2>
+    <ul>
+      <li><a href="/focus-launcher/privacy-policy.html">プライバシーポリシー</a></li>
+      <li><a href="/focus-launcher/terms.html">利用規約</a></li>
+      <li><a href="https://firebase.google.com/support/privacy">Firebase のプライバシーとセキュリティ</a></li>
+    </ul>
+  </div>
+
+  <hr id="english">
+
+  <h1>Focus Launcher Documentation</h1>
+  <p class="updated">Last updated: March 27, 2026</p>
+
+  <div class="section">
+    <h2>Data Collection Transparency</h2>
+    <p>Focus Launcher uses Firebase Analytics to collect anonymous analytics data to improve app quality and user experience. This page details exactly what data is collected.</p>
+    <p>No personally identifiable information is ever collected. Your app usage history (which apps you used and when), blocking rule contents, Wi-Fi network names, and journal entries are never collected or transmitted.</p>
+  </div>
+
+  <div class="section">
+    <h2>Collected Events</h2>
+
+    <h3>Onboarding</h3>
+    <table>
+      <tr><th>Event Name</th><th>Trigger</th><th>Parameters</th></tr>
+      <tr><td><code>onboarding_step_view</code></td><td>Each onboarding step is viewed</td><td>Step index, step type (narrative/permission)</td></tr>
+      <tr><td><code>onboarding_permission_granted</code></td><td>A permission is granted</td><td>Permission type</td></tr>
+      <tr><td><code>onboarding_permission_skipped</code></td><td>A permission is skipped</td><td>Permission type</td></tr>
+      <tr><td><code>onboarding_complete</code></td><td>Onboarding is completed</td><td>None</td></tr>
+    </table>
+
+    <h3>Tutorial</h3>
+    <table>
+      <tr><th>Event Name</th><th>Trigger</th><th>Parameters</th></tr>
+      <tr><td><code>tutorial_step_complete</code></td><td>Each tutorial step is completed</td><td>Step index, completion method</td></tr>
+      <tr><td><code>tutorial_complete</code></td><td>All tutorial steps completed</td><td>None</td></tr>
+    </table>
+
+    <h3>Rule Management</h3>
+    <table>
+      <tr><th>Event Name</th><th>Trigger</th><th>Parameters</th></tr>
+      <tr><td><code>rule_created</code></td><td>New rule created</td><td>Trigger type, friction level, app count</td></tr>
+      <tr><td><code>rule_edited</code></td><td>Rule edited</td><td>Trigger type, friction level, app count</td></tr>
+      <tr><td><code>rule_deleted</code></td><td>Rule deleted</td><td>None</td></tr>
+      <tr><td><code>rule_toggled</code></td><td>Rule enabled/disabled</td><td>Enabled state</td></tr>
+    </table>
+
+    <h3>Paywall &amp; Billing</h3>
+    <table>
+      <tr><th>Event Name</th><th>Trigger</th><th>Parameters</th></tr>
+      <tr><td><code>paywall_view</code></td><td>Paywall screen shown</td><td>Source (startup/onboarding/settings/gate)</td></tr>
+      <tr><td><code>paywall_plan_selected</code></td><td>Plan selected</td><td>Plan type</td></tr>
+      <tr><td><code>paywall_purchase_started</code></td><td>Purchase flow initiated</td><td>Plan type</td></tr>
+      <tr><td><code>paywall_purchase_complete</code></td><td>Purchase completed</td><td>Plan type</td></tr>
+      <tr><td><code>paywall_skipped</code></td><td>Paywall skipped</td><td>None</td></tr>
+      <tr><td><code>premium_gate_shown</code></td><td>Premium gate dialog shown</td><td>Feature name</td></tr>
+      <tr><td><code>premium_gate_upgrade_tapped</code></td><td>Upgrade tapped from gate dialog</td><td>Feature name</td></tr>
+    </table>
+
+    <h3>Engagement</h3>
+    <table>
+      <tr><th>Event Name</th><th>Trigger</th><th>Parameters</th></tr>
+      <tr><td><code>review_prompt_shown</code></td><td>Review prompt dialog shown</td><td>None</td></tr>
+      <tr><td><code>focus_mode_enabled</code></td><td>Focus mode enabled</td><td>None</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h2>Crash Reporting</h2>
+    <p>Firebase Crashlytics is used to automatically collect crash information including stack traces, device model, and OS version. This feature is disabled in debug builds.</p>
+  </div>
+
+  <div class="section">
+    <h2>Related Links</h2>
+    <ul>
+      <li><a href="/focus-launcher/privacy-policy.html">Privacy Policy</a></li>
+      <li><a href="/focus-launcher/terms.html">Terms of Service</a></li>
+      <li><a href="https://firebase.google.com/support/privacy">Firebase Privacy and Security</a></li>
+    </ul>
+  </div>
+
+</body>
+</html>
