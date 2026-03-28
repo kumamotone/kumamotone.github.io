@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,87 +30,8 @@
 <body>
 
   <div class="lang-switch">
-    <a href="#english">English version below</a>
+    <a href="#japanese">日本語版は下にあります</a>
   </div>
-
-  <!-- 日本語版 -->
-  <h1>プライバシーポリシー</h1>
-  <p class="updated">最終更新日: 2026年3月28日</p>
-
-  <div class="section">
-    <p>Focus Launcher（以下「本アプリ」）は、デジタルデトックスを目的としたAndroidランチャーアプリです。本プライバシーポリシーは、本アプリが収集・利用する情報について説明します。</p>
-  </div>
-
-  <div class="section">
-    <h2>1. 端末内で処理する情報</h2>
-    <p>以下の情報は端末内でのみ処理・保存し、外部サーバーへ送信しません。</p>
-    <ul>
-      <li><strong>アプリ使用状況</strong>: どのアプリをいつ起動・使用したかの記録。タイムライン表示のためにのみ使用し、端末内のデータベースにのみ保存します。</li>
-      <li><strong>Wi-Fi ネットワーク名（SSID）</strong>: ユーザーがWi-Fiトリガーのルールを設定する際に、接続中のネットワーク名を読み取ります。実際の位置情報（緯度・経度）は取得・記録しません。</li>
-      <li><strong>ユーザー設定・ルール</strong>: ブロックルール、ホーム画面のアプリ設定などの設定情報。端末内にのみ保存します。</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>2. 外部サービスに送信する情報</h2>
-    <p>本アプリはアプリの品質改善のために、以下の外部サービスを利用しています。</p>
-    <ul>
-      <li><strong>Firebase Crashlytics</strong>: アプリのクラッシュ情報（スタックトレース、端末モデル、OSバージョン等）を自動的に収集し、Googleのサーバーに送信します。個人を特定する情報は含まれません。</li>
-      <li><strong>Firebase Analytics</strong>: アプリの使用状況に関する匿名の分析データ（オンボーディングの進捗状況、機能の利用頻度等）を収集します。個人を特定する情報は含まれません。</li>
-    </ul>
-    <p>これらのサービスのプライバシーポリシーについては、<a href="https://firebase.google.com/support/privacy">Firebase のプライバシーとセキュリティ</a>をご確認ください。</p>
-    <p><strong>本アプリが収集・送信する情報には、アプリの使用履歴（どのアプリをいつ使用したか）、ブロックルールの内容、Wi-Fi ネットワーク名、ジャーナルの内容は一切含まれません。</strong></p>
-  </div>
-
-  <div class="section">
-    <h2>3. 利用する権限とその目的</h2>
-    <ul>
-      <li><strong>アクセシビリティサービス（AccessibilityService）</strong>: 起動されたアプリのパッケージ名を検知し、ブロックルールに従って警告画面を表示するためにのみ使用します。キーロガー、パスワードの読み取り、画面内容の記録、ユーザーのタップ操作の追跡は一切行いません。</li>
-      <li><strong>使用状況へのアクセス（PACKAGE_USAGE_STATS）</strong>: アプリの使用履歴を取得し、タイムライン画面に表示するために使用します。</li>
-      <li><strong>他のアプリの上に重ねて表示（SYSTEM_ALERT_WINDOW）</strong>: ブロックルールが発動した際に、アプリの上に警告画面を表示するために使用します。</li>
-      <li><strong>位置情報（ACCESS_FINE_LOCATION）</strong>: AndroidがWi-FiネットワークのSSIDを読み取るために位置情報権限を要求します。本アプリは実際の位置情報（GPSやネットワーク経由の緯度・経度）を取得・保存・送信しません。</li>
-      <li><strong>バッテリー最適化の無視</strong>: バックグラウンドでのアプリ監視サービスが停止しないようにするために使用します。</li>
-      <li><strong>起動完了の受信（RECEIVE_BOOT_COMPLETED）</strong>: 端末の再起動後にサービスを自動で再開するために使用します。</li>
-      <li><strong>インターネット（INTERNET）</strong>: Firebase Crashlytics / Analytics のデータ送信に使用します。</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>4. データの保持</h2>
-    <ul>
-      <li><strong>端末内データ</strong>: アプリ使用状況、ブロックルール、ジャーナル等のデータは、端末内のデータベースに保存されます。アプリをアンインストールすると、端末内のすべてのデータは完全に削除されます。</li>
-      <li><strong>Firebase経由のデータ</strong>: Firebase CrashlyticsおよびAnalyticsに送信されたデータは、Googleのデータ保持ポリシーに従って管理されます。詳細は<a href="https://firebase.google.com/support/privacy">Firebase のプライバシーとセキュリティ</a>をご確認ください。</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>5. データの削除</h2>
-    <ul>
-      <li><strong>アプリ使用統計データ</strong>: 設定画面の「使用データを削除」から、記録されたアプリ使用履歴を手動で削除できます。</li>
-      <li><strong>全データの削除</strong>: アプリをアンインストールすることで、端末内に保存されたすべてのデータ（使用状況、ルール、ジャーナル、設定）が完全に削除されます。</li>
-      <li><strong>Firebase データ</strong>: Firebase経由で送信された匿名データの削除については、<a href="https://firebase.google.com/support/privacy">Firebaseのプライバシーポリシー</a>に準じます。</li>
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>6. データの共有</h2>
-    <p>本アプリは、上記のFirebaseサービスを通じてクラッシュレポートおよび匿名の分析データをGoogleに送信する以外に、収集した情報を第三者と共有・売却・提供することはありません。</p>
-  </div>
-
-  <div class="section">
-    <h2>7. プライバシーポリシーの変更</h2>
-    <p>本ポリシーを変更する場合は、このページを更新します。定期的にご確認ください。</p>
-  </div>
-
-  <div class="section">
-    <h2>8. お問い合わせ</h2>
-    <p>本プライバシーポリシーに関するご質問は、以下までご連絡ください。</p>
-    <p>開発者: kumamotone<br>
-    X (Twitter): <a href="https://x.com/kumamo_tone">https://x.com/kumamo_tone</a><br>
-    Email: desper1jp@gmail.com</p>
-  </div>
-
-  <hr id="english">
 
   <!-- English version -->
   <h1>Privacy Policy</h1>
@@ -185,6 +106,85 @@
     <h2>8. Contact</h2>
     <p>If you have questions about this Privacy Policy, please contact:<br>
     Developer: kumamotone<br>
+    X (Twitter): <a href="https://x.com/kumamo_tone">https://x.com/kumamo_tone</a><br>
+    Email: desper1jp@gmail.com</p>
+  </div>
+
+  <hr id="japanese">
+
+  <!-- 日本語版 -->
+  <h1>プライバシーポリシー</h1>
+  <p class="updated">最終更新日: 2026年3月28日</p>
+
+  <div class="section">
+    <p>Focus Launcher（以下「本アプリ」）は、デジタルデトックスを目的としたAndroidランチャーアプリです。本プライバシーポリシーは、本アプリが収集・利用する情報について説明します。</p>
+  </div>
+
+  <div class="section">
+    <h2>1. 端末内で処理する情報</h2>
+    <p>以下の情報は端末内でのみ処理・保存し、外部サーバーへ送信しません。</p>
+    <ul>
+      <li><strong>アプリ使用状況</strong>: どのアプリをいつ起動・使用したかの記録。タイムライン表示のためにのみ使用し、端末内のデータベースにのみ保存します。</li>
+      <li><strong>Wi-Fi ネットワーク名（SSID）</strong>: ユーザーがWi-Fiトリガーのルールを設定する際に、接続中のネットワーク名を読み取ります。実際の位置情報（緯度・経度）は取得・記録しません。</li>
+      <li><strong>ユーザー設定・ルール</strong>: ブロックルール、ホーム画面のアプリ設定などの設定情報。端末内にのみ保存します。</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>2. 外部サービスに送信する情報</h2>
+    <p>本アプリはアプリの品質改善のために、以下の外部サービスを利用しています。</p>
+    <ul>
+      <li><strong>Firebase Crashlytics</strong>: アプリのクラッシュ情報（スタックトレース、端末モデル、OSバージョン等）を自動的に収集し、Googleのサーバーに送信します。個人を特定する情報は含まれません。</li>
+      <li><strong>Firebase Analytics</strong>: アプリの使用状況に関する匿名の分析データ（オンボーディングの進捗状況、機能の利用頻度等）を収集します。個人を特定する情報は含まれません。</li>
+    </ul>
+    <p>これらのサービスのプライバシーポリシーについては、<a href="https://firebase.google.com/support/privacy">Firebase のプライバシーとセキュリティ</a>をご確認ください。</p>
+    <p><strong>本アプリが収集・送信する情報には、アプリの使用履歴（どのアプリをいつ使用したか）、ブロックルールの内容、Wi-Fi ネットワーク名、ジャーナルの内容は一切含まれません。</strong></p>
+  </div>
+
+  <div class="section">
+    <h2>3. 利用する権限とその目的</h2>
+    <ul>
+      <li><strong>アクセシビリティサービス（AccessibilityService）</strong>: 起動されたアプリのパッケージ名を検知し、ブロックルールに従って警告画面を表示するためにのみ使用します。キーロガー、パスワードの読み取り、画面内容の記録、ユーザーのタップ操作の追跡は一切行いません。</li>
+      <li><strong>使用状況へのアクセス（PACKAGE_USAGE_STATS）</strong>: アプリの使用履歴を取得し、タイムライン画面に表示するために使用します。</li>
+      <li><strong>他のアプリの上に重ねて表示（SYSTEM_ALERT_WINDOW）</strong>: ブロックルールが発動した際に、アプリの上に警告画面を表示するために使用します。</li>
+      <li><strong>位置情報（ACCESS_FINE_LOCATION）</strong>: AndroidがWi-FiネットワークのSSIDを読み取るために位置情報権限を要求します。本アプリは実際の位置情報（GPSやネットワーク経由の緯度・経度）を取得・保存・送信しません。</li>
+      <li><strong>バッテリー最適化の無視</strong>: バックグラウンドでのアプリ監視サービスが停止しないようにするために使用します。</li>
+      <li><strong>起動完了の受信（RECEIVE_BOOT_COMPLETED）</strong>: 端末の再起動後にサービスを自動で再開するために使用します。</li>
+      <li><strong>インターネット（INTERNET）</strong>: Firebase Crashlytics / Analytics のデータ送信に使用します。</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>4. データの保持</h2>
+    <ul>
+      <li><strong>端末内データ</strong>: アプリ使用状況、ブロックルール、ジャーナル等のデータは、端末内のデータベースに保存されます。アプリをアンインストールすると、端末内のすべてのデータは完全に削除されます。</li>
+      <li><strong>Firebase経由のデータ</strong>: Firebase CrashlyticsおよびAnalyticsに送信されたデータは、Googleのデータ保持ポリシーに従って管理されます。詳細は<a href="https://firebase.google.com/support/privacy">Firebase のプライバシーとセキュリティ</a>をご確認ください。</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>5. データの削除</h2>
+    <ul>
+      <li><strong>アプリ使用統計データ</strong>: 設定画面の「使用データを削除」から、記録されたアプリ使用履歴を手動で削除できます。</li>
+      <li><strong>全データの削除</strong>: アプリをアンインストールすることで、端末内に保存されたすべてのデータ（使用状況、ルール、ジャーナル、設定）が完全に削除されます。</li>
+      <li><strong>Firebase データ</strong>: Firebase経由で送信された匿名データの削除については、<a href="https://firebase.google.com/support/privacy">Firebaseのプライバシーポリシー</a>に準じます。</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>6. データの共有</h2>
+    <p>本アプリは、上記のFirebaseサービスを通じてクラッシュレポートおよび匿名の分析データをGoogleに送信する以外に、収集した情報を第三者と共有・売却・提供することはありません。</p>
+  </div>
+
+  <div class="section">
+    <h2>7. プライバシーポリシーの変更</h2>
+    <p>本ポリシーを変更する場合は、このページを更新します。定期的にご確認ください。</p>
+  </div>
+
+  <div class="section">
+    <h2>8. お問い合わせ</h2>
+    <p>本プライバシーポリシーに関するご質問は、以下までご連絡ください。</p>
+    <p>開発者: kumamotone<br>
     X (Twitter): <a href="https://x.com/kumamo_tone">https://x.com/kumamo_tone</a><br>
     Email: desper1jp@gmail.com</p>
   </div>
