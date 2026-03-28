@@ -47,6 +47,14 @@
     font-family: 'DM Mono', monospace; font-size: 12px;
     letter-spacing: 0.14em; text-transform: uppercase; color: var(--mid);
   }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .lang-toggle {
+    font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--faint); background: none; border: none;
+    cursor: pointer; padding: 9px 12px; transition: color 0.2s;
+  }
+  .lang-toggle:hover { color: var(--accent); }
   .nav-cta {
     font-family: 'DM Mono', monospace; font-size: 10px;
     letter-spacing: 0.16em; text-transform: uppercase;
@@ -331,7 +339,6 @@
     .hero-phone { max-width: 220px; margin: 0 auto; }
     .screenshots { padding: 60px 24px; }
     .screenshots-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 100%; }
-    /* Feature セクション：モバイルは1列、テキスト→画像の順に統一 */
     .tl-section { grid-template-columns: 1fr; padding: 60px 24px; gap: 36px; }
     .tl-section--reverse { grid-template-columns: 1fr; }
     .tl-section--reverse .tl-left { order: -1; }
@@ -371,28 +378,29 @@
     </div>
     <span class="nav-wordmark">Focus Launcher</span>
   </div>
-  <a href="#download" class="nav-cta">ダウンロード</a>
+  <div class="nav-right">
+    <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
+    <a href="#download" class="nav-cta" data-i18n="nav_cta">ダウンロード</a>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <div class="hero-eyebrow">ベータ期間中は無料 &middot; アカウント不要</div>
-    <p class="hero-question">
-      集中力を、<em>取り戻す。</em>
-    </p>
-    <p class="hero-sub">Focus Launcher は、あなたの注意力を取り戻すためのAndroidランチャーです。ミニマルなデザインのランチャー、高度なアプリブロックツール、使用統計ツールをひとつにまとめました。</p>
+    <div class="hero-eyebrow" data-i18n="hero_eyebrow">ベータ期間中は無料 &middot; アカウント不要</div>
+    <p class="hero-question" data-i18n="hero_question">集中力を、<em>取り戻す。</em></p>
+    <p class="hero-sub" data-i18n="hero_sub">Focus Launcher は、あなたの注意力を取り戻すためのAndroidランチャーです。ミニマルなデザインのランチャー、高度なアプリブロックツール、使用統計ツールをひとつにまとめました。</p>
 
     <div class="hero-cta-row">
       <a href="https://play.google.com/apps/testing/dev.kuma.focuslauncher" class="btn-play">
         <img src="google_play_btn_white.svg" alt="Google Play で入手">
       </a>
-      <a href="#features" class="btn-text">詳しく見る</a>
+      <a href="#features" class="btn-text" data-i18n="hero_learn_more">詳しく見る</a>
     </div>
   </div>
   <div class="hero-right">
     <div class="hero-phone">
-      <img src="screenshots/Screenshot1_Home.png" alt="Focus Launcher ホーム画面">
+      <img src="screenshots/Screenshot1_Home.png" alt="Focus Launcher" data-i18n-src="hero_screenshot">
     </div>
   </div>
 </section>
@@ -401,58 +409,58 @@
 <section class="story">
   <div class="story-inner">
     <div class="story-left">
-      <div class="story-eyebrow">なぜ作ったか</div>
-      <p class="story-pull">「シンプルなランチャーは、<br>シンプルすぎた。」</p>
+      <div class="story-eyebrow" data-i18n="story_eyebrow">なぜ作ったか</div>
+      <p class="story-pull" data-i18n="story_pull">「シンプルなランチャーは、<br>シンプルすぎた。」</p>
     </div>
     <div class="story-right">
-      <p>私はかつて、重度のスマホ中毒でした。気づけば一日中、SNSのタイムラインやショート動画を縦スワイプしていました。</p>
-      <p>転機になったのは、シンプルなランチャー、アプリブロックツール、使用統計ツールとの出会いでした。「使いすぎているアプリを見えにくくする」という発想が、自分には効きました。</p>
-      <p>ただ、使い続けるうちに限界を感じるようになりました。「自宅のWi-Fiに接続しているときだけXをブロックする」ような条件付きの制限には、ランチャー以外のツールが必要でした。使用状況を確認するには別のアプリが必要で、それらは複数の課金体系を持ち、広告も入っていました。</p>
-      <p>シンプルさにも落とし穴がありました。GoogleとMicrosoftのAuthenticatorアプリのように、アイコンをなくしてしまうと区別がつかなくなるアプリがあります。シンプルすぎることも、それはそれで不便でした。</p>
-      <p class="story-closing">自分が本当に欲しかったのは、一つのアプリでした。そんな自分のために作ったのが、Focus Launcherです。</p>
+      <p data-i18n="story_p1">私はかつて、重度のスマホ中毒でした。気づけば一日中、SNSのタイムラインやショート動画を縦スワイプしていました。</p>
+      <p data-i18n="story_p2">転機になったのは、シンプルなランチャー、アプリブロックツール、使用統計ツールとの出会いでした。「使いすぎているアプリを見えにくくする」という発想が、自分には効きました。</p>
+      <p data-i18n="story_p3">ただ、使い続けるうちに限界を感じるようになりました。「自宅のWi-Fiに接続しているときだけXをブロックする」ような条件付きの制限には、ランチャー以外のツールが必要でした。使用状況を確認するには別のアプリが必要で、それらは複数の課金体系を持ち、広告も入っていました。</p>
+      <p data-i18n="story_p4">シンプルさにも落とし穴がありました。GoogleとMicrosoftのAuthenticatorアプリのように、アイコンをなくしてしまうと区別がつかなくなるアプリがあります。シンプルすぎることも、それはそれで不便でした。</p>
+      <p class="story-closing" data-i18n="story_closing">自分が本当に欲しかったのは、一つのアプリでした。そんな自分のために作ったのが、Focus Launcherです。</p>
     </div>
   </div>
 </section>
 
 <!-- SCREENSHOTS -->
 <section class="screenshots">
-  <div class="screenshots-eyebrow">実際の画面</div>
+  <div class="screenshots-eyebrow" data-i18n="screenshots_eyebrow">実際の画面</div>
   <div class="screenshots-grid">
     <div class="phone-card">
       <div class="phone-frame-sm">
-        <img src="screenshots/Screenshot1_Home.png" alt="ホーム画面">
+        <img src="screenshots/Screenshot1_Home.png" alt="" data-i18n-src="ss1">
       </div>
-      <span class="phone-caption">ホーム画面</span>
+      <span class="phone-caption" data-i18n="ss_home">ホーム画面</span>
     </div>
     <div class="phone-card">
       <div class="phone-frame-sm">
-        <img src="screenshots/Screenshot2_AllApps.png" alt="アプリ一覧">
+        <img src="screenshots/Screenshot2_AllApps.png" alt="" data-i18n-src="ss2">
       </div>
-      <span class="phone-caption">アプリ一覧</span>
+      <span class="phone-caption" data-i18n="ss_allapps">アプリ一覧</span>
     </div>
     <div class="phone-card">
       <div class="phone-frame-sm">
-        <img src="screenshots/Screenshot3_Settings.png" alt="設定・ブロックルール">
+        <img src="screenshots/Screenshot3_Settings.png" alt="" data-i18n-src="ss3">
       </div>
-      <span class="phone-caption">設定・ルール</span>
+      <span class="phone-caption" data-i18n="ss_settings">設定・ルール</span>
     </div>
     <div class="phone-card">
       <div class="phone-frame-sm">
-        <img src="screenshots/Screenshot4_UsageStats.png" alt="使用状況">
+        <img src="screenshots/Screenshot4_UsageStats.png" alt="" data-i18n-src="ss4">
       </div>
-      <span class="phone-caption">使用状況</span>
+      <span class="phone-caption" data-i18n="ss_usage">使用状況</span>
     </div>
     <div class="phone-card">
       <div class="phone-frame-sm">
-        <img src="screenshots/Screenshot5_BlockRules.png" alt="ルール編集">
+        <img src="screenshots/Screenshot5_BlockRules.png" alt="" data-i18n-src="ss5">
       </div>
-      <span class="phone-caption">ルール編集</span>
+      <span class="phone-caption" data-i18n="ss_rules">ルール編集</span>
     </div>
     <div class="phone-card">
       <div class="phone-frame-sm">
-        <img src="screenshots/Screenshot6_JournalMemo.png" alt="ブロック画面">
+        <img src="screenshots/Screenshot6_JournalMemo.png" alt="" data-i18n-src="ss6">
       </div>
-      <span class="phone-caption">ブロック画面</span>
+      <span class="phone-caption" data-i18n="ss_journal">ジャーナル</span>
     </div>
   </div>
 </section>
@@ -461,23 +469,23 @@
 <section class="tl-section" id="features">
   <div class="tl-left">
     <div class="tl-eyebrow">Feature 01 &middot; Home Screen</div>
-    <h2 class="tl-title">ミニマルだけど、<br>ミニマルすぎない。</h2>
-    <p class="tl-body">テキストだけのランチャーは、似たアプリの区別がつきづらく、不便すぎます。Focus Launcherは、グリッドやバッジは取り除きつつ、アイコンは残したデザインになっています。刺激を減らすために、アプリはグレースケールにすることもできます。</p>
+    <h2 class="tl-title" data-i18n="f1_title">ミニマルだけど、<br>ミニマルすぎない。</h2>
+    <p class="tl-body" data-i18n="f1_body">テキストだけのランチャーは、似たアプリの区別がつきづらく、不便すぎます。Focus Launcherは、グリッドやバッジは取り除きつつ、アイコンは残したデザインになっています。刺激を減らすために、アプリはグレースケールにすることもできます。</p>
   </div>
   <div class="tl-phone">
-    <img src="screenshots/Screenshot1_Home.png" alt="ホーム画面">
+    <img src="screenshots/Screenshot1_Home.png" alt="" data-i18n-src="f1_img">
   </div>
 </section>
 
 <!-- FEATURE 02 -->
 <section class="tl-section tl-section--reverse">
   <div class="tl-phone">
-    <img src="screenshots/Screenshot5_BlockRules.png" alt="ブロックルール画面">
+    <img src="screenshots/Screenshot5_BlockRules.png" alt="" data-i18n-src="f2_img">
   </div>
   <div class="tl-left">
     <div class="tl-eyebrow">Feature 02 &middot; Block Rules</div>
-    <h2 class="tl-title">高度なブロックルール</h2>
-    <p class="tl-body">既存のミニマルすぎるランチャーより高度なアプリのフィルタリングが可能です。「自宅のWi-Fiに接続しているときだけXをブロックする」ような条件付きの制限を提供します。</p>
+    <h2 class="tl-title" data-i18n="f2_title">高度なブロックルール</h2>
+    <p class="tl-body" data-i18n="f2_body">既存のミニマルすぎるランチャーより高度なアプリのフィルタリングが可能です。「自宅のWi-Fiに接続しているときだけXをブロックする」ような条件付きの制限を提供します。</p>
   </div>
 </section>
 
@@ -485,40 +493,40 @@
 <section class="tl-section">
   <div class="tl-left">
     <div class="tl-eyebrow">Feature 03 &middot; Usage Stats</div>
-    <h2 class="tl-title">使用履歴。</h2>
-    <p class="tl-body">使用状況をランチャーから確認でき、使いすぎているアプリはそこからそのままブロックルールに追加したり、非表示にしたりできます。</p>
+    <h2 class="tl-title" data-i18n="f3_title">使用履歴。</h2>
+    <p class="tl-body" data-i18n="f3_body">使用状況をランチャーから確認でき、使いすぎているアプリはそこからそのままブロックルールに追加したり、非表示にしたりできます。</p>
   </div>
   <div class="tl-phone">
-    <img src="screenshots/Screenshot4_UsageStats.png" alt="使用状況画面">
+    <img src="screenshots/Screenshot4_UsageStats.png" alt="" data-i18n-src="f3_img">
   </div>
 </section>
 
 <!-- FEATURE 04 -->
 <section class="tl-section tl-section--reverse">
   <div class="tl-phone">
-    <img src="screenshots/Screenshot6_JournalMemo.png" alt="ジャーナルメモ画面">
+    <img src="screenshots/Screenshot6_JournalMemo.png" alt="" data-i18n-src="f4_img">
   </div>
   <div class="tl-left">
     <div class="tl-eyebrow">Feature 04 &middot; Journal</div>
-    <h2 class="tl-title">マインドフルな<br>ブロック画面</h2>
-    <p class="tl-body">ブロック画面では、ちょっとしたマインドフルネスアクティビティと、ジャーナリングが可能です。ゆっくり落ち着いて、生活を整えていきませんか。</p>
+    <h2 class="tl-title" data-i18n="f4_title">マインドフルな<br>ブロック画面</h2>
+    <p class="tl-body" data-i18n="f4_body">ブロック画面では、ちょっとしたマインドフルネスアクティビティと、ジャーナリングが可能です。ゆっくり落ち着いて、生活を整えていきませんか。</p>
   </div>
 </section>
 
 <!-- POLICY -->
 <section class="principles">
   <div class="principles-head">
-    <h2 class="principles-title">ポリシー</h2>
+    <h2 class="principles-title" data-i18n="policy_title">ポリシー</h2>
     <span class="principles-note">Policy</span>
   </div>
-  <p style="font-size: 15px; line-height: 2; color: var(--mid); max-width: 720px;">このアプリには広告はありません。アプリの改善のために匿名のクラッシュレポートと使用状況分析（Firebase Crashlytics / Analytics）を利用していますが、個人を特定する情報は一切収集しません。あなたのアプリ使用履歴やルール設定などのデータは端末内にのみ保存され、第三者に提供されることはありません。スマホ中毒の開発者が、自らのために開発しました。</p>
+  <p style="font-size: 15px; line-height: 2; color: var(--mid); max-width: 720px;" data-i18n="policy_body">このアプリには広告はありません。アプリの改善のために匿名のクラッシュレポートと使用状況分析（Firebase Crashlytics / Analytics）を利用していますが、個人を特定する情報は一切収集しません。あなたのアプリ使用履歴やルール設定などのデータは端末内にのみ保存され、第三者に提供されることはありません。スマホ中毒の開発者が、自らのために開発しました。</p>
 </section>
 
 <!-- FOOTER CTA -->
 <section class="footer-cta" id="download">
-  <div class="footer-cta-eyebrow">ベータ期間中は無料 &middot; アカウント不要</div>
-  <h2>シンプルすぎない<br><strong>現代的なランチャー</strong></h2>
-  <p class="footer-cta-note">広告なし。個人データの収集なし。あなたのデータはあなたのデバイスに。</p>
+  <div class="footer-cta-eyebrow" data-i18n="cta_eyebrow">ベータ期間中は無料 &middot; アカウント不要</div>
+  <h2 data-i18n="cta_title">シンプルすぎない<br><strong>現代的なランチャー</strong></h2>
+  <p class="footer-cta-note" data-i18n="cta_note">広告なし。個人データの収集なし。あなたのデータはあなたのデバイスに。</p>
   <a href="https://play.google.com/apps/testing/dev.kuma.focuslauncher" class="btn-play">
     <img src="google_play_btn_white.svg" alt="Google Play で入手">
   </a>
@@ -534,8 +542,119 @@
 </footer>
 
 <script>
+const i18n = {
+  ja: {
+    nav_cta: 'ダウンロード',
+    hero_eyebrow: 'ベータ期間中は無料 &middot; アカウント不要',
+    hero_question: '集中力を、<em>取り戻す。</em>',
+    hero_sub: 'Focus Launcher は、あなたの注意力を取り戻すためのAndroidランチャーです。ミニマルなデザインのランチャー、高度なアプリブロックツール、使用統計ツールをひとつにまとめました。',
+    hero_learn_more: '詳しく見る',
+    story_eyebrow: 'なぜ作ったか',
+    story_pull: '「シンプルなランチャーは、<br>シンプルすぎた。」',
+    story_p1: '私はかつて、重度のスマホ中毒でした。気づけば一日中、SNSのタイムラインやショート動画を縦スワイプしていました。',
+    story_p2: '転機になったのは、シンプルなランチャー、アプリブロックツール、使用統計ツールとの出会いでした。「使いすぎているアプリを見えにくくする」という発想が、自分には効きました。',
+    story_p3: 'ただ、使い続けるうちに限界を感じるようになりました。「自宅のWi-Fiに接続しているときだけXをブロックする」ような条件付きの制限には、ランチャー以外のツールが必要でした。使用状況を確認するには別のアプリが必要で、それらは複数の課金体系を持ち、広告も入っていました。',
+    story_p4: 'シンプルさにも落とし穴がありました。GoogleとMicrosoftのAuthenticatorアプリのように、アイコンをなくしてしまうと区別がつかなくなるアプリがあります。シンプルすぎることも、それはそれで不便でした。',
+    story_closing: '自分が本当に欲しかったのは、一つのアプリでした。そんな自分のために作ったのが、Focus Launcherです。',
+    screenshots_eyebrow: '実際の画面',
+    ss_home: 'ホーム画面', ss_allapps: 'アプリ一覧', ss_settings: '設定・ルール',
+    ss_usage: '使用状況', ss_rules: 'ルール編集', ss_journal: 'ジャーナル',
+    f1_title: 'ミニマルだけど、<br>ミニマルすぎない。',
+    f1_body: 'テキストだけのランチャーは、似たアプリの区別がつきづらく、不便すぎます。Focus Launcherは、グリッドやバッジは取り除きつつ、アイコンは残したデザインになっています。刺激を減らすために、アプリはグレースケールにすることもできます。',
+    f2_title: '高度なブロックルール',
+    f2_body: '既存のミニマルすぎるランチャーより高度なアプリのフィルタリングが可能です。「自宅のWi-Fiに接続しているときだけXをブロックする」ような条件付きの制限を提供します。',
+    f3_title: '使用履歴。',
+    f3_body: '使用状況をランチャーから確認でき、使いすぎているアプリはそこからそのままブロックルールに追加したり、非表示にしたりできます。',
+    f4_title: 'マインドフルな<br>ブロック画面',
+    f4_body: 'ブロック画面では、ちょっとしたマインドフルネスアクティビティと、ジャーナリングが可能です。ゆっくり落ち着いて、生活を整えていきませんか。',
+    policy_title: 'ポリシー',
+    policy_body: 'このアプリには広告はありません。アプリの改善のために匿名のクラッシュレポートと使用状況分析（Firebase Crashlytics / Analytics）を利用していますが、個人を特定する情報は一切収集しません。あなたのアプリ使用履歴やルール設定などのデータは端末内にのみ保存され、第三者に提供されることはありません。スマホ中毒の開発者が、自らのために開発しました。',
+    cta_eyebrow: 'ベータ期間中は無料 &middot; アカウント不要',
+    cta_title: 'シンプルすぎない<br><strong>現代的なランチャー</strong>',
+    cta_note: '広告なし。個人データの収集なし。あなたのデータはあなたのデバイスに。',
+  },
+  en: {
+    nav_cta: 'Download',
+    hero_eyebrow: 'Free during beta &middot; No account required',
+    hero_question: 'Reclaim your <em>attention.</em>',
+    hero_sub: 'Focus Launcher is an Android launcher designed to help you take back your attention. A minimal launcher, advanced app blocking tools, and usage stats — all in one app.',
+    hero_learn_more: 'Learn more',
+    story_eyebrow: 'Why I built this',
+    story_pull: '"Simple launchers were<br>too simple."',
+    story_p1: 'I used to be severely addicted to my phone. I\'d spend entire days scrolling through social media feeds and short-form videos without even realizing it.',
+    story_p2: 'The turning point came when I discovered simple launchers, app blockers, and screen time trackers. The idea of making overused apps less visible really worked for me.',
+    story_p3: 'But over time, I hit their limits. Conditional blocking — like "block X only when connected to home Wi-Fi" — required separate tools. Checking usage stats meant yet another app, each with its own subscription and ads.',
+    story_p4: 'Simplicity had its pitfalls too. Text-only launchers made it impossible to tell apart similar apps like Google and Microsoft Authenticator. Too simple was its own kind of inconvenient.',
+    story_closing: 'What I really wanted was one app that did it all. So I built Focus Launcher — for myself, and for anyone like me.',
+    screenshots_eyebrow: 'Screenshots',
+    ss_home: 'Home', ss_allapps: 'All Apps', ss_settings: 'Settings',
+    ss_usage: 'Usage Stats', ss_rules: 'Rule Edit', ss_journal: 'Journal',
+    f1_title: 'Minimal, but not<br>too minimal.',
+    f1_body: 'Text-only launchers make it hard to distinguish similar apps. Focus Launcher strips away grids and badges while keeping icons visible. You can also switch to grayscale icons to reduce visual stimulation.',
+    f2_title: 'Advanced block rules',
+    f2_body: 'More powerful than minimalist launchers. Set conditional restrictions like "block X only when connected to home Wi-Fi" — with time-based and Wi-Fi-based triggers.',
+    f3_title: 'Usage history.',
+    f3_body: 'Check your usage stats right from the launcher. If you\'re overusing an app, you can add it to a block rule or hide it — all without leaving the screen.',
+    f4_title: 'Mindful<br>block screen',
+    f4_body: 'When an app is blocked, you\'re guided through a brief mindfulness activity and journaling prompt. A moment to pause, reflect, and regain control.',
+    policy_title: 'Policy',
+    policy_body: 'This app has no ads. We use anonymous crash reports and usage analytics (Firebase Crashlytics / Analytics) to improve the app, but we never collect personally identifiable information. Your app usage history, rules, and settings are stored only on your device and are never shared with third parties. Built by a phone-addicted developer, for himself.',
+    cta_eyebrow: 'Free during beta &middot; No account required',
+    cta_title: 'Not too simple.<br><strong>A modern launcher.</strong>',
+    cta_note: 'No ads. No personal data collection. Your data stays on your device.',
+  },
+};
+
+const screenshotPaths = {
+  ja: {
+    hero_screenshot: 'screenshots/ja/Screenshot1_Home.png',
+    ss1: 'screenshots/ja/Screenshot1_Home.png', ss2: 'screenshots/ja/Screenshot2_AllApps.png',
+    ss3: 'screenshots/ja/Screenshot3_Settings.png', ss4: 'screenshots/ja/Screenshot4_UsageStats.png',
+    ss5: 'screenshots/ja/Screenshot5_BlockRules.png', ss6: 'screenshots/ja/Screenshot6_JournalMemo.png',
+    f1_img: 'screenshots/ja/Screenshot1_Home.png', f2_img: 'screenshots/ja/Screenshot5_BlockRules.png',
+    f3_img: 'screenshots/ja/Screenshot4_UsageStats.png', f4_img: 'screenshots/ja/Screenshot6_JournalMemo.png',
+  },
+  en: {
+    hero_screenshot: 'screenshots/en/Screenshot1_Home.png',
+    ss1: 'screenshots/en/Screenshot1_Home.png', ss2: 'screenshots/en/Screenshot2_AllApps.png',
+    ss3: 'screenshots/en/Screenshot3_Settings.png', ss4: 'screenshots/en/Screenshot4_UsageStats.png',
+    ss5: 'screenshots/en/Screenshot5_BlockRules.png', ss6: 'screenshots/en/Screenshot6_JournalMemo.png',
+    f1_img: 'screenshots/en/Screenshot1_Home.png', f2_img: 'screenshots/en/Screenshot5_BlockRules.png',
+    f3_img: 'screenshots/en/Screenshot4_UsageStats.png', f4_img: 'screenshots/en/Screenshot6_JournalMemo.png',
+  },
+};
+
+let currentLang = localStorage.getItem('lang') || (navigator.language.startsWith('ja') ? 'ja' : 'en');
+
+function applyLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang;
+  document.getElementById('langToggle').textContent = lang === 'ja' ? 'EN' : 'JA';
+  document.title = lang === 'ja'
+    ? 'Focus Launcher \u2014 \u81EA\u5206\u306E\u6CE8\u610F\u529B\u3092\u3001\u53D6\u308A\u623B\u3059\u3002'
+    : 'Focus Launcher \u2014 Reclaim your attention.';
+
+  const strings = i18n[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (strings[key]) el.innerHTML = strings[key];
+  });
+
+  const imgs = screenshotPaths[lang];
+  document.querySelectorAll('[data-i18n-src]').forEach(el => {
+    const key = el.getAttribute('data-i18n-src');
+    if (imgs[key]) el.src = imgs[key];
+  });
+}
+
+function toggleLang() {
+  applyLang(currentLang === 'ja' ? 'en' : 'ja');
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   lucide.createIcons();
+  applyLang(currentLang);
 });
 </script>
 </body>
