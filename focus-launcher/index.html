@@ -14,12 +14,14 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --bg:      #0c0b0a;
-    --surface: #141312;
-    --white:   #eeece8;
-    --mid:     #666460;
-    --faint:   #2e2c2a;
-    --rule:    rgba(255,255,255,0.06);
+    --bg:      #0e0e0e;
+    --surface: #1a1a1a;
+    --white:   #f0f0f0;
+    --mid:     #909090;
+    --faint:   #505050;
+    --rule:    rgba(255,255,255,0.08);
+    --accent:  #4A85D0;
+    --accent-dim: rgba(74,133,208,0.15);
   }
   html { scroll-behavior: smooth; }
   body {
@@ -37,7 +39,7 @@
   .nav-logo { display: flex; align-items: center; gap: 11px; }
   .nav-icon {
     width: 26px; height: 26px; border-radius: 6px;
-    background: linear-gradient(150deg, #1a2e4a 0%, #0d1f35 100%);
+    background: linear-gradient(150deg, #2a5a8a 0%, #1a3a5a 100%);
     display: flex; align-items: center; justify-content: center;
   }
   .nav-icon svg { width: 13px; height: 13px; }
@@ -53,7 +55,7 @@
     text-decoration: none; transition: border-color 0.2s;
     border-radius: 2px;
   }
-  .nav-cta:hover { border-color: rgba(255,255,255,0.3); }
+  .nav-cta:hover { border-color: var(--accent); color: var(--accent); }
 
   /* ── HERO ─────────────────────────────── */
   .hero {
@@ -72,7 +74,7 @@
     font-size: clamp(28px, 3.2vw, 44px); font-weight: 300;
     line-height: 1.65; margin-bottom: 48px; color: var(--white);
   }
-  .hero-question em { font-style: normal; color: var(--mid); }
+  .hero-question em { font-style: normal; color: var(--accent); }
   .hero-sub {
     font-size: 14px; line-height: 1.9; color: var(--mid);
     margin-bottom: 52px; max-width: 380px;
@@ -98,7 +100,7 @@
     color: var(--mid); text-decoration: none;
     border-bottom: 1px solid transparent; transition: border-color 0.2s; padding-bottom: 1px;
   }
-  .btn-text:hover { border-color: var(--mid); }
+  .btn-text:hover { border-color: var(--accent); color: var(--accent); }
 
   /* ── HERO PHONE (right side) ── */
   .hero-right {
@@ -107,9 +109,9 @@
   }
   .hero-phone {
     border-radius: 40px; overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(74,133,208,0.15);
     max-width: 260px; width: 100%;
-    box-shadow: 0 0 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
+    box-shadow: 0 0 80px rgba(74,133,208,0.08), 0 0 0 1px rgba(255,255,255,0.04);
   }
   .hero-phone img { width: 100%; display: block; }
 
@@ -173,7 +175,7 @@
   }
   .phone-frame-sm {
     border-radius: 28px; overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(74,133,208,0.12);
     width: 100%;
     box-shadow: 0 8px 40px rgba(0,0,0,0.5);
   }
@@ -204,7 +206,7 @@
   .tl-body { font-size: 14px; line-height: 1.9; color: var(--mid); max-width: 440px; }
   .tl-phone {
     border-radius: 32px; overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(74,133,208,0.12);
     box-shadow: 0 8px 60px rgba(0,0,0,0.5);
   }
   .tl-phone img { width: 100%; display: block; }
@@ -285,7 +287,7 @@
   }
   .footer-cta::before {
     content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(255,255,255,0.025) 0%, transparent 100%);
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(74,133,208,0.06) 0%, transparent 100%);
     pointer-events: none;
   }
   .footer-cta-eyebrow {
@@ -319,7 +321,7 @@
     letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint);
     text-decoration: none; transition: color 0.2s;
   }
-  .footer-links a:hover { color: var(--mid); }
+  .footer-links a:hover { color: var(--accent); }
 
   @media (max-width: 960px) {
     nav { padding: 20px 24px; }
