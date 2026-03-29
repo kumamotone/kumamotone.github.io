@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DroidScreenCapture</title>
+  <meta name="description" content="One-click Android screen capture from your Mac menu bar.">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-alt: #f5f5f7;
+      --text: #1d1d1f;
+      --text-secondary: #86868b;
+      --accent: #0071e3;
+      --accent-hover: #0077ed;
+      --border: #d2d2d7;
+      --card-bg: #ffffff;
+      --card-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      --radius: 16px;
+      --max-w: 980px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* -- Nav -- */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 52px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-logo img { width: 28px; height: 28px; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .lang-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 4px 12px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* -- Hero -- */
+    .hero {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 140px 24px 80px;
+      text-align: center;
+    }
+
+    .hero-icon {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 32px;
+      border-radius: 26px;
+      overflow: hidden;
+    }
+
+    .hero-icon img { width: 100%; height: 100%; }
+
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      font-size: clamp(18px, 2.5vw, 22px);
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.5;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+
+    .btn-secondary {
+      background: var(--bg-alt);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover { background: #ececee; transform: translateY(-1px); }
+
+    .btn svg { width: 18px; height: 18px; }
+
+    /* -- Video Section -- */
+    .video-section {
+      max-width: 720px;
+      margin: 0 auto 80px;
+      padding: 0 24px;
+    }
+
+    .video-placeholder {
+      aspect-ratio: 16 / 9;
+      background: var(--bg-alt);
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--text-secondary);
+      font-size: 15px;
+    }
+
+    .video-placeholder svg {
+      width: 48px;
+      height: 48px;
+      opacity: 0.4;
+    }
+
+    /* -- Features -- */
+    .features {
+      background: var(--bg-alt);
+      padding: 80px 24px;
+    }
+
+    .features-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 17px;
+      margin-bottom: 48px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.2s;
+    }
+
+    .feature-card:hover { transform: translateY(-2px); }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 22px;
+    }
+
+    .feature-icon.red { background: #ffe5e7; }
+    .feature-icon.blue { background: #ddeeff; }
+    .feature-icon.green { background: #dcf5e7; }
+    .feature-icon.purple { background: #eee5ff; }
+    .feature-icon.orange { background: #fff0dd; }
+    .feature-icon.teal { background: #ddf5f3; }
+
+    .feature-card h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    /* -- How to use -- */
+    .howto {
+      padding: 80px 24px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .step {
+      text-align: center;
+    }
+
+    .step-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .step h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      color: var(--text-secondary);
+      font-size: 15px;
+    }
+
+    /* -- Controls Table -- */
+    .controls {
+      background: var(--bg-alt);
+      padding: 80px 24px;
+    }
+
+    .controls-inner {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .controls-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 36px;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+    }
+
+    .controls-table th,
+    .controls-table td {
+      padding: 16px 24px;
+      text-align: left;
+      font-size: 15px;
+    }
+
+    .controls-table th {
+      background: var(--bg-alt);
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+    }
+
+    .controls-table tr + tr td { border-top: 1px solid var(--border); }
+
+    .controls-table td:first-child { font-weight: 500; }
+
+    kbd {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 2px 8px;
+      font-family: inherit;
+      font-size: 13px;
+    }
+
+    /* -- Requirements -- */
+    .requirements {
+      padding: 80px 24px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .req-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 36px;
+    }
+
+    .req-card {
+      background: var(--bg-alt);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .req-card svg {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      color: var(--accent);
+    }
+
+    .req-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .req-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* -- CTA / Download -- */
+    .cta {
+      background: var(--bg-alt);
+      padding: 80px 24px;
+      text-align: center;
+    }
+
+    .cta .section-title { margin-bottom: 16px; }
+
+    .cta p {
+      color: var(--text-secondary);
+      font-size: 17px;
+      margin-bottom: 32px;
+    }
+
+    /* -- Footer -- */
+    footer {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    /* -- i18n -- */
+    [data-lang="en"] [data-ja],
+    [data-lang="ja"] [data-en] {
+      display: none !important;
+    }
+
+    /* -- Responsive -- */
+    @media (max-width: 600px) {
+      .nav-links .nav-page-link { display: none; }
+      .hero { padding: 120px 20px 60px; }
+      .hero-icon { width: 88px; height: 88px; border-radius: 20px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="icon.svg" alt="DroidScreenCapture">
+      DroidScreenCapture
+    </a>
+    <ul class="nav-links">
+      <li class="nav-page-link"><a href="#features"><span data-en>Features</span><span data-ja>Features</span></a></li>
+      <li class="nav-page-link"><a href="#howto"><span data-en>Usage</span><span data-ja>Usage</span></a></li>
+      <li class="nav-page-link"><a href="#download"><span data-en>Download</span><span data-ja>Download</span></a></li>
+      <li>
+        <a href="https://github.com/kumamotone/DroidScreenCapture" target="_blank" rel="noopener">GitHub</a>
+      </li>
+      <li>
+        <button class="lang-btn" onclick="toggleLang()" aria-label="Switch language">
+          <span data-en>JA</span><span data-ja>EN</span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-icon">
+    <img src="icon.svg" alt="DroidScreenCapture icon">
+  </div>
+  <h1>DroidScreenCapture</h1>
+  <p data-en>One-click Android screen capture from your Mac menu bar. Record, screenshot, done.</p>
+  <p data-ja>Macのメニューバーからワンクリックで、Androidの画面録画とスクリーンショットを。</p>
+  <div class="hero-buttons">
+    <a href="https://github.com/kumamotone/DroidScreenCapture/releases" class="btn btn-primary" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download
+    </a>
+    <a href="https://github.com/kumamotone/DroidScreenCapture" class="btn btn-secondary" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      GitHub
+    </a>
+  </div>
+</section>
+
+<!-- Video -->
+<section class="video-section">
+  <div class="video-placeholder" id="demo-video">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    <span data-en>Demo video coming soon</span>
+    <span data-ja>Demo video coming soon</span>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="features" id="features">
+  <div class="features-inner">
+    <h2 class="section-title">
+      <span data-en>Everything you need. Nothing you don't.</span>
+      <span data-ja>必要なものだけを、シンプルに。</span>
+    </h2>
+    <p class="section-subtitle">
+      <span data-en>Capture Android screens without ever opening a terminal.</span>
+      <span data-ja>ターミナルを開かずにAndroidの画面をキャプチャ。</span>
+    </p>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon red">&#9679;</div>
+        <h3><span data-en>Screen Recording</span><span data-ja>画面録画</span></h3>
+        <p><span data-en>Click to start, click to stop. MP4 files are saved automatically with timestamps.</span><span data-ja>クリックで録画開始、もう一度クリックで停止。MP4ファイルがタイムスタンプ付きで自動保存されます。</span></p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon blue">&#9724;</div>
+        <h3><span data-en>Screenshots</span><span data-ja>スクリーンショット</span></h3>
+        <p><span data-en>Option + click for an instant PNG screenshot. Captured and saved in one motion.</span><span data-ja>Option + クリックでPNGスクリーンショットを即座に撮影。ワンアクションで撮影から保存まで。</span></p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon green">&#9998;</div>
+        <h3><span data-en>Clipboard Ready</span><span data-ja>クリップボード連携</span></h3>
+        <p><span data-en>Every capture is automatically copied to your clipboard and revealed in Finder.</span><span data-ja>キャプチャしたファイルは自動でクリップボードにコピーされ、Finderに表示されます。</span></p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon purple">&#9881;</div>
+        <h3><span data-en>Multiple Devices</span><span data-ja>複数デバイス対応</span></h3>
+        <p><span data-en>Switch between connected Android devices and emulators from the menu bar.</span><span data-ja>接続中のAndroidデバイスやエミュレーターをメニューバーから切り替え可能。</span></p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon orange">&#9783;</div>
+        <h3><span data-en>Customizable</span><span data-ja>カスタマイズ可能</span></h3>
+        <p><span data-en>Configure ADB path and save location. Launch at login for instant access.</span><span data-ja>ADBパスと保存先を自由に設定。ログイン時起動にも対応。</span></p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon teal">&#10070;</div>
+        <h3><span data-en>Zero Dependencies</span><span data-ja>依存ゼロ</span></h3>
+        <p><span data-en>Native Swift app. No Electron, no runtime. Lightweight and fast.</span><span data-ja>ネイティブSwiftアプリ。Electronもランタイムも不要。軽量で高速。</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How to Use -->
+<section class="howto" id="howto">
+  <h2 class="section-title">
+    <span data-en>Get started in seconds</span>
+    <span data-ja>数秒で使い始められます</span>
+  </h2>
+  <p class="section-subtitle">
+    <span data-en>Three clicks from download to your first capture.</span>
+    <span data-ja>ダウンロードから最初のキャプチャまで、わずか3クリック。</span>
+  </p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-number">1</div>
+      <h3><span data-en>Install</span><span data-ja>インストール</span></h3>
+      <p><span data-en>Download the DMG, drag to Applications, and launch.</span><span data-ja>DMGをダウンロードし、アプリケーションにドラッグして起動。</span></p>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <h3><span data-en>Connect</span><span data-ja>接続</span></h3>
+      <p><span data-en>Connect your Android device or start an emulator. Select it from the menu.</span><span data-ja>Androidデバイスを接続またはエミュレーターを起動し、メニューから選択。</span></p>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <h3><span data-en>Capture</span><span data-ja>キャプチャ</span></h3>
+      <p><span data-en>Left-click to record. Option + click to screenshot. That's it.</span><span data-ja>左クリックで録画。Option + クリックでスクリーンショット。以上。</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- Controls -->
+<section class="controls">
+  <div class="controls-inner">
+    <h2 class="section-title">
+      <span data-en>Controls</span>
+      <span data-ja>操作方法</span>
+    </h2>
+    <table class="controls-table">
+      <thead>
+        <tr>
+          <th><span data-en>Action</span><span data-ja>操作</span></th>
+          <th><span data-en>Function</span><span data-ja>機能</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><kbd>Click</kbd></td>
+          <td><span data-en>Start / Stop recording</span><span data-ja>録画開始 / 停止</span></td>
+        </tr>
+        <tr>
+          <td><kbd>Option</kbd> + <kbd>Click</kbd></td>
+          <td><span data-en>Take screenshot</span><span data-ja>スクリーンショット撮影</span></td>
+        </tr>
+        <tr>
+          <td><kbd>Right Click</kbd></td>
+          <td><span data-en>Open menu</span><span data-ja>メニューを表示</span></td>
+        </tr>
+        <tr>
+          <td><kbd>&#8984;</kbd> + <kbd>,</kbd></td>
+          <td><span data-en>Open settings</span><span data-ja>設定を開く</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- Requirements -->
+<section class="requirements">
+  <h2 class="section-title">
+    <span data-en>Requirements</span>
+    <span data-ja>必要な環境</span>
+  </h2>
+  <div class="req-cards">
+    <div class="req-card">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      <div>
+        <h3>macOS 13.0+</h3>
+        <p><span data-en>Ventura or later required.</span><span data-ja>Ventura以降が必要です。</span></p>
+      </div>
+    </div>
+    <div class="req-card">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <div>
+        <h3>ADB</h3>
+        <p><span data-en>Android SDK Platform Tools must be installed.</span><span data-ja>Android SDK Platform Toolsのインストールが必要です。</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Download CTA -->
+<section class="cta" id="download">
+  <h2 class="section-title">
+    <span data-en>Ready to capture?</span>
+    <span data-ja>さっそく使ってみよう</span>
+  </h2>
+  <p><span data-en>Free and open source. MIT License.</span><span data-ja>無料でオープンソース。MITライセンス。</span></p>
+  <div class="hero-buttons">
+    <a href="https://github.com/kumamotone/DroidScreenCapture/releases" class="btn btn-primary" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span data-en>Download from GitHub</span><span data-ja>GitHubからダウンロード</span>
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>
+    DroidScreenCapture &mdash;
+    <a href="https://github.com/kumamotone/DroidScreenCapture" target="_blank" rel="noopener">GitHub</a> &middot;
+    MIT License
+  </p>
+</footer>
+
+<script>
+function toggleLang() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-lang');
+  const next = current === 'en' ? 'ja' : 'en';
+  html.setAttribute('data-lang', next);
+  html.setAttribute('lang', next);
+}
+</script>
+
+</body>
+</html>
