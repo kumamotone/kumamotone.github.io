@@ -456,12 +456,6 @@
       </div>
       <span class="phone-caption" data-i18n="ss_rules">ルール編集</span>
     </div>
-    <div class="phone-card">
-      <div class="phone-frame-sm">
-        <img src="screenshots/Screenshot6_JournalMemo.png" alt="" data-i18n-src="ss6">
-      </div>
-      <span class="phone-caption" data-i18n="ss_journal">ジャーナル</span>
-    </div>
   </div>
 </section>
 
@@ -498,18 +492,6 @@
   </div>
   <div class="tl-phone">
     <img src="screenshots/Screenshot4_UsageStats.png" alt="" data-i18n-src="f3_img">
-  </div>
-</section>
-
-<!-- FEATURE 04 -->
-<section class="tl-section tl-section--reverse">
-  <div class="tl-phone">
-    <img src="screenshots/Screenshot6_JournalMemo.png" alt="" data-i18n-src="f4_img">
-  </div>
-  <div class="tl-left">
-    <div class="tl-eyebrow">Feature 04 &middot; Journal</div>
-    <h2 class="tl-title" data-i18n="f4_title">マインドフルな<br>ブロック画面</h2>
-    <p class="tl-body" data-i18n="f4_body">ブロック画面では、ちょっとしたマインドフルネスアクティビティと、ジャーナリングが可能です。ゆっくり落ち着いて、生活を整えていきませんか。</p>
   </div>
 </section>
 
@@ -558,15 +540,13 @@ const i18n = {
     story_closing: '自分が本当に欲しかったのは、一つのアプリでした。そんな自分のために作ったのが、Focus Launcherです。',
     screenshots_eyebrow: '実際の画面',
     ss_home: 'ホーム画面', ss_allapps: 'アプリ一覧', ss_settings: '設定・ルール',
-    ss_usage: '使用状況', ss_rules: 'ルール編集', ss_journal: 'ジャーナル',
+    ss_usage: '使用状況', ss_rules: 'ルール編集',
     f1_title: 'ミニマルだけど、<br>ミニマルすぎない。',
     f1_body: 'テキストだけのランチャーは、似たアプリの区別がつきづらく、不便すぎます。Focus Launcherは、グリッドやバッジは取り除きつつ、アイコンは残したデザインになっています。刺激を減らすために、アプリはグレースケールにすることもできます。',
     f2_title: '高度なブロックルール',
     f2_body: '既存のミニマルすぎるランチャーより高度なアプリのフィルタリングが可能です。「自宅のWi-Fiに接続しているときだけXをブロックする」ような条件付きの制限を提供します。',
     f3_title: '使用履歴。',
     f3_body: '使用状況をランチャーから確認でき、使いすぎているアプリはそこからそのままブロックルールに追加したり、非表示にしたりできます。',
-    f4_title: 'マインドフルな<br>ブロック画面',
-    f4_body: 'ブロック画面では、ちょっとしたマインドフルネスアクティビティと、ジャーナリングが可能です。ゆっくり落ち着いて、生活を整えていきませんか。',
     policy_title: 'ポリシー',
     policy_body: 'このアプリには広告はありません。アプリの改善のために匿名のクラッシュレポートと使用状況分析（Firebase Crashlytics / Analytics）を利用していますが、個人を特定する情報は一切収集しません。あなたのアプリ使用履歴やルール設定などのデータは端末内にのみ保存され、第三者に提供されることはありません。スマホ中毒の開発者が、自らのために開発しました。',
     cta_eyebrow: 'ベータ期間中は無料 &middot; アカウント不要',
@@ -588,15 +568,13 @@ const i18n = {
     story_closing: 'What I really wanted was one app that did it all. So I built Focus Launcher — for myself, and for anyone like me.',
     screenshots_eyebrow: 'Screenshots',
     ss_home: 'Home', ss_allapps: 'All Apps', ss_settings: 'Settings',
-    ss_usage: 'Usage Stats', ss_rules: 'Rule Edit', ss_journal: 'Journal',
+    ss_usage: 'Usage Stats', ss_rules: 'Rule Edit',
     f1_title: 'Minimal, but not<br>too minimal.',
     f1_body: 'Text-only launchers make it hard to distinguish similar apps. Focus Launcher strips away grids and badges while keeping icons visible. You can also switch to grayscale icons to reduce visual stimulation.',
     f2_title: 'Advanced block rules',
     f2_body: 'More powerful than minimalist launchers. Set conditional restrictions like "block X only when connected to home Wi-Fi" — with time-based and Wi-Fi-based triggers.',
     f3_title: 'Usage history.',
     f3_body: 'Check your usage stats right from the launcher. If you\'re overusing an app, you can add it to a block rule or hide it — all without leaving the screen.',
-    f4_title: 'Mindful<br>block screen',
-    f4_body: 'When an app is blocked, you\'re guided through a brief mindfulness activity and journaling prompt. A moment to pause, reflect, and regain control.',
     policy_title: 'Policy',
     policy_body: 'This app has no ads. We use anonymous crash reports and usage analytics (Firebase Crashlytics / Analytics) to improve the app, but we never collect personally identifiable information. Your app usage history, rules, and settings are stored only on your device and are never shared with third parties. Built by a phone-addicted developer, for himself.',
     cta_eyebrow: 'Free during beta &middot; No account required',
@@ -610,17 +588,17 @@ const screenshotPaths = {
     hero_screenshot: 'screenshots/ja/Screenshot1_Home.png',
     ss1: 'screenshots/ja/Screenshot1_Home.png', ss2: 'screenshots/ja/Screenshot2_AllApps.png',
     ss3: 'screenshots/ja/Screenshot3_Settings.png', ss4: 'screenshots/ja/Screenshot4_UsageStats.png',
-    ss5: 'screenshots/ja/Screenshot5_BlockRules.png', ss6: 'screenshots/ja/Screenshot6_JournalMemo.png',
+    ss5: 'screenshots/ja/Screenshot5_BlockRules.png',
     f1_img: 'screenshots/ja/Screenshot1_Home.png', f2_img: 'screenshots/ja/Screenshot5_BlockRules.png',
-    f3_img: 'screenshots/ja/Screenshot4_UsageStats.png', f4_img: 'screenshots/ja/Screenshot6_JournalMemo.png',
+    f3_img: 'screenshots/ja/Screenshot4_UsageStats.png',
   },
   en: {
     hero_screenshot: 'screenshots/en/Screenshot1_Home.png',
     ss1: 'screenshots/en/Screenshot1_Home.png', ss2: 'screenshots/en/Screenshot2_AllApps.png',
     ss3: 'screenshots/en/Screenshot3_Settings.png', ss4: 'screenshots/en/Screenshot4_UsageStats.png',
-    ss5: 'screenshots/en/Screenshot5_BlockRules.png', ss6: 'screenshots/en/Screenshot6_JournalMemo.png',
+    ss5: 'screenshots/en/Screenshot5_BlockRules.png',
     f1_img: 'screenshots/en/Screenshot1_Home.png', f2_img: 'screenshots/en/Screenshot5_BlockRules.png',
-    f3_img: 'screenshots/en/Screenshot4_UsageStats.png', f4_img: 'screenshots/en/Screenshot6_JournalMemo.png',
+    f3_img: 'screenshots/en/Screenshot4_UsageStats.png',
   },
 };
 
