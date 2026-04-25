@@ -39,7 +39,7 @@
   </div>
 
   <h1>Focus Launcher ドキュメント</h1>
-  <p class="updated">最終更新日: 2026年3月27日</p>
+  <p class="updated">最終更新日: 2026年4月25日</p>
 
   <div class="section">
     <h2>収集データの透明性について</h2>
@@ -62,7 +62,7 @@
     <h3>チュートリアル</h3>
     <table>
       <tr><th>イベント名</th><th>タイミング</th><th>パラメータ</th></tr>
-      <tr><td><code>tutorial_step_complete</code></td><td>チュートリアルの各ステップ完了時</td><td>ステップ番号、完了方法</td></tr>
+      <tr><td><code>tutorial_step_complete</code></td><td>チュートリアルの各ステップ完了時</td><td>ステップ番号、ステップ名</td></tr>
       <tr><td><code>tutorial_complete</code></td><td>チュートリアル全完了時</td><td>なし</td></tr>
     </table>
 
@@ -81,16 +81,20 @@
       <tr><td><code>paywall_view</code></td><td>ペイウォール画面表示時</td><td>表示元（起動時/オンボーディング/設定/ゲート）</td></tr>
       <tr><td><code>paywall_plan_selected</code></td><td>プラン選択時</td><td>プラン種別</td></tr>
       <tr><td><code>paywall_purchase_started</code></td><td>購入フロー開始時</td><td>プラン種別</td></tr>
-      <tr><td><code>paywall_purchase_complete</code></td><td>購入完了時</td><td>プラン種別</td></tr>
-      <tr><td><code>paywall_skipped</code></td><td>ペイウォールスキップ時</td><td>なし</td></tr>
+      <tr><td><code>paywall_purchase_complete</code></td><td>購入完了時</td><td>プラン種別、価格、通貨</td></tr>
+      <tr><td><code>paywall_remind_later</code></td><td>「あとで」確定時（24時間後にリマインド）</td><td>なし</td></tr>
+      <tr><td><code>paywall_remind_later_cancelled</code></td><td>「あとで」ダイアログをキャンセル時</td><td>なし</td></tr>
       <tr><td><code>premium_gate_shown</code></td><td>プレミアム機能制限ダイアログ表示時</td><td>機能名</td></tr>
       <tr><td><code>premium_gate_upgrade_tapped</code></td><td>制限ダイアログからペイウォールへ遷移時</td><td>機能名</td></tr>
+      <tr><td><code>default_launcher_set</code></td><td>デフォルトランチャー設定完了時</td><td>表示元</td></tr>
     </table>
 
     <h3>エンゲージメント</h3>
     <table>
       <tr><th>イベント名</th><th>タイミング</th><th>パラメータ</th></tr>
-      <tr><td><code>review_prompt_shown</code></td><td>レビュー訴求ダイアログ表示時</td><td>なし</td></tr>
+      <tr><td><code>review_prompt_shown</code></td><td>レビュー訴求ダイアログ表示時</td><td>トリガー種別</td></tr>
+      <tr><td><code>review_prompt_rate_tapped</code></td><td>レビュー訴求ダイアログで「レビューする」を選択時</td><td>トリガー種別</td></tr>
+      <tr><td><code>review_prompt_dismissed</code></td><td>レビュー訴求ダイアログを閉じた時</td><td>トリガー種別</td></tr>
       <tr><td><code>focus_mode_enabled</code></td><td>集中モード有効化時</td><td>なし</td></tr>
     </table>
   </div>
@@ -112,7 +116,7 @@
   <hr id="english">
 
   <h1>Focus Launcher Documentation</h1>
-  <p class="updated">Last updated: March 27, 2026</p>
+  <p class="updated">Last updated: April 25, 2026</p>
 
   <div class="section">
     <h2>Data Collection Transparency</h2>
@@ -135,7 +139,7 @@
     <h3>Tutorial</h3>
     <table>
       <tr><th>Event Name</th><th>Trigger</th><th>Parameters</th></tr>
-      <tr><td><code>tutorial_step_complete</code></td><td>Each tutorial step is completed</td><td>Step index, completion method</td></tr>
+      <tr><td><code>tutorial_step_complete</code></td><td>Each tutorial step is completed</td><td>Step index, step name</td></tr>
       <tr><td><code>tutorial_complete</code></td><td>All tutorial steps completed</td><td>None</td></tr>
     </table>
 
@@ -154,16 +158,20 @@
       <tr><td><code>paywall_view</code></td><td>Paywall screen shown</td><td>Source (startup/onboarding/settings/gate)</td></tr>
       <tr><td><code>paywall_plan_selected</code></td><td>Plan selected</td><td>Plan type</td></tr>
       <tr><td><code>paywall_purchase_started</code></td><td>Purchase flow initiated</td><td>Plan type</td></tr>
-      <tr><td><code>paywall_purchase_complete</code></td><td>Purchase completed</td><td>Plan type</td></tr>
-      <tr><td><code>paywall_skipped</code></td><td>Paywall skipped</td><td>None</td></tr>
+      <tr><td><code>paywall_purchase_complete</code></td><td>Purchase completed</td><td>Plan type, price, currency</td></tr>
+      <tr><td><code>paywall_remind_later</code></td><td>"Remind me later" confirmed (paywall returns in 24h)</td><td>None</td></tr>
+      <tr><td><code>paywall_remind_later_cancelled</code></td><td>"Remind me later" dialog cancelled</td><td>None</td></tr>
       <tr><td><code>premium_gate_shown</code></td><td>Premium gate dialog shown</td><td>Feature name</td></tr>
       <tr><td><code>premium_gate_upgrade_tapped</code></td><td>Upgrade tapped from gate dialog</td><td>Feature name</td></tr>
+      <tr><td><code>default_launcher_set</code></td><td>App set as default launcher</td><td>Source</td></tr>
     </table>
 
     <h3>Engagement</h3>
     <table>
       <tr><th>Event Name</th><th>Trigger</th><th>Parameters</th></tr>
-      <tr><td><code>review_prompt_shown</code></td><td>Review prompt dialog shown</td><td>None</td></tr>
+      <tr><td><code>review_prompt_shown</code></td><td>Review prompt dialog shown</td><td>Trigger type</td></tr>
+      <tr><td><code>review_prompt_rate_tapped</code></td><td>"Rate" tapped on review prompt</td><td>Trigger type</td></tr>
+      <tr><td><code>review_prompt_dismissed</code></td><td>Review prompt dismissed</td><td>Trigger type</td></tr>
       <tr><td><code>focus_mode_enabled</code></td><td>Focus mode enabled</td><td>None</td></tr>
     </table>
   </div>

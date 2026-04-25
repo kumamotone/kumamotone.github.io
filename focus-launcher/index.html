@@ -3,11 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Focus Launcher — 自分の注意力を、取り戻す。</title>
-<link rel="icon" type="image/x-icon" href="/focus-launcher/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="/focus-launcher/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/focus-launcher/favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/focus-launcher/apple-touch-icon.png">
+<title>Focus Launcher — スマホ中毒防止+ブロッカー+スクリーンタイム</title>
+<meta name="description" content="Focus Launcherは、ミニマルランチャー、アプリブロッカー、スクリーンタイムをひとつにまとめたAndroidアプリ。広告なし、データ収集なし。スマホ依存対策に。">
+<meta name="keywords" content="Focus Launcher, スマホ中毒, スマホ依存, デジタルデトックス, アプリブロッカー, スクリーンタイム, ミニマルランチャー, Android, phone addiction, app blocker, screen time">
+<link rel="canonical" href="https://focus-launcher.com/">
+
+<!-- OGP -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://focus-launcher.com/">
+<meta property="og:title" content="Focus Launcher — スマホ中毒防止+ブロッカー+スクリーンタイム">
+<meta property="og:description" content="ミニマルランチャー、アプリブロッカー、スクリーンタイムをひとつに。広告なし、データ収集なし。">
+<meta property="og:image" content="https://focus-launcher.com/og-image.png">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:locale:alternate" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Focus Launcher — スマホ中毒防止+ブロッカー+スクリーンタイム">
+<meta name="twitter:description" content="ミニマルランチャー、アプリブロッカー、スクリーンタイムをひとつに。広告なし。">
+<meta name="twitter:image" content="https://focus-launcher.com/og-image.png">
+
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
@@ -51,10 +70,11 @@
   .lang-toggle {
     font-family: 'DM Mono', monospace; font-size: 10px;
     letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--faint); background: none; border: none;
+    color: var(--faint); background: var(--surface); border: 1px solid var(--rule);
     cursor: pointer; padding: 9px 12px; transition: color 0.2s;
+    border-radius: 4px; -webkit-appearance: none; appearance: none;
   }
-  .lang-toggle:hover { color: var(--accent); }
+  .lang-toggle:hover, .lang-toggle:focus { color: var(--accent); border-color: var(--accent); outline: none; }
   .nav-cta {
     font-family: 'DM Mono', monospace; font-size: 10px;
     letter-spacing: 0.16em; text-transform: uppercase;
@@ -379,7 +399,25 @@
     <span class="nav-wordmark">Focus Launcher</span>
   </div>
   <div class="nav-right">
-    <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
+    <select class="lang-toggle" id="langSelect" onchange="applyLang(this.value)">
+      <option value="ja">JA</option>
+      <option value="en">EN</option>
+      <option value="ko">KO</option>
+      <option value="zh_CN">ZH-CN</option>
+      <option value="zh_TW">ZH-TW</option>
+      <option value="th">TH</option>
+      <option value="hi">HI</option>
+      <option value="id">ID</option>
+      <option value="pt">PT</option>
+      <option value="es">ES</option>
+      <option value="fr">FR</option>
+      <option value="de">DE</option>
+      <option value="it">IT</option>
+      <option value="ru">RU</option>
+      <option value="tr">TR</option>
+      <option value="pl">PL</option>
+      <option value="nl">NL</option>
+    </select>
     <a href="#download" class="nav-cta" data-i18n="nav_cta">ダウンロード</a>
   </div>
 </nav>
@@ -517,9 +555,9 @@
 <footer>
   <span class="footer-text">&copy; 2026 Focus Launcher &middot; Made in Tokyo</span>
   <div class="footer-links">
-    <a href="/focus-launcher/privacy-policy.html">Privacy Policy</a>
-    <a href="/focus-launcher/terms.html">Terms of Service</a>
-    <a href="/focus-launcher/docs.html">Docs</a>
+    <a href="/privacy-policy.html">Privacy Policy</a>
+    <a href="/terms.html">Terms of Service</a>
+    <a href="/docs.html">Docs</a>
   </div>
 </footer>
 
@@ -581,54 +619,513 @@ const i18n = {
     cta_title: 'Not too simple.<br><strong>A modern launcher.</strong>',
     cta_note: 'No ads. No personal data collection. Your data stays on your device.',
   },
+  ko: {
+    nav_cta: '다운로드',
+    hero_eyebrow: '베타 기간 무료 &middot; 계정 불필요',
+    hero_question: '당신의 <em>집중력</em>을 되찾으세요.',
+    hero_sub: 'Focus Launcher는 집중력을 되찾도록 설계된 Android 런처입니다. 미니멀 런처, 고급 앱 차단 도구, 사용 통계를 하나의 앱에 담았습니다.',
+    hero_learn_more: '자세히 보기',
+    story_eyebrow: '만들게 된 이유',
+    story_pull: '"심플 런처는<br>너무 심플했다."',
+    story_p1: '저는 한때 심각한 스마트폰 중독이었습니다. 소셜 미디어 피드와 숏폼 영상을 하루 종일 스크롤하면서도 그걸 인지하지 못했습니다.',
+    story_p2: '전환점은 심플 런처, 앱 차단기, 스크린 타임 트래커를 발견했을 때였습니다. 과도하게 사용하는 앱을 눈에 덜 띄게 만드는 아이디어가 정말 효과적이었습니다.',
+    story_p3: '하지만 시간이 지나면서 한계에 부딪혔습니다. "집 Wi-Fi에 연결되었을 때만 X를 차단"하는 조건부 차단에는 별도의 도구가 필요했고, 사용 통계를 확인하려면 또 다른 앱이 필요했으며, 각각 별도의 구독료와 광고가 있었습니다.',
+    story_p4: '심플함에도 함정이 있었습니다. 텍스트 전용 런처에서는 Google과 Microsoft Authenticator 같은 비슷한 앱을 구분하기 어려웠습니다. 너무 심플한 것도 나름의 불편함이었습니다.',
+    story_closing: '제가 정말 원했던 것은 이 모든 것을 하나로 합친 앱이었습니다. 그래서 Focus Launcher를 만들었습니다. 저 자신을 위해, 그리고 저와 같은 분들을 위해.',
+    screenshots_eyebrow: '스크린샷',
+    ss_home: '홈', ss_allapps: '전체 앱', ss_settings: '설정',
+    ss_usage: '사용 통계', ss_rules: '규칙 편집',
+    f1_title: '미니멀, 그러나<br>너무 미니멀하지 않게.',
+    f1_body: '텍스트 전용 런처에서는 비슷한 앱을 구분하기 어렵습니다. Focus Launcher는 그리드와 배지를 제거하면서도 아이콘은 유지합니다. 시각적 자극을 줄이기 위해 그레이스케일 아이콘으로 전환할 수도 있습니다.',
+    f2_title: '고급 차단 규칙',
+    f2_body: '미니멀리스트 런처보다 강력합니다. "집 Wi-Fi에 연결되었을 때만 X를 차단"과 같은 조건부 제한을 시간 기반 및 Wi-Fi 기반 트리거로 설정할 수 있습니다.',
+    f3_title: '사용 기록.',
+    f3_body: '런처에서 바로 사용 통계를 확인하세요. 앱을 과도하게 사용하고 있다면, 화면을 벗어나지 않고 차단 규칙에 추가하거나 숨길 수 있습니다.',
+    policy_title: '정책',
+    policy_body: '이 앱에는 광고가 없습니다. 앱 개선을 위해 익명의 크래시 리포트와 사용 분석(Firebase Crashlytics / Analytics)을 사용하지만, 개인 식별 정보는 수집하지 않습니다. 앱 사용 기록, 규칙, 설정은 기기에만 저장되며 제3자와 공유되지 않습니다. 스마트폰 중독 개발자가 자기 자신을 위해 만들었습니다.',
+    cta_eyebrow: '베타 기간 무료 &middot; 계정 불필요',
+    cta_title: '너무 심플하지 않게.<br><strong>현대적인 런처.</strong>',
+    cta_note: '광고 없음. 개인정보 수집 없음. 데이터는 기기에만 저장됩니다.',
+  },
+  zh_CN: {
+    nav_cta: '下载',
+    hero_eyebrow: '测试期间免费 &middot; 无需注册账号',
+    hero_question: '夺回你的<em>注意力。</em>',
+    hero_sub: 'Focus Launcher 是一款帮助你夺回注意力的 Android 启动器。极简启动器、高级应用拦截工具和使用统计，全部集成在一个应用中。',
+    hero_learn_more: '了解更多',
+    story_eyebrow: '为什么要做这个',
+    story_pull: '"简约启动器<br>太简约了。"',
+    story_p1: '我曾经严重沉迷于手机。整天刷社交媒体和短视频，自己却完全没有意识到。',
+    story_p2: '转折点是我发现了简约启动器、应用拦截器和屏幕使用时间追踪器。让过度使用的应用变得不那么显眼，这个思路对我非常有效。',
+    story_p3: '但随着时间推移，我遇到了瓶颈。条件拦截 - 比如"仅在连接家庭 Wi-Fi 时拦截某应用" - 需要单独的工具。查看使用统计又得装另一个应用，每个都有自己的订阅费和广告。',
+    story_p4: '极简也有陷阱。纯文字启动器让人很难区分类似的应用，比如 Google 和 Microsoft Authenticator。太简约反而成了另一种不便。',
+    story_closing: '我真正想要的是一个能做到这一切的应用。所以我做了 Focus Launcher - 为我自己，也为和我一样的人。',
+    screenshots_eyebrow: '截图',
+    ss_home: '主屏幕', ss_allapps: '全部应用', ss_settings: '设置',
+    ss_usage: '使用统计', ss_rules: '规则编辑',
+    f1_title: '极简，但不会<br>过于极简。',
+    f1_body: '纯文字启动器很难区分类似的应用。Focus Launcher 去掉了网格和角标，同时保留图标可见。你还可以切换为灰度图标来减少视觉刺激。',
+    f2_title: '高级拦截规则',
+    f2_body: '比极简启动器更强大。支持条件限制，比如"仅在连接家庭 Wi-Fi 时拦截某应用"，可设置基于时间和 Wi-Fi 的触发条件。',
+    f3_title: '使用记录。',
+    f3_body: '直接在启动器中查看使用统计。如果你发现某个应用使用过度，可以将它添加到拦截规则或隐藏，无需离开当前页面。',
+    policy_title: '隐私政策',
+    policy_body: '本应用没有广告。我们使用匿名的崩溃报告和使用分析（Firebase Crashlytics / Analytics）来改进应用，但绝不收集个人身份信息。你的应用使用记录、规则和设置仅存储在你的设备上，不会与第三方共享。由一个手机成瘾的开发者为自己而做。',
+    cta_eyebrow: '测试期间免费 &middot; 无需注册账号',
+    cta_title: '不会过于极简。<br><strong>一个现代启动器。</strong>',
+    cta_note: '无广告。不收集个人数据。你的数据留在你的设备上。',
+  },
+  zh_TW: {
+    nav_cta: '下載',
+    hero_eyebrow: '測試期間免費 &middot; 無需註冊帳號',
+    hero_question: '奪回你的<em>注意力。</em>',
+    hero_sub: 'Focus Launcher 是一款幫助你奪回注意力的 Android 啟動器。極簡啟動器、進階應用程式封鎖工具和使用統計，全部整合在一個應用程式中。',
+    hero_learn_more: '了解更多',
+    story_eyebrow: '為什麼要做這個',
+    story_pull: '"簡約啟動器<br>太簡約了。"',
+    story_p1: '我曾經嚴重沉迷於手機。整天滑社群媒體和短影片，自己卻完全沒有意識到。',
+    story_p2: '轉捩點是我發現了簡約啟動器、應用程式封鎖器和螢幕使用時間追蹤器。讓過度使用的應用程式變得不那麼顯眼，這個方法對我非常有效。',
+    story_p3: '但隨著時間推移，我遇到了瓶頸。條件式封鎖 - 例如「僅在連接家用 Wi-Fi 時封鎖某應用程式」- 需要額外的工具。查看使用統計又得裝另一個應用程式，每個都有自己的訂閱費和廣告。',
+    story_p4: '極簡也有陷阱。純文字啟動器讓人很難區分相似的應用程式，例如 Google 和 Microsoft Authenticator。太簡約反而成了另一種不便。',
+    story_closing: '我真正想要的是一個能做到這一切的應用程式。所以我做了 Focus Launcher - 為我自己，也為和我一樣的人。',
+    screenshots_eyebrow: '螢幕截圖',
+    ss_home: '主畫面', ss_allapps: '所有應用程式', ss_settings: '設定',
+    ss_usage: '使用統計', ss_rules: '規則編輯',
+    f1_title: '極簡，但不會<br>過於極簡。',
+    f1_body: '純文字啟動器很難區分相似的應用程式。Focus Launcher 去掉了格狀排列和標記，同時保留圖示可見。你還可以切換為灰階圖示來減少視覺刺激。',
+    f2_title: '進階封鎖規則',
+    f2_body: '比極簡啟動器更強大。支援條件式限制，例如「僅在連接家用 Wi-Fi 時封鎖某應用程式」，可設定基於時間和 Wi-Fi 的觸發條件。',
+    f3_title: '使用記錄。',
+    f3_body: '直接在啟動器中查看使用統計。如果你發現某個應用程式使用過度，可以將它加入封鎖規則或隱藏，無需離開目前頁面。',
+    policy_title: '隱私政策',
+    policy_body: '本應用程式沒有廣告。我們使用匿名的當機報告和使用分析（Firebase Crashlytics / Analytics）來改進應用程式，但絕不收集個人身分資訊。你的應用程式使用記錄、規則和設定僅儲存在你的裝置上，不會與第三方分享。由一個手機成癮的開發者為自己而做。',
+    cta_eyebrow: '測試期間免費 &middot; 無需註冊帳號',
+    cta_title: '不會過於極簡。<br><strong>一個現代啟動器。</strong>',
+    cta_note: '無廣告。不收集個人資料。你的資料留在你的裝置上。',
+  },
+  th: {
+    nav_cta: 'ดาวน์โหลด',
+    hero_eyebrow: 'ฟรีในช่วงเบต้า &middot; ไม่ต้องสร้างบัญชี',
+    hero_question: 'เรียกคืน<em>สมาธิ</em>ของคุณ',
+    hero_sub: 'Focus Launcher คือ Android launcher ที่ออกแบบมาเพื่อช่วยให้คุณเรียกคืนสมาธิ รวม launcher มินิมอล เครื่องมือบล็อกแอปขั้นสูง และสถิติการใช้งานไว้ในแอปเดียว',
+    hero_learn_more: 'เรียนรู้เพิ่มเติม',
+    story_eyebrow: 'ทำไมถึงสร้างแอปนี้',
+    story_pull: '"Launcher แบบเรียบง่าย<br>มันเรียบง่ายเกินไป"',
+    story_p1: 'ผมเคยติดโทรศัพท์อย่างหนัก ใช้เวลาทั้งวันเลื่อนดูโซเชียลมีเดียและวิดีโอสั้นโดยไม่รู้ตัว',
+    story_p2: 'จุดเปลี่ยนคือตอนที่ผมค้นพบ launcher แบบเรียบง่าย ตัวบล็อกแอป และตัวติดตามเวลาหน้าจอ แนวคิดที่ทำให้แอปที่ใช้มากเกินไปมองเห็นได้ยากขึ้นนั้นได้ผลดีมากสำหรับผม',
+    story_p3: 'แต่เมื่อเวลาผ่านไป ผมก็พบข้อจำกัด การบล็อกแบบมีเงื่อนไข เช่น "บล็อก X เฉพาะเมื่อเชื่อมต่อ Wi-Fi ที่บ้าน" ต้องใช้เครื่องมือแยกต่างหาก การดูสถิติการใช้งานก็ต้องใช้อีกแอปหนึ่ง แต่ละตัวก็มีค่าสมัครสมาชิกและโฆษณาของตัวเอง',
+    story_p4: 'ความเรียบง่ายก็มีข้อเสีย Launcher แบบข้อความอย่างเดียวทำให้แยกแอปที่คล้ายกันอย่าง Google และ Microsoft Authenticator ไม่ออก เรียบง่ายเกินไปก็เป็นความไม่สะดวกอีกแบบหนึ่ง',
+    story_closing: 'สิ่งที่ผมต้องการจริงๆ คือแอปเดียวที่ทำได้ทุกอย่าง ผมจึงสร้าง Focus Launcher ขึ้นมา สำหรับตัวเอง และสำหรับทุกคนที่เป็นเหมือนผม',
+    screenshots_eyebrow: 'ภาพหน้าจอ',
+    ss_home: 'หน้าหลัก', ss_allapps: 'แอปทั้งหมด', ss_settings: 'การตั้งค่า',
+    ss_usage: 'สถิติการใช้งาน', ss_rules: 'แก้ไขกฎ',
+    f1_title: 'มินิมอล แต่ไม่ได้<br>มินิมอลเกินไป',
+    f1_body: 'Launcher แบบข้อความอย่างเดียวทำให้แยกแอปที่คล้ายกันได้ยาก Focus Launcher ตัดกริดและป้ายออกแต่ยังคงแสดงไอคอน คุณยังสามารถสลับเป็นไอคอนโทนเทาเพื่อลดสิ่งเร้าทางสายตาได้',
+    f2_title: 'กฎการบล็อกขั้นสูง',
+    f2_body: 'ทรงพลังกว่า launcher แบบมินิมอลทั่วไป ตั้งข้อจำกัดแบบมีเงื่อนไข เช่น "บล็อก X เฉพาะเมื่อเชื่อมต่อ Wi-Fi ที่บ้าน" ด้วยทริกเกอร์ตามเวลาและ Wi-Fi',
+    f3_title: 'ประวัติการใช้งาน',
+    f3_body: 'ดูสถิติการใช้งานได้จาก launcher โดยตรง หากคุณใช้แอปมากเกินไป สามารถเพิ่มเข้ากฎการบล็อกหรือซ่อนได้ทันทีโดยไม่ต้องออกจากหน้าจอ',
+    policy_title: 'นโยบาย',
+    policy_body: 'แอปนี้ไม่มีโฆษณา เราใช้รายงานข้อขัดข้องและการวิเคราะห์การใช้งานแบบไม่ระบุตัวตน (Firebase Crashlytics / Analytics) เพื่อปรับปรุงแอป แต่เราไม่เคยเก็บข้อมูลที่ระบุตัวตนได้ ประวัติการใช้แอป กฎ และการตั้งค่าของคุณจัดเก็บไว้ในอุปกรณ์เท่านั้นและไม่มีการแชร์กับบุคคลที่สาม สร้างโดยนักพัฒนาที่ติดโทรศัพท์ เพื่อตัวเอง',
+    cta_eyebrow: 'ฟรีในช่วงเบต้า &middot; ไม่ต้องสร้างบัญชี',
+    cta_title: 'ไม่เรียบง่ายเกินไป<br><strong>Launcher สมัยใหม่</strong>',
+    cta_note: 'ไม่มีโฆษณา ไม่เก็บข้อมูลส่วนบุคคล ข้อมูลของคุณอยู่ในอุปกรณ์ของคุณ',
+  },
+  hi: {
+    nav_cta: 'डाउनलोड',
+    hero_eyebrow: 'बीटा में मुफ़्त &middot; अकाउंट की ज़रूरत नहीं',
+    hero_question: 'अपना <em>ध्यान</em> वापस पाएं।',
+    hero_sub: 'Focus Launcher एक Android लॉन्चर है जो आपका ध्यान वापस दिलाने के लिए बनाया गया है। मिनिमल लॉन्चर, एडवांस ऐप ब्लॉकिंग टूल्स, और उपयोग के आंकड़े - सब एक ऐप में।',
+    hero_learn_more: 'और जानें',
+    story_eyebrow: 'मैंने यह क्यों बनाया',
+    story_pull: '"सिंपल लॉन्चर<br>बहुत सिंपल थे।"',
+    story_p1: 'मैं एक समय फ़ोन का बुरी तरह आदी था। पूरा दिन सोशल मीडिया फ़ीड और शॉर्ट वीडियो स्क्रॉल करता रहता था और पता भी नहीं चलता था।',
+    story_p2: 'बदलाव तब आया जब मुझे सिंपल लॉन्चर, ऐप ब्लॉकर और स्क्रीन टाइम ट्रैकर मिले। ज़्यादा इस्तेमाल होने वाले ऐप्स को कम दिखाई देने वाला बनाने का आइडिया मेरे लिए सच में काम किया।',
+    story_p3: 'लेकिन समय के साथ, मुझे उनकी सीमाएं दिखीं। कंडीशनल ब्लॉकिंग - जैसे "X को सिर्फ़ घर के Wi-Fi पर ब्लॉक करो" - के लिए अलग टूल्स चाहिए थे। उपयोग के आंकड़े देखने के लिए एक और ऐप, हर एक का अपना सब्सक्रिप्शन और विज्ञापन।',
+    story_p4: 'सिंपलिसिटी की भी अपनी समस्याएं थीं। टेक्स्ट-ओनली लॉन्चर में Google और Microsoft Authenticator जैसे मिलते-जुलते ऐप्स को पहचानना मुश्किल था। बहुत सिंपल होना भी अपनी तरह की असुविधा थी।',
+    story_closing: 'मुझे असल में एक ऐसा ऐप चाहिए था जो यह सब करे। इसलिए मैंने Focus Launcher बनाया - अपने लिए, और मेरे जैसे हर किसी के लिए।',
+    screenshots_eyebrow: 'स्क्रीनशॉट',
+    ss_home: 'होम', ss_allapps: 'सभी ऐप्स', ss_settings: 'सेटिंग्स',
+    ss_usage: 'उपयोग के आंकड़े', ss_rules: 'नियम संपादन',
+    f1_title: 'मिनिमल, लेकिन<br>ज़्यादा मिनिमल नहीं।',
+    f1_body: 'टेक्स्ट-ओनली लॉन्चर में मिलते-जुलते ऐप्स को पहचानना मुश्किल होता है। Focus Launcher ग्रिड और बैज हटाता है लेकिन आइकन दिखाता रहता है। विज़ुअल उत्तेजना कम करने के लिए आप ग्रेस्केल आइकन भी चुन सकते हैं।',
+    f2_title: 'एडवांस ब्लॉक नियम',
+    f2_body: 'मिनिमलिस्ट लॉन्चर से ज़्यादा शक्तिशाली। "X को सिर्फ़ घर के Wi-Fi पर ब्लॉक करो" जैसी कंडीशनल पाबंदियां लगाएं - समय और Wi-Fi आधारित ट्रिगर के साथ।',
+    f3_title: 'उपयोग इतिहास।',
+    f3_body: 'लॉन्चर से ही अपने उपयोग के आंकड़े देखें। अगर आप किसी ऐप का ज़्यादा इस्तेमाल कर रहे हैं, तो स्क्रीन छोड़े बिना उसे ब्लॉक नियम में जोड़ सकते हैं या छुपा सकते हैं।',
+    policy_title: 'नीति',
+    policy_body: 'इस ऐप में कोई विज्ञापन नहीं है। हम ऐप को बेहतर बनाने के लिए अनाम क्रैश रिपोर्ट और उपयोग एनालिटिक्स (Firebase Crashlytics / Analytics) का इस्तेमाल करते हैं, लेकिन हम कभी व्यक्तिगत पहचान योग्य जानकारी एकत्र नहीं करते। आपका ऐप उपयोग इतिहास, नियम और सेटिंग्स सिर्फ़ आपके डिवाइस पर संग्रहीत हैं और कभी तीसरे पक्ष के साथ साझा नहीं किए जाते। एक फ़ोन-एडिक्ट डेवलपर द्वारा, खुद के लिए बनाया गया।',
+    cta_eyebrow: 'बीटा में मुफ़्त &middot; अकाउंट की ज़रूरत नहीं',
+    cta_title: 'बहुत सिंपल नहीं।<br><strong>एक आधुनिक लॉन्चर।</strong>',
+    cta_note: 'कोई विज्ञापन नहीं। कोई व्यक्तिगत डेटा संग्रह नहीं। आपका डेटा आपके डिवाइस पर रहता है।',
+  },
+  vi: {
+    nav_cta: 'Tải xuống',
+    hero_eyebrow: 'Miễn phí trong giai đoạn beta &middot; Không cần tài khoản',
+    hero_question: 'Lấy lại <em>sự tập trung</em> của bạn.',
+    hero_sub: 'Focus Launcher là một Android launcher được thiết kế để giúp bạn lấy lại sự tập trung. Launcher tối giản, công cụ chặn ứng dụng nâng cao và thống kê sử dụng - tất cả trong một ứng dụng.',
+    hero_learn_more: 'Tìm hiểu thêm',
+    story_eyebrow: 'Tại sao tôi tạo ra ứng dụng này',
+    story_pull: '"Launcher đơn giản<br>quá đơn giản."',
+    story_p1: 'Tôi từng nghiện điện thoại rất nặng. Tôi dành cả ngày lướt mạng xã hội và video ngắn mà không hề nhận ra.',
+    story_p2: 'Bước ngoặt đến khi tôi khám phá ra launcher đơn giản, ứng dụng chặn và trình theo dõi thời gian sử dụng màn hình. Ý tưởng làm cho các ứng dụng dùng nhiều trở nên ít bắt mắt hơn thực sự hiệu quả với tôi.',
+    story_p3: 'Nhưng theo thời gian, tôi gặp phải giới hạn của chúng. Chặn có điều kiện - như "chỉ chặn X khi kết nối Wi-Fi nhà" - cần công cụ riêng. Xem thống kê sử dụng lại cần thêm một ứng dụng nữa, mỗi cái đều có phí đăng ký và quảng cáo riêng.',
+    story_p4: 'Sự đơn giản cũng có nhược điểm. Launcher chỉ có chữ khiến việc phân biệt các ứng dụng tương tự như Google và Microsoft Authenticator trở nên bất khả thi. Quá đơn giản cũng là một dạng bất tiện.',
+    story_closing: 'Điều tôi thực sự muốn là một ứng dụng làm được tất cả. Vì vậy tôi đã tạo ra Focus Launcher - cho chính mình, và cho bất kỳ ai giống tôi.',
+    screenshots_eyebrow: 'Ảnh chụp màn hình',
+    ss_home: 'Trang chủ', ss_allapps: 'Tất cả ứng dụng', ss_settings: 'Cài đặt',
+    ss_usage: 'Thống kê sử dụng', ss_rules: 'Chỉnh sửa quy tắc',
+    f1_title: 'Tối giản, nhưng không<br>quá tối giản.',
+    f1_body: 'Launcher chỉ có chữ khiến việc phân biệt các ứng dụng tương tự trở nên khó khăn. Focus Launcher loại bỏ lưới và huy hiệu nhưng vẫn giữ biểu tượng hiển thị. Bạn cũng có thể chuyển sang biểu tượng xám để giảm kích thích thị giác.',
+    f2_title: 'Quy tắc chặn nâng cao',
+    f2_body: 'Mạnh mẽ hơn các launcher tối giản. Đặt hạn chế có điều kiện như "chỉ chặn X khi kết nối Wi-Fi nhà" - với bộ kích hoạt theo thời gian và Wi-Fi.',
+    f3_title: 'Lịch sử sử dụng.',
+    f3_body: 'Xem thống kê sử dụng ngay từ launcher. Nếu bạn đang dùng một ứng dụng quá nhiều, bạn có thể thêm nó vào quy tắc chặn hoặc ẩn đi mà không cần rời khỏi màn hình.',
+    policy_title: 'Chính sách',
+    policy_body: 'Ứng dụng này không có quảng cáo. Chúng tôi sử dụng báo cáo lỗi ẩn danh và phân tích sử dụng (Firebase Crashlytics / Analytics) để cải thiện ứng dụng, nhưng chúng tôi không bao giờ thu thập thông tin nhận dạng cá nhân. Lịch sử sử dụng ứng dụng, quy tắc và cài đặt của bạn chỉ được lưu trên thiết bị và không bao giờ chia sẻ với bên thứ ba. Được xây dựng bởi một lập trình viên nghiện điện thoại, cho chính mình.',
+    cta_eyebrow: 'Miễn phí trong giai đoạn beta &middot; Không cần tài khoản',
+    cta_title: 'Không quá đơn giản.<br><strong>Một launcher hiện đại.</strong>',
+    cta_note: 'Không quảng cáo. Không thu thập dữ liệu cá nhân. Dữ liệu của bạn ở trên thiết bị của bạn.',
+  },
+  id: {
+    nav_cta: 'Unduh',
+    hero_eyebrow: 'Gratis selama beta &middot; Tanpa perlu akun',
+    hero_question: 'Rebut kembali <em>fokus</em> Anda.',
+    hero_sub: 'Focus Launcher adalah Android launcher yang dirancang untuk membantu Anda merebut kembali fokus. Launcher minimalis, alat pemblokiran aplikasi canggih, dan statistik penggunaan - semua dalam satu aplikasi.',
+    hero_learn_more: 'Pelajari lebih lanjut',
+    story_eyebrow: 'Mengapa saya membuat ini',
+    story_pull: '"Launcher sederhana<br>terlalu sederhana."',
+    story_p1: 'Saya pernah sangat kecanduan ponsel. Saya menghabiskan seharian penuh menggulir media sosial dan video pendek tanpa menyadarinya.',
+    story_p2: 'Titik baliknya adalah ketika saya menemukan launcher sederhana, pemblokir aplikasi, dan pelacak waktu layar. Ide membuat aplikasi yang sering digunakan menjadi kurang terlihat benar-benar berhasil untuk saya.',
+    story_p3: 'Tapi seiring waktu, saya menemui keterbatasannya. Pemblokiran bersyarat - seperti "blokir X hanya saat terhubung ke Wi-Fi rumah" - memerlukan alat terpisah. Memeriksa statistik penggunaan berarti aplikasi lain lagi, masing-masing dengan langganan dan iklannya sendiri.',
+    story_p4: 'Kesederhanaan juga punya jebakan. Launcher berbasis teks saja membuat mustahil untuk membedakan aplikasi serupa seperti Google dan Microsoft Authenticator. Terlalu sederhana juga merepotkan.',
+    story_closing: 'Yang benar-benar saya inginkan adalah satu aplikasi yang melakukan semuanya. Jadi saya membuat Focus Launcher - untuk diri sendiri, dan untuk siapa pun yang seperti saya.',
+    screenshots_eyebrow: 'Tangkapan Layar',
+    ss_home: 'Beranda', ss_allapps: 'Semua Aplikasi', ss_settings: 'Pengaturan',
+    ss_usage: 'Statistik Penggunaan', ss_rules: 'Edit Aturan',
+    f1_title: 'Minimalis, tapi tidak<br>terlalu minimalis.',
+    f1_body: 'Launcher berbasis teks saja menyulitkan untuk membedakan aplikasi yang mirip. Focus Launcher menghilangkan grid dan badge sambil tetap menampilkan ikon. Anda juga bisa beralih ke ikon grayscale untuk mengurangi stimulasi visual.',
+    f2_title: 'Aturan pemblokiran canggih',
+    f2_body: 'Lebih powerful dari launcher minimalis biasa. Atur pembatasan bersyarat seperti "blokir X hanya saat terhubung Wi-Fi rumah" - dengan pemicu berbasis waktu dan Wi-Fi.',
+    f3_title: 'Riwayat penggunaan.',
+    f3_body: 'Periksa statistik penggunaan langsung dari launcher. Jika Anda terlalu sering menggunakan suatu aplikasi, Anda bisa menambahkannya ke aturan pemblokiran atau menyembunyikannya - tanpa meninggalkan layar.',
+    policy_title: 'Kebijakan',
+    policy_body: 'Aplikasi ini tidak ada iklan. Kami menggunakan laporan kerusakan anonim dan analitik penggunaan (Firebase Crashlytics / Analytics) untuk meningkatkan aplikasi, tetapi kami tidak pernah mengumpulkan informasi identitas pribadi. Riwayat penggunaan aplikasi, aturan, dan pengaturan Anda hanya disimpan di perangkat Anda dan tidak pernah dibagikan ke pihak ketiga. Dibuat oleh developer yang kecanduan ponsel, untuk dirinya sendiri.',
+    cta_eyebrow: 'Gratis selama beta &middot; Tanpa perlu akun',
+    cta_title: 'Tidak terlalu sederhana.<br><strong>Launcher modern.</strong>',
+    cta_note: 'Tanpa iklan. Tanpa pengumpulan data pribadi. Data Anda tetap di perangkat Anda.',
+  },
+  pt: {
+    nav_cta: 'Baixar',
+    hero_eyebrow: 'Grátis durante o beta &middot; Sem necessidade de conta',
+    hero_question: 'Recupere sua <em>atenção.</em>',
+    hero_sub: 'O Focus Launcher é um launcher Android projetado para ajudar você a retomar sua atenção. Um launcher minimalista, ferramentas avançadas de bloqueio de apps e estatísticas de uso - tudo em um único app.',
+    hero_learn_more: 'Saiba mais',
+    story_eyebrow: 'Por que eu criei isso',
+    story_pull: '"Launchers simples eram<br>simples demais."',
+    story_p1: 'Eu era extremamente viciado no celular. Passava dias inteiros rolando feeds de redes sociais e vídeos curtos sem nem perceber.',
+    story_p2: 'A virada aconteceu quando descobri launchers simples, bloqueadores de apps e rastreadores de tempo de tela. A ideia de tornar apps usados em excesso menos visíveis realmente funcionou para mim.',
+    story_p3: 'Mas com o tempo, encontrei limitações. Bloqueio condicional - como "bloquear X apenas quando conectado ao Wi-Fi de casa" - exigia ferramentas separadas. Ver estatísticas de uso significava mais um app, cada um com sua própria assinatura e anúncios.',
+    story_p4: 'A simplicidade também tinha suas armadilhas. Launchers apenas com texto tornavam impossível distinguir apps parecidos como Google e Microsoft Authenticator. Simples demais era seu próprio tipo de inconveniência.',
+    story_closing: 'O que eu realmente queria era um app que fizesse tudo. Então criei o Focus Launcher - para mim mesmo, e para qualquer pessoa como eu.',
+    screenshots_eyebrow: 'Capturas de tela',
+    ss_home: 'Início', ss_allapps: 'Todos os Apps', ss_settings: 'Configurações',
+    ss_usage: 'Estatísticas de Uso', ss_rules: 'Editar Regra',
+    f1_title: 'Minimalista, mas não<br>minimalista demais.',
+    f1_body: 'Launchers apenas com texto dificultam a distinção entre apps parecidos. O Focus Launcher remove grades e badges mantendo os ícones visíveis. Você também pode mudar para ícones em escala de cinza para reduzir o estímulo visual.',
+    f2_title: 'Regras de bloqueio avançadas',
+    f2_body: 'Mais poderoso que launchers minimalistas. Defina restrições condicionais como "bloquear X apenas quando conectado ao Wi-Fi de casa" - com gatilhos baseados em horário e Wi-Fi.',
+    f3_title: 'Histórico de uso.',
+    f3_body: 'Confira suas estatísticas de uso direto do launcher. Se você está usando um app demais, pode adicioná-lo a uma regra de bloqueio ou ocultá-lo - tudo sem sair da tela.',
+    policy_title: 'Política',
+    policy_body: 'Este app não tem anúncios. Usamos relatórios de falhas anônimos e análises de uso (Firebase Crashlytics / Analytics) para melhorar o app, mas nunca coletamos informações pessoalmente identificáveis. Seu histórico de uso de apps, regras e configurações são armazenados apenas no seu dispositivo e nunca compartilhados com terceiros. Feito por um desenvolvedor viciado em celular, para si mesmo.',
+    cta_eyebrow: 'Grátis durante o beta &middot; Sem necessidade de conta',
+    cta_title: 'Não simples demais.<br><strong>Um launcher moderno.</strong>',
+    cta_note: 'Sem anúncios. Sem coleta de dados pessoais. Seus dados ficam no seu dispositivo.',
+  },
+  es: {
+    nav_cta: 'Descargar',
+    hero_eyebrow: 'Gratis durante la beta &middot; Sin cuenta necesaria',
+    hero_question: 'Recupera tu <em>atención.</em>',
+    hero_sub: 'Focus Launcher es un launcher Android diseñado para ayudarte a recuperar tu atención. Un launcher minimalista, herramientas avanzadas de bloqueo de apps y estadísticas de uso, todo en una sola app.',
+    hero_learn_more: 'Más información',
+    story_eyebrow: 'Por qué lo creé',
+    story_pull: '"Los launchers simples eran<br>demasiado simples."',
+    story_p1: 'Antes era gravemente adicto al móvil. Pasaba días enteros desplazándome por redes sociales y vídeos cortos sin darme cuenta.',
+    story_p2: 'El punto de inflexión fue cuando descubrí los launchers simples, bloqueadores de apps y rastreadores de tiempo de pantalla. La idea de hacer menos visibles las apps que más usaba realmente funcionó para mí.',
+    story_p3: 'Pero con el tiempo, encontré sus límites. El bloqueo condicional - como "bloquear X solo cuando estoy conectado al Wi-Fi de casa" - requería herramientas separadas. Ver estadísticas de uso significaba otra app más, cada una con su propia suscripción y anuncios.',
+    story_p4: 'La simplicidad también tenía sus trampas. Los launchers de solo texto hacían imposible distinguir apps similares como Google y Microsoft Authenticator. Demasiado simple era otro tipo de inconveniente.',
+    story_closing: 'Lo que realmente quería era una app que lo hiciera todo. Así que creé Focus Launcher - para mí mismo, y para cualquiera como yo.',
+    screenshots_eyebrow: 'Capturas de pantalla',
+    ss_home: 'Inicio', ss_allapps: 'Todas las Apps', ss_settings: 'Ajustes',
+    ss_usage: 'Estadísticas de Uso', ss_rules: 'Editar Regla',
+    f1_title: 'Minimalista, pero no<br>demasiado minimalista.',
+    f1_body: 'Los launchers de solo texto dificultan distinguir apps similares. Focus Launcher elimina cuadrículas y badges manteniendo los iconos visibles. También puedes cambiar a iconos en escala de grises para reducir la estimulación visual.',
+    f2_title: 'Reglas de bloqueo avanzadas',
+    f2_body: 'Más potente que los launchers minimalistas. Establece restricciones condicionales como "bloquear X solo cuando estoy conectado al Wi-Fi de casa", con disparadores basados en horario y Wi-Fi.',
+    f3_title: 'Historial de uso.',
+    f3_body: 'Consulta tus estadísticas de uso directamente desde el launcher. Si estás usando una app en exceso, puedes añadirla a una regla de bloqueo u ocultarla sin salir de la pantalla.',
+    policy_title: 'Política',
+    policy_body: 'Esta app no tiene anuncios. Utilizamos informes de errores anónimos y análisis de uso (Firebase Crashlytics / Analytics) para mejorar la app, pero nunca recopilamos información de identificación personal. Tu historial de uso, reglas y ajustes se almacenan solo en tu dispositivo y nunca se comparten con terceros. Creada por un desarrollador adicto al móvil, para sí mismo.',
+    cta_eyebrow: 'Gratis durante la beta &middot; Sin cuenta necesaria',
+    cta_title: 'No demasiado simple.<br><strong>Un launcher moderno.</strong>',
+    cta_note: 'Sin anuncios. Sin recopilación de datos personales. Tus datos se quedan en tu dispositivo.',
+  },
+  fr: {
+    nav_cta: 'Télécharger',
+    hero_eyebrow: 'Gratuit pendant la bêta &middot; Aucun compte requis',
+    hero_question: 'Reprenez le contrôle de votre <em>attention.</em>',
+    hero_sub: 'Focus Launcher est un launcher Android conçu pour vous aider à reprendre le contrôle de votre attention. Un launcher minimaliste, des outils de blocage d\'apps avancés et des statistiques d\'utilisation - le tout dans une seule app.',
+    hero_learn_more: 'En savoir plus',
+    story_eyebrow: 'Pourquoi j\'ai créé ça',
+    story_pull: '"Les launchers simples étaient<br>trop simples."',
+    story_p1: 'J\'étais autrefois gravement accro à mon téléphone. Je passais des journées entières à défiler les réseaux sociaux et les vidéos courtes sans même m\'en rendre compte.',
+    story_p2: 'Le déclic est venu quand j\'ai découvert les launchers simples, les bloqueurs d\'apps et les traqueurs de temps d\'écran. L\'idée de rendre les apps trop utilisées moins visibles a vraiment fonctionné pour moi.',
+    story_p3: 'Mais au fil du temps, j\'ai atteint leurs limites. Le blocage conditionnel - comme « bloquer X uniquement sur le Wi-Fi de la maison » - nécessitait des outils séparés. Consulter les statistiques d\'utilisation signifiait encore une autre app, chacune avec son propre abonnement et ses publicités.',
+    story_p4: 'La simplicité avait aussi ses pièges. Les launchers texte uniquement rendaient impossible la distinction entre des apps similaires comme Google et Microsoft Authenticator. Trop simple, c\'était aussi un inconvénient.',
+    story_closing: 'Ce que je voulais vraiment, c\'était une seule app qui fasse tout. Alors j\'ai créé Focus Launcher - pour moi-même, et pour tous ceux qui me ressemblent.',
+    screenshots_eyebrow: 'Captures d\'écran',
+    ss_home: 'Accueil', ss_allapps: 'Toutes les Apps', ss_settings: 'Paramètres',
+    ss_usage: 'Statistiques d\'Utilisation', ss_rules: 'Modifier la Règle',
+    f1_title: 'Minimaliste, mais pas<br>trop minimaliste.',
+    f1_body: 'Les launchers texte uniquement rendent difficile la distinction entre des apps similaires. Focus Launcher supprime les grilles et les badges tout en gardant les icônes visibles. Vous pouvez aussi passer en icônes en niveaux de gris pour réduire la stimulation visuelle.',
+    f2_title: 'Règles de blocage avancées',
+    f2_body: 'Plus puissant que les launchers minimalistes. Définissez des restrictions conditionnelles comme « bloquer X uniquement sur le Wi-Fi de la maison » - avec des déclencheurs basés sur l\'heure et le Wi-Fi.',
+    f3_title: 'Historique d\'utilisation.',
+    f3_body: 'Consultez vos statistiques d\'utilisation directement depuis le launcher. Si vous utilisez trop une app, vous pouvez l\'ajouter à une règle de blocage ou la masquer - sans quitter l\'écran.',
+    policy_title: 'Politique',
+    policy_body: 'Cette app n\'a pas de publicité. Nous utilisons des rapports de plantage anonymes et des analyses d\'utilisation (Firebase Crashlytics / Analytics) pour améliorer l\'app, mais nous ne collectons jamais d\'informations personnellement identifiables. Votre historique d\'utilisation, vos règles et paramètres sont stockés uniquement sur votre appareil et ne sont jamais partagés avec des tiers. Créée par un développeur accro au téléphone, pour lui-même.',
+    cta_eyebrow: 'Gratuit pendant la bêta &middot; Aucun compte requis',
+    cta_title: 'Pas trop simple.<br><strong>Un launcher moderne.</strong>',
+    cta_note: 'Pas de publicité. Pas de collecte de données personnelles. Vos données restent sur votre appareil.',
+  },
+  de: {
+    nav_cta: 'Herunterladen',
+    hero_eyebrow: 'Kostenlos während der Beta &middot; Kein Konto erforderlich',
+    hero_question: 'Hol dir deine <em>Aufmerksamkeit</em> zurück.',
+    hero_sub: 'Focus Launcher ist ein Android-Launcher, der dir hilft, deine Aufmerksamkeit zurückzugewinnen. Ein minimalistischer Launcher, fortschrittliche App-Blockierung und Nutzungsstatistiken - alles in einer App.',
+    hero_learn_more: 'Mehr erfahren',
+    story_eyebrow: 'Warum ich das gebaut habe',
+    story_pull: '"Einfache Launcher waren<br>zu einfach."',
+    story_p1: 'Ich war früher extrem handysüchtig. Ich verbrachte ganze Tage damit, durch Social-Media-Feeds und Kurzvideos zu scrollen, ohne es zu merken.',
+    story_p2: 'Der Wendepunkt kam, als ich einfache Launcher, App-Blocker und Bildschirmzeit-Tracker entdeckte. Die Idee, übermäßig genutzte Apps weniger sichtbar zu machen, funktionierte wirklich gut für mich.',
+    story_p3: 'Aber mit der Zeit stieß ich an ihre Grenzen. Bedingtes Blockieren - wie „X nur blockieren, wenn mit dem Heim-Wi-Fi verbunden" - erforderte separate Tools. Nutzungsstatistiken prüfen bedeutete noch eine weitere App, jede mit eigenem Abo und Werbung.',
+    story_p4: 'Einfachheit hatte auch ihre Tücken. Reine Text-Launcher machten es unmöglich, ähnliche Apps wie Google und Microsoft Authenticator zu unterscheiden. Zu einfach war auf seine eigene Art unpraktisch.',
+    story_closing: 'Was ich wirklich wollte, war eine App, die alles kann. Also habe ich Focus Launcher gebaut - für mich selbst und für alle, die so sind wie ich.',
+    screenshots_eyebrow: 'Screenshots',
+    ss_home: 'Startseite', ss_allapps: 'Alle Apps', ss_settings: 'Einstellungen',
+    ss_usage: 'Nutzungsstatistiken', ss_rules: 'Regel bearbeiten',
+    f1_title: 'Minimalistisch, aber nicht<br>zu minimalistisch.',
+    f1_body: 'Reine Text-Launcher erschweren die Unterscheidung ähnlicher Apps. Focus Launcher entfernt Raster und Badges, behält aber die Icons bei. Du kannst auch zu Graustufen-Icons wechseln, um visuelle Reize zu reduzieren.',
+    f2_title: 'Erweiterte Blockierregeln',
+    f2_body: 'Leistungsfähiger als minimalistische Launcher. Lege bedingte Einschränkungen fest wie „X nur blockieren, wenn mit dem Heim-Wi-Fi verbunden" - mit zeit- und Wi-Fi-basierten Auslösern.',
+    f3_title: 'Nutzungsverlauf.',
+    f3_body: 'Überprüfe deine Nutzungsstatistiken direkt im Launcher. Wenn du eine App zu viel nutzt, kannst du sie einer Blockierregel hinzufügen oder ausblenden - ohne den Bildschirm zu verlassen.',
+    policy_title: 'Richtlinie',
+    policy_body: 'Diese App hat keine Werbung. Wir verwenden anonyme Absturzberichte und Nutzungsanalysen (Firebase Crashlytics / Analytics) zur Verbesserung der App, erfassen aber niemals personenbezogene Daten. Dein App-Nutzungsverlauf, Regeln und Einstellungen werden nur auf deinem Gerät gespeichert und niemals an Dritte weitergegeben. Entwickelt von einem handysüchtigen Entwickler, für sich selbst.',
+    cta_eyebrow: 'Kostenlos während der Beta &middot; Kein Konto erforderlich',
+    cta_title: 'Nicht zu einfach.<br><strong>Ein moderner Launcher.</strong>',
+    cta_note: 'Keine Werbung. Keine Erhebung persönlicher Daten. Deine Daten bleiben auf deinem Gerät.',
+  },
+  it: {
+    nav_cta: 'Scarica',
+    hero_eyebrow: 'Gratis durante la beta &middot; Nessun account richiesto',
+    hero_question: 'Riprendi il controllo della tua <em>attenzione.</em>',
+    hero_sub: 'Focus Launcher è un launcher Android progettato per aiutarti a riprendere il controllo della tua attenzione. Un launcher minimale, strumenti avanzati di blocco app e statistiche d\'utilizzo - tutto in un\'unica app.',
+    hero_learn_more: 'Scopri di più',
+    story_eyebrow: 'Perché l\'ho creato',
+    story_pull: '"I launcher semplici erano<br>troppo semplici."',
+    story_p1: 'Un tempo ero gravemente dipendente dal telefono. Passavo intere giornate a scorrere i feed dei social e i video brevi senza nemmeno rendermene conto.',
+    story_p2: 'La svolta è arrivata quando ho scoperto i launcher semplici, i blocca-app e i tracker del tempo schermo. L\'idea di rendere meno visibili le app più usate ha funzionato davvero per me.',
+    story_p3: 'Ma col tempo, ne ho trovato i limiti. Il blocco condizionale - come "blocca X solo quando connesso al Wi-Fi di casa" - richiedeva strumenti separati. Controllare le statistiche d\'uso significava un\'altra app ancora, ognuna con il proprio abbonamento e la propria pubblicità.',
+    story_p4: 'Anche la semplicità aveva le sue insidie. I launcher solo testo rendevano impossibile distinguere app simili come Google e Microsoft Authenticator. Troppo semplice era a sua volta un tipo di scomodità.',
+    story_closing: 'Quello che volevo davvero era un\'app che facesse tutto. Così ho creato Focus Launcher - per me stesso, e per chiunque sia come me.',
+    screenshots_eyebrow: 'Screenshot',
+    ss_home: 'Home', ss_allapps: 'Tutte le App', ss_settings: 'Impostazioni',
+    ss_usage: 'Statistiche d\'Uso', ss_rules: 'Modifica Regola',
+    f1_title: 'Minimale, ma non<br>troppo minimale.',
+    f1_body: 'I launcher solo testo rendono difficile distinguere app simili. Focus Launcher rimuove griglie e badge mantenendo le icone visibili. Puoi anche passare a icone in scala di grigi per ridurre la stimolazione visiva.',
+    f2_title: 'Regole di blocco avanzate',
+    f2_body: 'Più potente dei launcher minimalisti. Imposta restrizioni condizionali come "blocca X solo quando connesso al Wi-Fi di casa" - con trigger basati su orario e Wi-Fi.',
+    f3_title: 'Cronologia d\'uso.',
+    f3_body: 'Controlla le tue statistiche d\'uso direttamente dal launcher. Se stai usando troppo un\'app, puoi aggiungerla a una regola di blocco o nasconderla - tutto senza lasciare la schermata.',
+    policy_title: 'Policy',
+    policy_body: 'Questa app non ha pubblicità. Utilizziamo report di crash anonimi e analisi d\'utilizzo (Firebase Crashlytics / Analytics) per migliorare l\'app, ma non raccogliamo mai informazioni personalmente identificabili. La cronologia d\'uso delle app, le regole e le impostazioni sono archiviate solo sul tuo dispositivo e non vengono mai condivise con terze parti. Creata da uno sviluppatore dipendente dal telefono, per se stesso.',
+    cta_eyebrow: 'Gratis durante la beta &middot; Nessun account richiesto',
+    cta_title: 'Non troppo semplice.<br><strong>Un launcher moderno.</strong>',
+    cta_note: 'Nessuna pubblicità. Nessuna raccolta di dati personali. I tuoi dati restano sul tuo dispositivo.',
+  },
+  ru: {
+    nav_cta: 'Скачать',
+    hero_eyebrow: 'Бесплатно в бета-версии &middot; Аккаунт не нужен',
+    hero_question: 'Верните себе <em>внимание.</em>',
+    hero_sub: 'Focus Launcher - это Android-лаунчер, созданный, чтобы помочь вам вернуть контроль над вниманием. Минималистичный лаунчер, продвинутые инструменты блокировки приложений и статистика использования - всё в одном приложении.',
+    hero_learn_more: 'Узнать больше',
+    story_eyebrow: 'Почему я это создал',
+    story_pull: '"Простые лаунчеры были<br>слишком простыми."',
+    story_p1: 'Раньше я был сильно зависим от телефона. Я проводил целые дни, листая ленты соцсетей и короткие видео, даже не осознавая этого.',
+    story_p2: 'Переломный момент наступил, когда я обнаружил простые лаунчеры, блокировщики приложений и трекеры экранного времени. Идея сделать часто используемые приложения менее заметными действительно сработала для меня.',
+    story_p3: 'Но со временем я столкнулся с их ограничениями. Условная блокировка - например, «блокировать X только при подключении к домашнему Wi-Fi» - требовала отдельных инструментов. Проверка статистики использования означала ещё одно приложение, каждое со своей подпиской и рекламой.',
+    story_p4: 'У простоты тоже были свои подводные камни. В текстовых лаунчерах невозможно было отличить похожие приложения вроде Google и Microsoft Authenticator. Слишком просто - это тоже своего рода неудобство.',
+    story_closing: 'На самом деле мне нужно было одно приложение, которое делает всё. Поэтому я создал Focus Launcher - для себя и для всех, кто похож на меня.',
+    screenshots_eyebrow: 'Скриншоты',
+    ss_home: 'Главная', ss_allapps: 'Все приложения', ss_settings: 'Настройки',
+    ss_usage: 'Статистика использования', ss_rules: 'Редактирование правил',
+    f1_title: 'Минималистичный, но не<br>слишком минималистичный.',
+    f1_body: 'Текстовые лаунчеры затрудняют различение похожих приложений. Focus Launcher убирает сетку и значки уведомлений, сохраняя иконки видимыми. Вы также можете переключиться на чёрно-белые иконки для снижения визуальной стимуляции.',
+    f2_title: 'Продвинутые правила блокировки',
+    f2_body: 'Мощнее минималистичных лаунчеров. Устанавливайте условные ограничения вроде «блокировать X только при подключении к домашнему Wi-Fi» - с триггерами по времени и Wi-Fi.',
+    f3_title: 'История использования.',
+    f3_body: 'Проверяйте статистику использования прямо из лаунчера. Если вы злоупотребляете каким-то приложением, можете добавить его в правило блокировки или скрыть - не покидая экран.',
+    policy_title: 'Политика',
+    policy_body: 'В этом приложении нет рекламы. Мы используем анонимные отчёты об ошибках и аналитику использования (Firebase Crashlytics / Analytics) для улучшения приложения, но никогда не собираем персональные данные. История использования приложений, правила и настройки хранятся только на вашем устройстве и никогда не передаются третьим лицам. Создано разработчиком, зависимым от телефона, для самого себя.',
+    cta_eyebrow: 'Бесплатно в бета-версии &middot; Аккаунт не нужен',
+    cta_title: 'Не слишком просто.<br><strong>Современный лаунчер.</strong>',
+    cta_note: 'Без рекламы. Без сбора персональных данных. Ваши данные остаются на вашем устройстве.',
+  },
+  tr: {
+    nav_cta: 'İndir',
+    hero_eyebrow: 'Beta süresince ücretsiz &middot; Hesap gerekmez',
+    hero_question: '<em>Dikkatinizi</em> geri kazanın.',
+    hero_sub: 'Focus Launcher, dikkatinizi geri kazanmanıza yardımcı olmak için tasarlanmış bir Android launcher\'dır. Minimalist launcher, gelişmiş uygulama engelleme araçları ve kullanım istatistikleri - hepsi tek bir uygulamada.',
+    hero_learn_more: 'Daha fazla bilgi',
+    story_eyebrow: 'Bunu neden yaptım',
+    story_pull: '"Basit launcher\'lar<br>fazla basitti."',
+    story_p1: 'Bir zamanlar telefona ciddi anlamda bağımlıydım. Farkına bile varmadan bütün günümü sosyal medya akışlarında ve kısa videolarda geçiriyordum.',
+    story_p2: 'Dönüm noktası basit launcher\'ları, uygulama engelleyicileri ve ekran süresi izleyicileri keşfettiğimde geldi. Aşırı kullanılan uygulamaları daha az görünür kılma fikri benim için gerçekten işe yaradı.',
+    story_p3: 'Ama zamanla sınırlarına ulaştım. Koşullu engelleme - "X\'i sadece ev Wi-Fi\'sine bağlıyken engelle" gibi - ayrı araçlar gerektiriyordu. Kullanım istatistiklerini kontrol etmek bir uygulama daha demekti, her birinin kendi aboneliği ve reklamları vardı.',
+    story_p4: 'Sadeliğin de tuzakları vardı. Sadece metin içeren launcher\'lar, Google ve Microsoft Authenticator gibi benzer uygulamaları ayırt etmeyi imkansız kılıyordu. Fazla basit olmak da kendi başına bir rahatsızlıktı.',
+    story_closing: 'Gerçekten istediğim, hepsini yapan tek bir uygulamaydı. Bu yüzden Focus Launcher\'ı yaptım - kendim için ve benim gibi olan herkes için.',
+    screenshots_eyebrow: 'Ekran Görüntüleri',
+    ss_home: 'Ana Sayfa', ss_allapps: 'Tüm Uygulamalar', ss_settings: 'Ayarlar',
+    ss_usage: 'Kullanım İstatistikleri', ss_rules: 'Kural Düzenle',
+    f1_title: 'Minimalist, ama<br>fazla minimalist değil.',
+    f1_body: 'Sadece metin içeren launcher\'lar benzer uygulamaları ayırt etmeyi zorlaştırır. Focus Launcher ızgaraları ve rozetleri kaldırırken simgeleri görünür tutar. Görsel uyarımı azaltmak için gri tonlamalı simgelere de geçebilirsiniz.',
+    f2_title: 'Gelişmiş engelleme kuralları',
+    f2_body: 'Minimalist launcher\'lardan daha güçlü. "X\'i sadece ev Wi-Fi\'sine bağlıyken engelle" gibi koşullu kısıtlamalar belirleyin - zaman ve Wi-Fi tabanlı tetikleyicilerle.',
+    f3_title: 'Kullanım geçmişi.',
+    f3_body: 'Kullanım istatistiklerinizi doğrudan launcher\'dan kontrol edin. Bir uygulamayı fazla kullanıyorsanız, ekrandan ayrılmadan engelleme kuralına ekleyebilir veya gizleyebilirsiniz.',
+    policy_title: 'Politika',
+    policy_body: 'Bu uygulamada reklam yoktur. Uygulamayı iyileştirmek için anonim çökme raporları ve kullanım analitiği (Firebase Crashlytics / Analytics) kullanıyoruz, ancak kişisel olarak tanımlanabilir bilgi asla toplamıyoruz. Uygulama kullanım geçmişiniz, kurallarınız ve ayarlarınız yalnızca cihazınızda saklanır ve üçüncü taraflarla asla paylaşılmaz. Telefon bağımlısı bir geliştirici tarafından, kendisi için yapılmıştır.',
+    cta_eyebrow: 'Beta süresince ücretsiz &middot; Hesap gerekmez',
+    cta_title: 'Fazla basit değil.<br><strong>Modern bir launcher.</strong>',
+    cta_note: 'Reklam yok. Kişisel veri toplama yok. Verileriniz cihazınızda kalır.',
+  },
+  pl: {
+    nav_cta: 'Pobierz',
+    hero_eyebrow: 'Bezpłatnie w fazie beta &middot; Bez konieczności zakładania konta',
+    hero_question: 'Odzyskaj swoją <em>uwagę.</em>',
+    hero_sub: 'Focus Launcher to launcher na Androida zaprojektowany, by pomóc Ci odzyskać kontrolę nad uwagą. Minimalistyczny launcher, zaawansowane narzędzia blokowania aplikacji i statystyki użytkowania - wszystko w jednej aplikacji.',
+    hero_learn_more: 'Dowiedz się więcej',
+    story_eyebrow: 'Dlaczego to stworzyłem',
+    story_pull: '"Proste launchery były<br>zbyt proste."',
+    story_p1: 'Kiedyś byłem poważnie uzależniony od telefonu. Spędzałem całe dni, przewijając media społecznościowe i krótkie filmy, nawet nie zdając sobie z tego sprawy.',
+    story_p2: 'Punkt zwrotny nastąpił, gdy odkryłem proste launchery, blokery aplikacji i trackery czasu ekranowego. Pomysł, by nadmiernie używane aplikacje były mniej widoczne, naprawdę zadziałał.',
+    story_p3: 'Ale z czasem natrafiłem na ich ograniczenia. Warunkowe blokowanie - jak „blokuj X tylko przy połączeniu z domowym Wi-Fi" - wymagało osobnych narzędzi. Sprawdzanie statystyk użytkowania oznaczało kolejną aplikację, każda ze swoją subskrypcją i reklamami.',
+    story_p4: 'Prostota też miała swoje pułapki. Launchery z samym tekstem uniemożliwiały rozróżnienie podobnych aplikacji jak Google i Microsoft Authenticator. Zbyt proste to też rodzaj niedogodności.',
+    story_closing: 'Tak naprawdę chciałem jednej aplikacji, która robi to wszystko. Dlatego stworzyłem Focus Launcher - dla siebie i dla każdego, kto jest taki jak ja.',
+    screenshots_eyebrow: 'Zrzuty ekranu',
+    ss_home: 'Ekran główny', ss_allapps: 'Wszystkie aplikacje', ss_settings: 'Ustawienia',
+    ss_usage: 'Statystyki użytkowania', ss_rules: 'Edycja reguły',
+    f1_title: 'Minimalistyczny, ale nie<br>za bardzo.',
+    f1_body: 'Launchery z samym tekstem utrudniają rozróżnienie podobnych aplikacji. Focus Launcher usuwa siatki i odznaki, zachowując widoczność ikon. Możesz też przełączyć się na ikony w skali szarości, by zmniejszyć bodźce wizualne.',
+    f2_title: 'Zaawansowane reguły blokowania',
+    f2_body: 'Potężniejszy niż minimalistyczne launchery. Ustaw warunkowe ograniczenia jak „blokuj X tylko przy połączeniu z domowym Wi-Fi" - z wyzwalaczami opartymi na czasie i Wi-Fi.',
+    f3_title: 'Historia użytkowania.',
+    f3_body: 'Sprawdzaj statystyki użytkowania bezpośrednio z launchera. Jeśli za dużo korzystasz z jakiejś aplikacji, możesz dodać ją do reguły blokowania lub ukryć - nie opuszczając ekranu.',
+    policy_title: 'Polityka',
+    policy_body: 'Ta aplikacja nie ma reklam. Używamy anonimowych raportów o awariach i analityki użytkowania (Firebase Crashlytics / Analytics) do ulepszania aplikacji, ale nigdy nie zbieramy danych umożliwiających identyfikację osoby. Historia użytkowania aplikacji, reguły i ustawienia są przechowywane wyłącznie na Twoim urządzeniu i nigdy nie są udostępniane stronom trzecim. Stworzone przez uzależnionego od telefonu programistę, dla siebie samego.',
+    cta_eyebrow: 'Bezpłatnie w fazie beta &middot; Bez konieczności zakładania konta',
+    cta_title: 'Nie za prosty.<br><strong>Nowoczesny launcher.</strong>',
+    cta_note: 'Bez reklam. Bez zbierania danych osobowych. Twoje dane pozostają na Twoim urządzeniu.',
+  },
+  nl: {
+    nav_cta: 'Downloaden',
+    hero_eyebrow: 'Gratis tijdens de bèta &middot; Geen account nodig',
+    hero_question: 'Neem je <em>aandacht</em> terug.',
+    hero_sub: 'Focus Launcher is een Android-launcher die je helpt om je aandacht terug te winnen. Een minimalistische launcher, geavanceerde app-blokkering en gebruiksstatistieken - alles in één app.',
+    hero_learn_more: 'Meer informatie',
+    story_eyebrow: 'Waarom ik dit heb gemaakt',
+    story_pull: '"Simpele launchers waren<br>te simpel."',
+    story_p1: 'Ik was ooit ernstig verslaafd aan mijn telefoon. Ik bracht hele dagen door met scrollen door social media en korte video\'s zonder het te beseffen.',
+    story_p2: 'Het keerpunt kwam toen ik simpele launchers, app-blockers en schermtijd-trackers ontdekte. Het idee om veelgebruikte apps minder zichtbaar te maken werkte echt voor mij.',
+    story_p3: 'Maar na verloop van tijd liep ik tegen hun beperkingen aan. Voorwaardelijk blokkeren - zoals "blokkeer X alleen wanneer verbonden met thuis-Wi-Fi" - vereiste aparte tools. Gebruiksstatistieken bekijken betekende weer een andere app, elk met een eigen abonnement en advertenties.',
+    story_p4: 'Eenvoud had ook zijn valkuilen. Launchers met alleen tekst maakten het onmogelijk om vergelijkbare apps zoals Google en Microsoft Authenticator te onderscheiden. Te simpel was op zich ook onhandig.',
+    story_closing: 'Wat ik echt wilde was één app die alles deed. Dus bouwde ik Focus Launcher - voor mezelf, en voor iedereen zoals ik.',
+    screenshots_eyebrow: 'Screenshots',
+    ss_home: 'Startscherm', ss_allapps: 'Alle Apps', ss_settings: 'Instellingen',
+    ss_usage: 'Gebruiksstatistieken', ss_rules: 'Regel Bewerken',
+    f1_title: 'Minimalistisch, maar niet<br>te minimalistisch.',
+    f1_body: 'Launchers met alleen tekst maken het moeilijk om vergelijkbare apps te onderscheiden. Focus Launcher verwijdert rasters en badges maar houdt iconen zichtbaar. Je kunt ook overschakelen naar grijstinten-iconen om visuele prikkels te verminderen.',
+    f2_title: 'Geavanceerde blokkeerregels',
+    f2_body: 'Krachtiger dan minimalistische launchers. Stel voorwaardelijke beperkingen in zoals "blokkeer X alleen wanneer verbonden met thuis-Wi-Fi" - met triggers op basis van tijd en Wi-Fi.',
+    f3_title: 'Gebruiksgeschiedenis.',
+    f3_body: 'Bekijk je gebruiksstatistieken direct vanuit de launcher. Als je een app te veel gebruikt, kun je deze toevoegen aan een blokkeerregel of verbergen - zonder het scherm te verlaten.',
+    policy_title: 'Beleid',
+    policy_body: 'Deze app heeft geen advertenties. We gebruiken anonieme crashrapporten en gebruiksanalyse (Firebase Crashlytics / Analytics) om de app te verbeteren, maar we verzamelen nooit persoonlijk identificeerbare informatie. Je app-gebruiksgeschiedenis, regels en instellingen worden alleen op je apparaat opgeslagen en worden nooit gedeeld met derden. Gemaakt door een telefoonverslaafde ontwikkelaar, voor zichzelf.',
+    cta_eyebrow: 'Gratis tijdens de bèta &middot; Geen account nodig',
+    cta_title: 'Niet te simpel.<br><strong>Een moderne launcher.</strong>',
+    cta_note: 'Geen advertenties. Geen verzameling van persoonlijke gegevens. Je data blijft op je apparaat.',
+  }
+,
 };
 
-const screenshotPaths = {
-  ja: {
-    hero_screenshot: 'screenshots/ja/Screenshot1_Home.png',
-    ss1: 'screenshots/ja/Screenshot1_Home.png', ss2: 'screenshots/ja/Screenshot2_AllApps.png',
-    ss3: 'screenshots/ja/Screenshot3_Settings.png', ss4: 'screenshots/ja/Screenshot4_UsageStats.png',
-    ss5: 'screenshots/ja/Screenshot5_BlockRules.png',
-    f1_img: 'screenshots/ja/Screenshot1_Home.png', f2_img: 'screenshots/ja/Screenshot5_BlockRules.png',
-    f3_img: 'screenshots/ja/Screenshot4_UsageStats.png',
-  },
-  en: {
-    hero_screenshot: 'screenshots/en/Screenshot1_Home.png',
-    ss1: 'screenshots/en/Screenshot1_Home.png', ss2: 'screenshots/en/Screenshot2_AllApps.png',
-    ss3: 'screenshots/en/Screenshot3_Settings.png', ss4: 'screenshots/en/Screenshot4_UsageStats.png',
-    ss5: 'screenshots/en/Screenshot5_BlockRules.png',
-    f1_img: 'screenshots/en/Screenshot1_Home.png', f2_img: 'screenshots/en/Screenshot5_BlockRules.png',
-    f3_img: 'screenshots/en/Screenshot4_UsageStats.png',
-  },
-};
+function getScreenshotPaths(lang) {
+  const dir = (lang === 'ja') ? 'ja' : 'en';
+  return {
+    hero_screenshot: `screenshots/${dir}/Screenshot1_Home.png`,
+    ss1: `screenshots/${dir}/Screenshot1_Home.png`, ss2: `screenshots/${dir}/Screenshot2_AllApps.png`,
+    ss3: `screenshots/${dir}/Screenshot3_Settings.png`, ss4: `screenshots/${dir}/Screenshot4_UsageStats.png`,
+    ss5: `screenshots/${dir}/Screenshot5_BlockRules.png`,
+    f1_img: `screenshots/${dir}/Screenshot1_Home.png`, f2_img: `screenshots/${dir}/Screenshot5_BlockRules.png`,
+    f3_img: `screenshots/${dir}/Screenshot4_UsageStats.png`,
+  };
+}
 
-let currentLang = localStorage.getItem('lang') || (navigator.language.startsWith('ja') ? 'ja' : 'en');
+function detectLang() {
+  const saved = localStorage.getItem('lang');
+  if (saved && i18n[saved]) return saved;
+  const nav = navigator.language || '';
+  const langMap = { ja:'ja', ko:'ko', th:'th', hi:'hi', id:'id', pt:'pt', es:'es', fr:'fr', de:'de', it:'it', ru:'ru', tr:'tr', pl:'pl', nl:'nl' };
+  for (const [prefix, lang] of Object.entries(langMap)) {
+    if (nav.startsWith(prefix)) return lang;
+  }
+  if (nav.startsWith('zh') && nav.includes('TW')) return 'zh_TW';
+  if (nav.startsWith('zh')) return 'zh_CN';
+  return 'en';
+}
+let currentLang = detectLang();
 
 function applyLang(lang) {
   currentLang = lang;
   localStorage.setItem('lang', lang);
   document.documentElement.lang = lang;
-  document.getElementById('langToggle').textContent = lang === 'ja' ? 'EN' : 'JA';
-  document.title = lang === 'ja'
-    ? 'Focus Launcher \u2014 \u81EA\u5206\u306E\u6CE8\u610F\u529B\u3092\u3001\u53D6\u308A\u623B\u3059\u3002'
-    : 'Focus Launcher \u2014 Reclaim your attention.';
+  document.getElementById('langSelect').value = lang;
+  const titles = {
+    ja: 'Focus Launcher \u2014 \u30B9\u30DE\u30DB\u4E2D\u6BD2\u9632\u6B62+\u30D6\u30ED\u30C3\u30AB\u30FC+\u30B9\u30AF\u30EA\u30FC\u30F3\u30BF\u30A4\u30E0',
+    en: 'Focus Launcher \u2014 Phone Detox + Blocker + Screen Time',
+    ko: 'Focus Launcher \u2014 \uC2A4\uB9C8\uD2B8\uD3F0 \uC911\uB3C5 \uBC29\uC9C0 + \uCC28\uB2E8 + \uC2A4\uD06C\uB9B0 \uD0C0\uC784',
+    zh_CN: 'Focus Launcher \u2014 \u624B\u673A\u6210\u763E\u9632\u6B62+\u62E6\u622A\u5668+\u5C4F\u5E55\u65F6\u95F4',
+    zh_TW: 'Focus Launcher \u2014 \u624B\u6A5F\u6210\u764E\u9632\u6B62+\u5C01\u9396\u5668+\u87A2\u5E55\u6642\u9593',
+  };
+  document.title = titles[lang] || titles.en;
 
-  const strings = i18n[lang];
+  const strings = i18n[lang] || i18n.en;
+  const fallback = i18n.en;
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (strings[key]) el.innerHTML = strings[key];
+    else if (fallback[key]) el.innerHTML = fallback[key];
   });
 
-  const imgs = screenshotPaths[lang];
+  const imgs = getScreenshotPaths(lang);
   document.querySelectorAll('[data-i18n-src]').forEach(el => {
     const key = el.getAttribute('data-i18n-src');
     if (imgs[key]) el.src = imgs[key];
   });
 }
 
-function toggleLang() {
-  applyLang(currentLang === 'ja' ? 'en' : 'ja');
-}
+// toggleLang removed - using select dropdown instead
 
 document.addEventListener('DOMContentLoaded', () => {
   lucide.createIcons();
